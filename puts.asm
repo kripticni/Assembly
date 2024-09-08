@@ -14,15 +14,15 @@ section .text
   ; improved puts macro that uses a single syscall to write
   ; the entire string
   %macro puts 1
+    mov rsi, %1      ; rsi points to the string, by default
     mov rax, 1
     mov rdi, 1
-    mov rsi, %1      ; rsi points to the string, by default
     xor rdx, rdx
     
     %%lenloop:
-    cmp byte [rsi + rdx], 0  ; check if we've hit the null terminator
+    cmp byte [rsi + rdx], byte 0  ; check if we've hit the null terminator
     je %%endlen
-    inc rdx
+    add rdx, 1
     jmp %%lenloop
     
     %%endlen:
