@@ -1,0 +1,51 @@
+
+printeger-func:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <PRINTDEC>:
+  401000:	4c 8d 0c 25 13 20 40 	lea    0x402013,%r9
+  401007:	00 
+  401008:	4d 89 ca             	mov    %r9,%r10
+  40100b:	bb 0a 00 00 00       	mov    $0xa,%ebx
+
+0000000000401010 <DIV_BY_10>:
+  401010:	48 31 d2             	xor    %rdx,%rdx
+  401013:	48 f7 f3             	div    %rbx
+  401016:	48 83 c2 30          	add    $0x30,%rdx
+  40101a:	48 85 c0             	test   %rax,%rax
+  40101d:	74 09                	je     401028 <LAST_REMAINDER>
+  40101f:	41 88 11             	mov    %dl,(%r9)
+  401022:	49 83 e9 01          	sub    $0x1,%r9
+  401026:	eb e8                	jmp    401010 <DIV_BY_10>
+
+0000000000401028 <LAST_REMAINDER>:
+  401028:	84 d2                	test   %dl,%dl
+  40102a:	74 07                	je     401033 <CHECK_BUFFER>
+  40102c:	41 88 11             	mov    %dl,(%r9)
+  40102f:	49 83 e9 01          	sub    $0x1,%r9
+
+0000000000401033 <CHECK_BUFFER>:
+  401033:	4d 39 d1             	cmp    %r10,%r9
+  401036:	75 08                	jne    401040 <PRINT_BUFFER>
+  401038:	41 c6 01 30          	movb   $0x30,(%r9)
+  40103c:	49 83 e9 01          	sub    $0x1,%r9
+
+0000000000401040 <PRINT_BUFFER>:
+  401040:	49 83 c1 01          	add    $0x1,%r9
+  401044:	4d 29 ca             	sub    %r9,%r10
+  401047:	49 83 c2 01          	add    $0x1,%r10
+  40104b:	b8 01 00 00 00       	mov    $0x1,%eax
+  401050:	bf 01 00 00 00       	mov    $0x1,%edi
+  401055:	4c 89 ce             	mov    %r9,%rsi
+  401058:	4c 89 d2             	mov    %r10,%rdx
+  40105b:	0f 05                	syscall
+  40105d:	c3                   	ret
+
+000000000040105e <_start>:
+  40105e:	b8 af 26 73 00       	mov    $0x7326af,%eax
+  401063:	e8 98 ff ff ff       	call   401000 <PRINTDEC>
+  401068:	b8 3c 00 00 00       	mov    $0x3c,%eax
+  40106d:	bf 00 00 00 00       	mov    $0x0,%edi
+  401072:	0f 05                	syscall
