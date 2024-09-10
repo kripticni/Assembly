@@ -57,8 +57,16 @@ The stack at the beginning stores in this sequence:
 Writing to files also depends on the linux permissions,
 it the same octal values you learn when you start getting
 into file management, so I won't go over this.
-
 SYS_OPEN returns you a file descriptor into the rax register.
 
+db == define bytes
+dw == define word, 16 bits/2 bytes 
+dd == define double word, 32 bits/4 bytes
+dq == define quadruple word, 64 bits/8 bytes
+This is pretty elementary but I guess important so I'll leave it here.
+
+sys_nanosleep takes a struct of timespec.
+the two arguments are both pointers, so you need in
+defined in the main memory.
 
 

@@ -1,0 +1,53 @@
+
+/home/aleksic/Assembly/elf/reading-files:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	b8 02 00 00 00       	mov    $0x2,%eax
+  401005:	48 bf 00 20 40 00 00 	movabs $0x402000,%rdi
+  40100c:	00 00 00 
+  40100f:	be 41 00 00 00       	mov    $0x41,%esi
+  401014:	ba b6 01 00 00       	mov    $0x1b6,%edx
+  401019:	0f 05                	syscall
+  40101b:	48 89 04 25 28 20 40 	mov    %rax,0x402028
+  401022:	00 
+  401023:	48 89 c7             	mov    %rax,%rdi
+  401026:	b8 01 00 00 00       	mov    $0x1,%eax
+  40102b:	48 be 0c 20 40 00 00 	movabs $0x40200c,%rsi
+  401032:	00 00 00 
+  401035:	ba 0d 00 00 00       	mov    $0xd,%edx
+  40103a:	0f 05                	syscall
+  40103c:	b8 03 00 00 00       	mov    $0x3,%eax
+  401041:	48 8b 3c 25 28 20 40 	mov    0x402028,%rdi
+  401048:	00 
+  401049:	0f 05                	syscall
+  40104b:	b8 02 00 00 00       	mov    $0x2,%eax
+  401050:	48 bf 00 20 40 00 00 	movabs $0x402000,%rdi
+  401057:	00 00 00 
+  40105a:	be 00 00 00 00       	mov    $0x0,%esi
+  40105f:	ba b6 01 00 00       	mov    $0x1b6,%edx
+  401064:	0f 05                	syscall
+  401066:	48 89 04 25 28 20 40 	mov    %rax,0x402028
+  40106d:	00 
+  40106e:	b8 00 00 00 00       	mov    $0x0,%eax
+  401073:	48 8b 3c 25 28 20 40 	mov    0x402028,%rdi
+  40107a:	00 
+  40107b:	48 be 1a 20 40 00 00 	movabs $0x40201a,%rsi
+  401082:	00 00 00 
+  401085:	ba 0d 00 00 00       	mov    $0xd,%edx
+  40108a:	0f 05                	syscall
+  40108c:	b8 01 00 00 00       	mov    $0x1,%eax
+  401091:	bf 01 00 00 00       	mov    $0x1,%edi
+  401096:	48 be 1a 20 40 00 00 	movabs $0x40201a,%rsi
+  40109d:	00 00 00 
+  4010a0:	ba 0d 00 00 00       	mov    $0xd,%edx
+  4010a5:	0f 05                	syscall
+  4010a7:	b8 03 00 00 00       	mov    $0x3,%eax
+  4010ac:	48 8b 3c 25 28 20 40 	mov    0x402028,%rdi
+  4010b3:	00 
+  4010b4:	0f 05                	syscall
+  4010b6:	b8 3c 00 00 00       	mov    $0x3c,%eax
+  4010bb:	48 31 ff             	xor    %rdi,%rdi
+  4010be:	0f 05                	syscall

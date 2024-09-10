@@ -1,0 +1,52 @@
+
+/home/aleksic/Assembly/elf/reading-files2:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	b8 02 00 00 00       	mov    $0x2,%eax
+  401005:	48 bf 00 20 40 00 00 	movabs $0x402000,%rdi
+  40100c:	00 00 00 
+  40100f:	be 41 00 00 00       	mov    $0x41,%esi
+  401014:	ba b6 01 00 00       	mov    $0x1b6,%edx
+  401019:	0f 05                	syscall
+  40101b:	48 89 04 25 24 20 40 	mov    %rax,0x402024
+  401022:	00 
+  401023:	48 89 c7             	mov    %rax,%rdi
+  401026:	b8 01 00 00 00       	mov    $0x1,%eax
+  40102b:	48 be 09 20 40 00 00 	movabs $0x402009,%rsi
+  401032:	00 00 00 
+  401035:	ba 0d 00 00 00       	mov    $0xd,%edx
+  40103a:	0f 05                	syscall
+  40103c:	b8 03 00 00 00       	mov    $0x3,%eax
+  401041:	48 8b 3c 25 24 20 40 	mov    0x402024,%rdi
+  401048:	00 
+  401049:	0f 05                	syscall
+  40104b:	b8 02 00 00 00       	mov    $0x2,%eax
+  401050:	48 bf 00 20 40 00 00 	movabs $0x402000,%rdi
+  401057:	00 00 00 
+  40105a:	be 00 00 00 00       	mov    $0x0,%esi
+  40105f:	0f 05                	syscall
+  401061:	48 89 04 25 24 20 40 	mov    %rax,0x402024
+  401068:	00 
+  401069:	b8 00 00 00 00       	mov    $0x0,%eax
+  40106e:	48 8b 3c 25 24 20 40 	mov    0x402024,%rdi
+  401075:	00 
+  401076:	48 be 17 20 40 00 00 	movabs $0x402017,%rsi
+  40107d:	00 00 00 
+  401080:	ba 0d 00 00 00       	mov    $0xd,%edx
+  401085:	0f 05                	syscall
+  401087:	b8 01 00 00 00       	mov    $0x1,%eax
+  40108c:	bf 01 00 00 00       	mov    $0x1,%edi
+  401091:	48 be 17 20 40 00 00 	movabs $0x402017,%rsi
+  401098:	00 00 00 
+  40109b:	ba 0d 00 00 00       	mov    $0xd,%edx
+  4010a0:	0f 05                	syscall
+  4010a2:	b8 03 00 00 00       	mov    $0x3,%eax
+  4010a7:	48 8b 3c 25 24 20 40 	mov    0x402024,%rdi
+  4010ae:	00 
+  4010af:	0f 05                	syscall
+  4010b1:	b8 3c 00 00 00       	mov    $0x3c,%eax
+  4010b6:	48 31 ff             	xor    %rdi,%rdi
+  4010b9:	0f 05                	syscall
