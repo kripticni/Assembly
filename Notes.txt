@@ -70,3 +70,48 @@ the two arguments are both pointers, so you need in
 defined in the main memory.
 
 
+Including C functions need to be linked with the C standard
+This is achieved by assembling a .asm file with nasm, and:
+> gcc -no-pie {}.o -o {} -lc
+and it would successfully link if you follow the C asm format.
+
+This includes having a defined main label.
+And a prologue:
+'''asm
+  push rbp
+  mov rbp, rsp
+''' 
+
+And an epilogue:
+'''asm
+  leave
+  ; which is actually just
+  ; mov rsp, rbp
+  ; pop rbp
+''' 
+
+And a ret at the end so to not cause a seg fault and exit propertly.
+
+Also important to mention that the heap and the stack are both
+found in the RAM, the program's stack is mostly static, while
+the heap is dynamic and done at runtime with syscalls. 
+(which is very slow)
+The heap is also worse for cache locality but we can get virtually
+unlimited space, which is not the case for the stack.
+
+The heap also consists of a fragmentator, I won't go into this
+since fragmentation is pretty trivial.
+The main point is that the stack never needs to use a fragmentator.
+
+This is also an insanely good case for how slow linked lists are
+compared to arrays and even vectors (ArrayLists). 
+And it can be also used for the support of linear allocators or arenas. 
+
+If all of the above is done correctly, the heap can be about just as
+fast as the stack, when it comes to memory accessing, altho it's
+allocation is awfully slow.
+
+BUT, its actually possible to resize variables on the stack, altho it would
+require a new allocated memory space to keep the current heap, popping until we reach
+the variable, resizing the variables needed, and the pushing back.
+(This is also really slow, but I suppose its possible)
