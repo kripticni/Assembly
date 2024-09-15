@@ -115,3 +115,143 @@ BUT, its actually possible to resize variables on the stack, altho it would
 require a new allocated memory space to keep the current heap, popping until we reach
 the variable, resizing the variables needed, and the pushing back.
 (This is also really slow, but I suppose its possible)
+
+16-bit 8086:
+ax, ah/al, general purpose
+bx, bh/bl, general purpose (used in the c++ compiler by microsoft)
+cx, ch/cl, general purpose (often as the counter and for loops)
+dx, dh/dl, general purpose
+si, source index
+di, destination index
+cs, segment
+ds, segment
+es, segment
+ss, segment
+flags (comparasings and branching things alike, at the top of the txt file)
+
+Segments were used for segmented memory, but now we have flat memory.
+
+32-bit 80386:
+eax, ax, ah/al, general purpose
+ebx, bx, bh/bl, general purpose
+ecx, cx, ch/cl, general purpose
+edx, dx, dh/dl, general purpose
+esi, si, source index
+edi, di, destination index
+ebp, bp, base pointer
+esp, sp, stack pointer 
+eip, ip, instruction pointer
+eFlags, Flags, just the basic flags
+
+And also the deprecated segment registers:
+cs, ds, es, ss, fs, gs 
+fs and gs were additions the segment registers
+instead of the increase in size of the existing ones.
+
+Pentium IV, first x64:
+rax, eax, ax, ah/al, general purpose
+rbx, ebx, bx, bh/bl, general purpose
+rcx, ecx, cx, ch/cl, general purpose
+rdx, edx, dx, dh/dl, general purpose
+rsi, esi, si, sil, source index (xil variant to get to the lowest)
+rdi, edi, di, dil, destination index
+rbp, ebp, bp, spl, base pointer (also the xpl)
+rsp, esp, sp, bpl, stack pointer 
+rip, eip, instruction pointer (loss of ip)
+r8, r8d, r8w, r8b, general purpose
+r9, r9d, r9w, r9b, general purpose
+r10, r10d, r10w, r10b, general purpose //new registers, D for double
+r11, r11d, r11w, r11b, general purpose //word, so 32 bytes
+r12, r12d, r12w, r12b, general purpose //W for word or 16 bits
+r13, r13d, r13w, r13b, general purpose //B for byte or 8 bits
+r14, r14d, r14w, r14b, general purpose //so total 17 registers in total
+r15, r15d, r15w, r15b, general purpose //ax-ip regs didn't change for compat
+RFlags, EFlags, Flags, just the basic flags
+
+Using instructions with 32 bit registers will zero the top of 64 bit ones
+however 8 bit and 16 bit dont, however you can still write x64 as x86
+and that is why there is program compatability.
+
+Using original registers generates more efficient machine code
+since the newer x64 registers and instructions add a REX prefix
+in the machine code translation.
+
+Datatypes in x64:
+Integers consist of byte, word, dword and qword
+Ints can also be signed of unsigned, but you keep track of that
+Floating points are real4, real8, real10
+and the SIMD pointers are xmmword, ymmword, zmmword
+
+all real types are IEEE754
+real4 is single precision float:
+1 bit sign
+8 bit exponent
+23 bit mantissa
+
+real8 is double precision:
+1 bit sign
+11 bit exponent
+52 bit mantissa
+
+real10 which is not available in all compilers
+and is only used in X87 FPU, amazing precision
+is extended precision float:
+1 bit sign
+15 bit exponent
+64 bit mantissa
+
+SIMD packed data:
+xmmword: 128 bits (SSE packed)
+ymmword: 256 bits (AVX)
+zmmword: 512 bits (AVX512, not in all cpus)
+
+
+Instructions:
+mov, only loads value
+mov ax, [RBP+RSI+5] ; gets the value at that address
+mov is also the only instruction that allows for immediate
+64 bit operands, others will cause sign extension.
+
+sign extension means that if the 31th bit is a 1, all the rest 
+would become 1s as well so 0xfffff...
+
+
+lea, loads/calculates effective address
+lea ax, [RBP+RSI+5] ; gets the adress 
+
+
+add only adds, obviously
+however you can use
+add REG, 0
+to update the flags according to the reg
+
+you can also do 
+add REG, 1
+to increment but also update the carry flag
+
+and since add is faster than mul
+doing 
+mov rax, 2
+mul rbx
+mov rbx, rax
+
+is slower than
+
+add rbx, rbx
+
+
+sub only subtracts, obviously
+overflow means a signed borrow
+carry means unsigned borrow
+a quick way to zero is sub reg, reg
+however
+xor reg, reg ; is faster
+sub reg, 1 is the same a dec reg, except it affects the carry flag
+
+
+
+
+
+
+
+

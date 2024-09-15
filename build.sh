@@ -9,7 +9,7 @@ fi
 clean_name=$(echo "$1" | awk -F. '{print $1}')
 nasm -f elf64 "$1" -o "$HOME"/Assembly/obj/"$clean_name.o"
 ld "$HOME"/Assembly/obj/"$clean_name.o" -o "$HOME"/Assembly/elf/"$clean_name"
-objdump -d "$HOME"/Assembly/elf/"$clean_name" > "$HOME"/Assembly/disassembled/"$clean_name.dasm"
+objdump -d -M intel "$HOME"/Assembly/elf/"$clean_name" > "$HOME"/Assembly/disassembled/"$clean_name.dasm"
 
 nasm -f elf64 -g -F dwarf "$1" -o "$HOME"/Assembly/debug/obj/"$clean_name.o"
 ld "$HOME"/Assembly/debug/obj/"$clean_name.o" -o "$HOME"/Assembly/debug/dwarf/"$clean_name"
