@@ -1,0 +1,226 @@
+
+/home/aleksic/Assembly/elf/Bit-Manipulations:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	b8 01 00 00 00       	mov    eax,0x1
+  401005:	4c 8d 0c 25 16 20 40 	lea    r9,ds:0x402016
+  40100c:	00 
+  40100d:	4d 89 ca             	mov    r10,r9
+  401010:	bb 0a 00 00 00       	mov    ebx,0xa
+
+0000000000401015 <..@4.div>:
+  401015:	48 31 d2             	xor    rdx,rdx
+  401018:	48 f7 f3             	div    rbx
+  40101b:	48 83 c2 30          	add    rdx,0x30
+  40101f:	48 85 c0             	test   rax,rax
+  401022:	74 09                	je     40102d <..@4.last_remainder>
+  401024:	41 88 11             	mov    BYTE PTR [r9],dl
+  401027:	49 83 e9 01          	sub    r9,0x1
+  40102b:	eb e8                	jmp    401015 <..@4.div>
+
+000000000040102d <..@4.last_remainder>:
+  40102d:	84 d2                	test   dl,dl
+  40102f:	74 07                	je     401038 <..@4.check_buffer>
+  401031:	41 88 11             	mov    BYTE PTR [r9],dl
+  401034:	49 83 e9 01          	sub    r9,0x1
+
+0000000000401038 <..@4.check_buffer>:
+  401038:	4d 39 d1             	cmp    r9,r10
+  40103b:	75 08                	jne    401045 <..@4.print_buffer>
+  40103d:	41 c6 01 30          	mov    BYTE PTR [r9],0x30
+  401041:	49 83 e9 01          	sub    r9,0x1
+
+0000000000401045 <..@4.print_buffer>:
+  401045:	49 83 c1 01          	add    r9,0x1
+  401049:	4d 29 ca             	sub    r10,r9
+  40104c:	49 83 c2 01          	add    r10,0x1
+  401050:	b8 01 00 00 00       	mov    eax,0x1
+  401055:	bf 01 00 00 00       	mov    edi,0x1
+  40105a:	4c 89 ce             	mov    rsi,r9
+  40105d:	4c 89 d2             	mov    rdx,r10
+  401060:	0f 05                	syscall
+  401062:	b8 01 00 00 00       	mov    eax,0x1
+  401067:	bf 01 00 00 00       	mov    edi,0x1
+  40106c:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401073:	00 00 00 
+  401076:	ba 01 00 00 00       	mov    edx,0x1
+  40107b:	0f 05                	syscall
+  40107d:	48 d1 e0             	shl    rax,1
+  401080:	4c 8d 0c 25 16 20 40 	lea    r9,ds:0x402016
+  401087:	00 
+  401088:	4d 89 ca             	mov    r10,r9
+  40108b:	bb 0a 00 00 00       	mov    ebx,0xa
+
+0000000000401090 <..@6.div>:
+  401090:	48 31 d2             	xor    rdx,rdx
+  401093:	48 f7 f3             	div    rbx
+  401096:	48 83 c2 30          	add    rdx,0x30
+  40109a:	48 85 c0             	test   rax,rax
+  40109d:	74 09                	je     4010a8 <..@6.last_remainder>
+  40109f:	41 88 11             	mov    BYTE PTR [r9],dl
+  4010a2:	49 83 e9 01          	sub    r9,0x1
+  4010a6:	eb e8                	jmp    401090 <..@6.div>
+
+00000000004010a8 <..@6.last_remainder>:
+  4010a8:	84 d2                	test   dl,dl
+  4010aa:	74 07                	je     4010b3 <..@6.check_buffer>
+  4010ac:	41 88 11             	mov    BYTE PTR [r9],dl
+  4010af:	49 83 e9 01          	sub    r9,0x1
+
+00000000004010b3 <..@6.check_buffer>:
+  4010b3:	4d 39 d1             	cmp    r9,r10
+  4010b6:	75 08                	jne    4010c0 <..@6.print_buffer>
+  4010b8:	41 c6 01 30          	mov    BYTE PTR [r9],0x30
+  4010bc:	49 83 e9 01          	sub    r9,0x1
+
+00000000004010c0 <..@6.print_buffer>:
+  4010c0:	49 83 c1 01          	add    r9,0x1
+  4010c4:	4d 29 ca             	sub    r10,r9
+  4010c7:	49 83 c2 01          	add    r10,0x1
+  4010cb:	b8 01 00 00 00       	mov    eax,0x1
+  4010d0:	bf 01 00 00 00       	mov    edi,0x1
+  4010d5:	4c 89 ce             	mov    rsi,r9
+  4010d8:	4c 89 d2             	mov    rdx,r10
+  4010db:	0f 05                	syscall
+  4010dd:	b8 01 00 00 00       	mov    eax,0x1
+  4010e2:	bf 01 00 00 00       	mov    edi,0x1
+  4010e7:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  4010ee:	00 00 00 
+  4010f1:	ba 01 00 00 00       	mov    edx,0x1
+  4010f6:	0f 05                	syscall
+  4010f8:	b8 a9 d4 70 49       	mov    eax,0x4970d4a9
+  4010fd:	48 c1 d8 0c          	rcr    rax,0xc
+  401101:	4c 8d 0c 25 16 20 40 	lea    r9,ds:0x402016
+  401108:	00 
+  401109:	4d 89 ca             	mov    r10,r9
+  40110c:	bb 0a 00 00 00       	mov    ebx,0xa
+
+0000000000401111 <..@8.div>:
+  401111:	48 31 d2             	xor    rdx,rdx
+  401114:	48 f7 f3             	div    rbx
+  401117:	48 83 c2 30          	add    rdx,0x30
+  40111b:	48 85 c0             	test   rax,rax
+  40111e:	74 09                	je     401129 <..@8.last_remainder>
+  401120:	41 88 11             	mov    BYTE PTR [r9],dl
+  401123:	49 83 e9 01          	sub    r9,0x1
+  401127:	eb e8                	jmp    401111 <..@8.div>
+
+0000000000401129 <..@8.last_remainder>:
+  401129:	84 d2                	test   dl,dl
+  40112b:	74 07                	je     401134 <..@8.check_buffer>
+  40112d:	41 88 11             	mov    BYTE PTR [r9],dl
+  401130:	49 83 e9 01          	sub    r9,0x1
+
+0000000000401134 <..@8.check_buffer>:
+  401134:	4d 39 d1             	cmp    r9,r10
+  401137:	75 08                	jne    401141 <..@8.print_buffer>
+  401139:	41 c6 01 30          	mov    BYTE PTR [r9],0x30
+  40113d:	49 83 e9 01          	sub    r9,0x1
+
+0000000000401141 <..@8.print_buffer>:
+  401141:	49 83 c1 01          	add    r9,0x1
+  401145:	4d 29 ca             	sub    r10,r9
+  401148:	49 83 c2 01          	add    r10,0x1
+  40114c:	b8 01 00 00 00       	mov    eax,0x1
+  401151:	bf 01 00 00 00       	mov    edi,0x1
+  401156:	4c 89 ce             	mov    rsi,r9
+  401159:	4c 89 d2             	mov    rdx,r10
+  40115c:	0f 05                	syscall
+  40115e:	b8 01 00 00 00       	mov    eax,0x1
+  401163:	bf 01 00 00 00       	mov    edi,0x1
+  401168:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  40116f:	00 00 00 
+  401172:	ba 01 00 00 00       	mov    edx,0x1
+  401177:	0f 05                	syscall
+  401179:	48 c1 c8 02          	ror    rax,0x2
+  40117d:	4c 8d 0c 25 16 20 40 	lea    r9,ds:0x402016
+  401184:	00 
+  401185:	4d 89 ca             	mov    r10,r9
+  401188:	bb 0a 00 00 00       	mov    ebx,0xa
+
+000000000040118d <..@10.div>:
+  40118d:	48 31 d2             	xor    rdx,rdx
+  401190:	48 f7 f3             	div    rbx
+  401193:	48 83 c2 30          	add    rdx,0x30
+  401197:	48 85 c0             	test   rax,rax
+  40119a:	74 09                	je     4011a5 <..@10.last_remainder>
+  40119c:	41 88 11             	mov    BYTE PTR [r9],dl
+  40119f:	49 83 e9 01          	sub    r9,0x1
+  4011a3:	eb e8                	jmp    40118d <..@10.div>
+
+00000000004011a5 <..@10.last_remainder>:
+  4011a5:	84 d2                	test   dl,dl
+  4011a7:	74 07                	je     4011b0 <..@10.check_buffer>
+  4011a9:	41 88 11             	mov    BYTE PTR [r9],dl
+  4011ac:	49 83 e9 01          	sub    r9,0x1
+
+00000000004011b0 <..@10.check_buffer>:
+  4011b0:	4d 39 d1             	cmp    r9,r10
+  4011b3:	75 08                	jne    4011bd <..@10.print_buffer>
+  4011b5:	41 c6 01 30          	mov    BYTE PTR [r9],0x30
+  4011b9:	49 83 e9 01          	sub    r9,0x1
+
+00000000004011bd <..@10.print_buffer>:
+  4011bd:	49 83 c1 01          	add    r9,0x1
+  4011c1:	4d 29 ca             	sub    r10,r9
+  4011c4:	49 83 c2 01          	add    r10,0x1
+  4011c8:	b8 01 00 00 00       	mov    eax,0x1
+  4011cd:	bf 01 00 00 00       	mov    edi,0x1
+  4011d2:	4c 89 ce             	mov    rsi,r9
+  4011d5:	4c 89 d2             	mov    rdx,r10
+  4011d8:	0f 05                	syscall
+  4011da:	b8 01 00 00 00       	mov    eax,0x1
+  4011df:	bf 01 00 00 00       	mov    edi,0x1
+  4011e4:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  4011eb:	00 00 00 
+  4011ee:	ba 01 00 00 00       	mov    edx,0x1
+  4011f3:	0f 05                	syscall
+  4011f5:	48 c1 f8 03          	sar    rax,0x3
+  4011f9:	4c 8d 0c 25 16 20 40 	lea    r9,ds:0x402016
+  401200:	00 
+  401201:	4d 89 ca             	mov    r10,r9
+  401204:	bb 0a 00 00 00       	mov    ebx,0xa
+
+0000000000401209 <..@12.div>:
+  401209:	48 31 d2             	xor    rdx,rdx
+  40120c:	48 f7 f3             	div    rbx
+  40120f:	48 83 c2 30          	add    rdx,0x30
+  401213:	48 85 c0             	test   rax,rax
+  401216:	74 09                	je     401221 <..@12.last_remainder>
+  401218:	41 88 11             	mov    BYTE PTR [r9],dl
+  40121b:	49 83 e9 01          	sub    r9,0x1
+  40121f:	eb e8                	jmp    401209 <..@12.div>
+
+0000000000401221 <..@12.last_remainder>:
+  401221:	84 d2                	test   dl,dl
+  401223:	74 07                	je     40122c <..@12.check_buffer>
+  401225:	41 88 11             	mov    BYTE PTR [r9],dl
+  401228:	49 83 e9 01          	sub    r9,0x1
+
+000000000040122c <..@12.check_buffer>:
+  40122c:	4d 39 d1             	cmp    r9,r10
+  40122f:	75 08                	jne    401239 <..@12.print_buffer>
+  401231:	41 c6 01 30          	mov    BYTE PTR [r9],0x30
+  401235:	49 83 e9 01          	sub    r9,0x1
+
+0000000000401239 <..@12.print_buffer>:
+  401239:	49 83 c1 01          	add    r9,0x1
+  40123d:	4d 29 ca             	sub    r10,r9
+  401240:	49 83 c2 01          	add    r10,0x1
+  401244:	b8 01 00 00 00       	mov    eax,0x1
+  401249:	bf 01 00 00 00       	mov    edi,0x1
+  40124e:	4c 89 ce             	mov    rsi,r9
+  401251:	4c 89 d2             	mov    rdx,r10
+  401254:	0f 05                	syscall
+  401256:	b8 01 00 00 00       	mov    eax,0x1
+  40125b:	bf 01 00 00 00       	mov    edi,0x1
+  401260:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401267:	00 00 00 
+  40126a:	ba 01 00 00 00       	mov    edx,0x1
+  40126f:	0f 05                	syscall
+  401271:	b8 3c 00 00 00       	mov    eax,0x3c
+  401276:	bf 00 00 00 00       	mov    edi,0x0
+  40127b:	0f 05                	syscall

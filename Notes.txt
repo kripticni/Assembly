@@ -248,10 +248,82 @@ however
 xor reg, reg ; is faster
 sub reg, 1 is the same a dec reg, except it affects the carry flag
 
+Boolean algebra:
+xor
+or
+and
+not
+Pretty simple, and I dealt with this a bunch so I won't go into it
+and it's pretty much an entire seperate field.
+obviously out of this you can make more complex gates.
 
+Bit manipulations:
 
+shifts:
+shl
+shr
 
+if the final bit shifts out, it will set the carry flag as one.
+With a positive signed number, its faster to shr than div 2. 
+(Unless you shift into the sign bit)
+Also with unsigned numbers, it has no downsides.
 
+arithemtic shifts:
+sal
+sar
 
+Fix all of the problems with regular shifts, but at a cost of
+performance.
 
+rotate:
+rol
+ror
+
+This for whatever reason does not exist in the C standard.
+Altho compilers may recognize similar functions.
+Its shifting to one side except it's like a looped list.
+
+rotate through the carry flag:
+rcl
+rcr
+
+Sets the carry flag as an extra bit, so registers would act 
+as if they were 65 bit, pretty much just concats and then shifts.
+Hard to implement in many languages.
+
+double precision shifts:
+rold
+rord
+
+Concats two registers so we get 128 bits, and then shifts them.
+
+Basic Flags:
+0 - CF, carry, an unsigned overflow
+2 - PF, parity, old, backwards compat for data transmission
+4 - AF, auxiliary, not applicable in x64, overflow or carry of lowest 4 bits (nibble)
+6 - ZF, zero, if result is zero then set to 1
+7 - SF, sign, 1 for negative, 0 for positive
+8 - TF, trap, allows for debuggers to step through the code
+9 - IF, interrupt, allows interrupts to be called
+10 - DF, direction, 0 reading string forwards, 1 for backwards
+11 - OF, overflow, a signed overflow
+12,13 - IOPL, shows IO port privilege level
+14 - NT, shows if this task is nested
+Some flags are general purpose but most are not in use.
+
+pushfq would push the entire flag register to the stack,
+popfq would get the top of the stack into the flag register.
+
+Other flags:
+15 - MD, mode flag NEC V-series only
+16 - RF, resume flag, used to manage floating point exceptions in the FPU
+17 - VM, virtual mode, a hardware virtualization technique
+18 - AC, alignment check, if 0 the processor does not generated expections for misaligned memory
+19 - VIF, virtual interrupt, Pentium+
+20 - VIP, virtual interrupt pending, Pentium+
+21 - ID, able to use the CPUID instruction on Pentium+
+30 - (none), AES key schedule loaded flag (VIA PadLock only)
+31 - AI, Alternate Instruction Set, enabled VIA C5XL processors only
+
+Rflags are reserved.
 
