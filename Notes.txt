@@ -215,12 +215,16 @@ mov is also the only instruction that allows for immediate
 sign extension means that if the 31th bit is a 1, all the rest 
 would become 1s as well so 0xfffff...
 
+movzx, is the same as mov except it zero extends the smaller source operand
+
 
 lea, loads/calculates effective address
 lea ax, [RBP+RSI+5] ; gets the adress 
 
 
-add only adds, obviously
+Arithmetic:
+
+Add only adds, obviously
 however you can use
 add REG, 0
 to update the flags according to the reg
@@ -240,13 +244,18 @@ is slower than
 add rbx, rbx
 
 
-sub only subtracts, obviously
+Sub, only subtracts, obviously
 overflow means a signed borrow
 carry means unsigned borrow
 a quick way to zero is sub reg, reg
 however
 xor reg, reg ; is faster
 sub reg, 1 is the same a dec reg, except it affects the carry flag
+
+Mul, multiplication
+Imul, unsigned multiplication
+Div, division, if rdx is not zero it concats with rax to a 128 bit register
+Idiv, same as above, and if the rdx is empty then the remainder is stored there
 
 Boolean algebra:
 xor
@@ -268,7 +277,7 @@ With a positive signed number, its faster to shr than div 2.
 (Unless you shift into the sign bit)
 Also with unsigned numbers, it has no downsides.
 
-arithemtic shifts:
+arithmetic shifts:
 sal
 sar
 
@@ -326,4 +335,38 @@ Other flags:
 31 - AI, Alternate Instruction Set, enabled VIA C5XL processors only
 
 Rflags are reserved.
+
+Without the capability to do things conditionaly, computers would be
+severly underpowered because they could only execute simple programs.
+Conditions operate by checking flags and branching accordingly.
+
+Conditionals:
+Jumps/jcc, if the condition cc is true, the processor would only change
+the instruction pointer by a relative offset, which in return will change
+the next line of instructions.
+
+Moves/cmovcc, if cc then it moves, it also doesn't support immediate 
+values, nor 8 bit version.
+
+Set Byte/setcc, if true, then it sets the byte to 00000001, else 0
+
+CC:
+JE/JZ: Zero
+JNE/JNZ: Not Zero
+JO: Overflow
+JNO: Not Overflow
+JB/JC/JNAE: Carry Unsigned
+JNB/JNC/JAE: Not Carry Unsigned
+JBE/JNA: Below or Equal Unsigned
+JNBE: Above Unsigned
+JS: Sign
+JNS: Not Sign
+JP/JPE: Parity Even
+JNP/JPO: Parity Odd
+JL/JNGE: Less Signed
+JNL/JGE: Not Less Signed
+JLE/JNG: Not Greater Signed
+JNLE/JG: Greater Signed
+
+
 

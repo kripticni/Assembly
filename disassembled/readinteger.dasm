@@ -1,0 +1,70 @@
+
+/home/aleksic/Assembly/elf/readinteger:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	b8 00 00 00 00       	mov    eax,0x0
+  401005:	bf 00 00 00 00       	mov    edi,0x0
+  40100a:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401011:	00 00 00 
+  401014:	ba 14 00 00 00       	mov    edx,0x14
+  401019:	0f 05                	syscall
+  40101b:	4d 31 c0             	xor    r8,r8
+  40101e:	48 31 c9             	xor    rcx,rcx
+
+0000000000401021 <parse_input>:
+  401021:	48 0f b6 99 00 20 40 	movzx  rbx,BYTE PTR [rcx+0x402000]
+  401028:	00 
+  401029:	48 83 fb 0a          	cmp    rbx,0xa
+  40102d:	74 17                	je     401046 <done_parsing>
+  40102f:	48 83 eb 30          	sub    rbx,0x30
+  401033:	b8 0a 00 00 00       	mov    eax,0xa
+  401038:	49 f7 e0             	mul    r8
+  40103b:	49 89 c0             	mov    r8,rax
+  40103e:	49 01 d8             	add    r8,rbx
+  401041:	48 ff c1             	inc    rcx
+  401044:	eb db                	jmp    401021 <parse_input>
+
+0000000000401046 <done_parsing>:
+  401046:	4c 89 c0             	mov    rax,r8
+  401049:	4c 8d 0c 25 12 20 40 	lea    r9,ds:0x402012
+  401050:	00 
+  401051:	4d 89 ca             	mov    r10,r9
+  401054:	bb 0a 00 00 00       	mov    ebx,0xa
+
+0000000000401059 <..@5.div>:
+  401059:	48 31 d2             	xor    rdx,rdx
+  40105c:	48 f7 f3             	div    rbx
+  40105f:	48 83 c2 30          	add    rdx,0x30
+  401063:	48 85 c0             	test   rax,rax
+  401066:	74 09                	je     401071 <..@5.last_remainder>
+  401068:	41 88 11             	mov    BYTE PTR [r9],dl
+  40106b:	49 83 e9 01          	sub    r9,0x1
+  40106f:	eb e8                	jmp    401059 <..@5.div>
+
+0000000000401071 <..@5.last_remainder>:
+  401071:	84 d2                	test   dl,dl
+  401073:	74 07                	je     40107c <..@5.check_buffer>
+  401075:	41 88 11             	mov    BYTE PTR [r9],dl
+  401078:	49 83 e9 01          	sub    r9,0x1
+
+000000000040107c <..@5.check_buffer>:
+  40107c:	4d 39 d1             	cmp    r9,r10
+  40107f:	75 08                	jne    401089 <..@5.print_buffer>
+  401081:	41 c6 01 30          	mov    BYTE PTR [r9],0x30
+  401085:	49 83 e9 01          	sub    r9,0x1
+
+0000000000401089 <..@5.print_buffer>:
+  401089:	49 83 c1 01          	add    r9,0x1
+  40108d:	4d 29 ca             	sub    r10,r9
+  401090:	49 83 c2 01          	add    r10,0x1
+  401094:	b8 01 00 00 00       	mov    eax,0x1
+  401099:	bf 01 00 00 00       	mov    edi,0x1
+  40109e:	4c 89 ce             	mov    rsi,r9
+  4010a1:	4c 89 d2             	mov    rdx,r10
+  4010a4:	0f 05                	syscall
+  4010a6:	b8 3c 00 00 00       	mov    eax,0x3c
+  4010ab:	bf 00 00 00 00       	mov    edi,0x0
+  4010b0:	0f 05                	syscall
