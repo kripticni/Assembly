@@ -43,7 +43,8 @@ with 64bit registers, since thats the size of pointers
 
 
 Calls are pretty much jumps to specific functions,
-you need a defined block with a ret at the end.
+you need a defined block with a ret at the end, and they 
+work by changing rip and then changing it back with ret.
 
 The stack works with 64 bit values, so when you are 
 pushing a value from memory into the stack, you need
@@ -367,6 +368,100 @@ JL/JNGE: Less Signed
 JNL/JGE: Not Less Signed
 JLE/JNG: Not Greater Signed
 JNLE/JG: Greater Signed
+
+Calling convention:
+
+Windows "C" Calling Convention 
+The first 4 args are stored in the registers
+xmm0 are used for floating points, while regular regs
+are for ints, pointers, arrays, objs
+1st: rcx/xmm0
+2nd: rdx/xmm1
+3rd: r8/xmm2
+4th: r9/xmm3
+The rest get pushed to the stack.
+
+The return value can be found in the rax register.
+
+Linux Calling Convention
+When calling from the commandline, the arguments are
+stored like this.
+The stack at the beginning stores in this sequence:
+-argc
+-path
+-argv[1]...
+Within functions, the first 6 args are
+rdi, rsi, rdx, rcx, r8, r9
+and the rest are pushed onto the stack
+rax is the return value
+rdx is optionally the 2nd return value
+rbx is optionally used as a base pointer
+
+Structures in Assembly:
+In nasm, you start a struct by doing
+struc *name*
+  *var1*: resd/resw/resb...
+  *var2*...
+  ...
+endstruc
+
+The correct way of accessing structs is doing
+mov ax, [*name_struct*+*varx*]
+
+to have multipul structures with the same members
+you should prepend the variable with a dot
+in that case you would do 
+mov ax, [*name_struct*+*name.var*]
+
+to make an instance of a struct in your data segment
+you do something like this
+
+*name_struct*:
+  istruc *name*
+    at *var1*, dd 12321
+    at *str1*, db "hello world"
+  iend
+
+puting *at* before var names will force them to be
+defined in the same order as written
+
+to create an uninitalized instance you just put the
+"?" inside the dd/db/... field
+
+also the dup keyword duplicates so
+3 dup(0), would duplicate 3 zeroes
+
+assembler doesn't know about classes and it does
+not care about private nor public, methods don't
+get defined, so its the same as structs
+
+for a union, you would just say one symbol is 
+the same as another, so just use
+  var1 resd 1
+  var2 equ var1
+
+if you want the full capabilities of unions
+you need to implement unions yourself
+since there is no native union support
+
+nested structures are quite simple
+in the struc declaration you would want to 
+reserve bytes for the struct
+
+struc inner_struct
+  var1: resw1
+  var2: resb 30
+endstruc
+
+struc outer_struct
+  var1: inner_struct
+  var2: resw 1
+endstruc
+
+and for nested structs we actually need to 
+use the dot operator
+  mov ax, [outer_struct_instance.var1.var2]
+this would lead to the resb 30
 
 
 

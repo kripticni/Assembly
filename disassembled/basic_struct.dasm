@@ -1,0 +1,32 @@
+
+/home/aleksic/Assembly/elf/basic_struct:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	b8 01 00 00 00       	mov    eax,0x1
+  401005:	bf 01 00 00 00       	mov    edi,0x1
+  40100a:	48 8d 34 25 06 20 40 	lea    rsi,ds:0x402006
+  401011:	00 
+  401012:	ba 0f 00 00 00       	mov    edx,0xf
+  401017:	0f 05                	syscall
+  401019:	b8 01 00 00 00       	mov    eax,0x1
+  40101e:	bf 01 00 00 00       	mov    edi,0x1
+  401023:	48 8d 34 25 00 20 40 	lea    rsi,ds:0x402000
+  40102a:	00 
+  40102b:	ba 05 00 00 00       	mov    edx,0x5
+  401030:	0f 05                	syscall
+  401032:	b8 01 00 00 00       	mov    eax,0x1
+  401037:	bf 01 00 00 00       	mov    edi,0x1
+  40103c:	83 04 25 26 20 40 00 	add    DWORD PTR ds:0x402026,0x30
+  401043:	30 
+  401044:	48 8d 34 25 26 20 40 	lea    rsi,ds:0x402026
+  40104b:	00 
+  40104c:	ba 01 00 00 00       	mov    edx,0x1
+  401051:	0f 05                	syscall
+  401053:	83 2c 25 26 20 40 00 	sub    DWORD PTR ds:0x402026,0x30
+  40105a:	30 
+  40105b:	b8 3c 00 00 00       	mov    eax,0x3c
+  401060:	bf 00 00 00 00       	mov    edi,0x0
+  401065:	0f 05                	syscall
