@@ -464,4 +464,59 @@ use the dot operator
 this would lead to the resb 30
 
 
+SIMD:
+Single Instruction Multipul Data (MIMD AND MISD also exist)
+To achieve higher performance, architects started creating 
+processors with higher clock speeds, but that leads to more
+power drawing, as a solution they started making processors
+with multipul cores and achieveing paralelism
+... and at last SIMD and vectorized instrucitons
+
+The instruction sets are:
+-x64: SSE, AVX, AVX512, MMX, BMI, (TBM, XOP in amd) (FMA in addition)
+-arm: neon, sve...
+-risc-v...
+
+MMX (1997): MM0-MM7
+SSE (1999): XMM0-XMM15
+AVX (2011): YMM0-YMM15
+AVX512 (2016): ZMM0-ZMM15
+512/256/128/64
+
+SSE can do operations on as much variables you can
+fit within a single 128 bit space, so for example 
+it can do operations on 2 quad words at the same time.
+
+Same aplies to AVX and AVX512.
+
+Data needs to be aligned aka evenly divisible by 
+some number the instruction and data decide.
+
+SSE instructions:
+for packed data aka simd you just add *ps at the end
+of an instruction, if you for some reason want to do 
+it with a scalar, you'd do *ss, pretty simple
+the s at the end stand for single precision tho 
+you can change it for a d for double precision
+if its unaligned you add *u* before the sufix
+
+AVX instructions:
+same as SSE except you put a prefix of v* before
+the instruction.
+Also it supports 3 register instruction so you 
+dont need to align the store address
+dont need to be destructive with the inputs
+unlike SSE.  
+It has upgraded sse by allowing it to be 
+non distructive with the 128 bit registers.
+You can also add a prefix a* before the sufix
+if you know that your data is aligned.
+
+CPUID is used to check if the hardware is capable of
+performing some of these advanced instructions.
+If you run newer instructions on older hardware 
+you will crash with an illegal instruction error.
+
+arithmetic:
+{V}[add/sub/mul/div][u/a/ ][s/p][s/d]
 
