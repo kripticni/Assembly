@@ -1,3 +1,14 @@
+Credits to:
+
+1. Creel on youtube for his material, 
+mainly focusing on the hardware specifics
+https://www.youtube.com/@WhatsACreel
+
+2. kupala on youtube for his material,
+mainly focusing on the linux interactions with asm
+https://www.youtube.com/@khoraski
+
+
 Flags contain 1 bit each, aka boolean
 They are *likely?* used to determine some other calls
 CF = Carry
@@ -179,7 +190,7 @@ in the machine code translation.
 
 Datatypes in x64:
 Integers consist of byte, word, dword and qword
-Ints can also be signed of unsigned, but you keep track of that
+Ints can also be signed or unsigned, but you keep track of that
 Floating points are real4, real8, real10
 and the SIMD pointers are xmmword, ymmword, zmmword
 
@@ -205,6 +216,29 @@ SIMD packed data:
 xmmword: 128 bits (SSE packed)
 ymmword: 256 bits (AVX)
 zmmword: 512 bits (AVX512, not in all cpus)
+
+To achieve signed integers you must use I's complement or II's complement
+and they are pretty similar
+
+I's complement:
+-Positive numbers remain unchanged
+-Negative numbers will get all the bits flipped
+-The left most bit is the sign bit, if its 0 a number is positive
+So +5 = 0101b but -5 = 1010
+This leads to there being 2 representations of zero
+aka 00000000 and 11111111, for positive and negative zero
+
+When adding numbers in I's complement, if there is a carry
+from the most significant bit, it will be added to the least significant bit
+this process is called the end-around carry
+
+II's complement:
+-Positive numbers remain unchanged
+-The left most bit is the sign bit, if its 0 a number is positive
+for negative numbers, just flip all bits and then add 1
+
+This gives you only a value for zero
+and also simplified arithmetic since there is not special rules
 
 
 Instructions:
@@ -516,7 +550,22 @@ CPUID is used to check if the hardware is capable of
 performing some of these advanced instructions.
 If you run newer instructions on older hardware 
 you will crash with an illegal instruction error.
+AVX512 is not supported by my cpu, checked by CPUID.
+
+AVX512 info:
+Introduces a new kind of registers, that are really useful
+for branchless programming, the K masks.
+K0-K7, altho K0 is not to be used, and they are 64 bits.
+kmov*, kadd*, kand*, knot*, kor*, kortest*, kshiftl*, ktest*
+kunpck[bw/wd/dq], kx[nor/or]*...
+*=[b/w/d/q]
+[b/w/d/q]
+It had also introduced casting floats to integers, or rounding.
+And compressed displacement, which is quite convinient.
+
 
 arithmetic:
 {V}[add/sub/mul/div][u/a/ ][s/p][s/d]
+
+
 
