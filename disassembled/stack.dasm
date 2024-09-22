@@ -1,0 +1,63 @@
+
+/home/aleksic/Assembly-Dasm/elf/stack:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	b8 00 00 00 00       	mov    eax,0x0
+  401005:	bf 00 00 00 00       	mov    edi,0x0
+  40100a:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401011:	00 00 00 
+  401014:	ba 02 00 00 00       	mov    edx,0x2
+  401019:	0f 05                	syscall
+  40101b:	48 8b 04 25 00 20 40 	mov    rax,QWORD PTR ds:0x402000
+  401022:	00 
+  401023:	48 83 e8 30          	sub    rax,0x30
+  401027:	48 89 04 25 00 20 40 	mov    QWORD PTR ds:0x402000,rax
+  40102e:	00 
+  40102f:	ff 34 25 00 20 40 00 	push   QWORD PTR ds:0x402000
+  401036:	b8 00 00 00 00       	mov    eax,0x0
+  40103b:	bf 00 00 00 00       	mov    edi,0x0
+  401040:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401047:	00 00 00 
+  40104a:	ba 02 00 00 00       	mov    edx,0x2
+  40104f:	0f 05                	syscall
+  401051:	48 8b 04 25 00 20 40 	mov    rax,QWORD PTR ds:0x402000
+  401058:	00 
+  401059:	48 83 e8 30          	sub    rax,0x30
+  40105d:	48 89 04 25 00 20 40 	mov    QWORD PTR ds:0x402000,rax
+  401064:	00 
+  401065:	ff 34 25 00 20 40 00 	push   QWORD PTR ds:0x402000
+  40106c:	b8 00 00 00 00       	mov    eax,0x0
+  401071:	bf 00 00 00 00       	mov    edi,0x0
+  401076:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  40107d:	00 00 00 
+  401080:	ba 02 00 00 00       	mov    edx,0x2
+  401085:	0f 05                	syscall
+  401087:	48 8b 04 25 00 20 40 	mov    rax,QWORD PTR ds:0x402000
+  40108e:	00 
+  40108f:	48 83 e8 30          	sub    rax,0x30
+  401093:	48 89 04 25 00 20 40 	mov    QWORD PTR ds:0x402000,rax
+  40109a:	00 
+  40109b:	ff 34 25 00 20 40 00 	push   QWORD PTR ds:0x402000
+  4010a2:	58                   	pop    rax
+  4010a3:	5b                   	pop    rbx
+  4010a4:	48 01 d8             	add    rax,rbx
+  4010a7:	5b                   	pop    rbx
+  4010a8:	48 01 d8             	add    rax,rbx
+  4010ab:	48 89 04 25 00 20 40 	mov    QWORD PTR ds:0x402000,rax
+  4010b2:	00 
+  4010b3:	48 83 c0 30          	add    rax,0x30
+  4010b7:	b4 0a                	mov    ah,0xa
+  4010b9:	66 89 04 25 00 20 40 	mov    WORD PTR ds:0x402000,ax
+  4010c0:	00 
+  4010c1:	b8 01 00 00 00       	mov    eax,0x1
+  4010c6:	bf 01 00 00 00       	mov    edi,0x1
+  4010cb:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  4010d2:	00 00 00 
+  4010d5:	ba 02 00 00 00       	mov    edx,0x2
+  4010da:	0f 05                	syscall
+  4010dc:	b8 3c 00 00 00       	mov    eax,0x3c
+  4010e1:	bf 00 00 00 00       	mov    edi,0x0
+  4010e6:	0f 05                	syscall

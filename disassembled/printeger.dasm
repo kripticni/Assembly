@@ -1,0 +1,47 @@
+
+/home/aleksic/Assembly-Dasm/elf/printeger:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	b8 af 26 73 00       	mov    eax,0x7326af
+  401005:	4c 8d 0c 25 13 20 40 	lea    r9,ds:0x402013
+  40100c:	00 
+  40100d:	4d 89 ca             	mov    r10,r9
+  401010:	bb 0a 00 00 00       	mov    ebx,0xa
+
+0000000000401015 <..@4.div>:
+  401015:	48 31 d2             	xor    rdx,rdx
+  401018:	48 f7 f3             	div    rbx
+  40101b:	48 83 c2 30          	add    rdx,0x30
+  40101f:	48 85 c0             	test   rax,rax
+  401022:	74 09                	je     40102d <..@4.last_remainder>
+  401024:	41 88 11             	mov    BYTE PTR [r9],dl
+  401027:	49 83 e9 01          	sub    r9,0x1
+  40102b:	eb e8                	jmp    401015 <..@4.div>
+
+000000000040102d <..@4.last_remainder>:
+  40102d:	84 d2                	test   dl,dl
+  40102f:	74 07                	je     401038 <..@4.check_buffer>
+  401031:	41 88 11             	mov    BYTE PTR [r9],dl
+  401034:	49 83 e9 01          	sub    r9,0x1
+
+0000000000401038 <..@4.check_buffer>:
+  401038:	4d 39 d1             	cmp    r9,r10
+  40103b:	75 08                	jne    401045 <..@4.print_buffer>
+  40103d:	41 c6 01 30          	mov    BYTE PTR [r9],0x30
+  401041:	49 83 e9 01          	sub    r9,0x1
+
+0000000000401045 <..@4.print_buffer>:
+  401045:	49 83 c1 01          	add    r9,0x1
+  401049:	4d 29 ca             	sub    r10,r9
+  40104c:	49 83 c2 01          	add    r10,0x1
+  401050:	b8 01 00 00 00       	mov    eax,0x1
+  401055:	bf 01 00 00 00       	mov    edi,0x1
+  40105a:	4c 89 ce             	mov    rsi,r9
+  40105d:	4c 89 d2             	mov    rdx,r10
+  401060:	0f 05                	syscall
+  401062:	b8 3c 00 00 00       	mov    eax,0x3c
+  401067:	bf 00 00 00 00       	mov    edi,0x0
+  40106c:	0f 05                	syscall

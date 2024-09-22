@@ -1,0 +1,50 @@
+
+/home/aleksic/Assembly-Dasm/elf/user_input:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	e8 1b 00 00 00       	call   401020 <_print1>
+  401005:	e8 4e 00 00 00       	call   401058 <_scanName>
+  40100a:	e8 2d 00 00 00       	call   40103c <_print2>
+  40100f:	e8 60 00 00 00       	call   401074 <_printName>
+  401014:	b8 3c 00 00 00       	mov    eax,0x3c
+  401019:	bf 00 00 00 00       	mov    edi,0x0
+  40101e:	0f 05                	syscall
+
+0000000000401020 <_print1>:
+  401020:	b8 01 00 00 00       	mov    eax,0x1
+  401025:	bf 01 00 00 00       	mov    edi,0x1
+  40102a:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401031:	00 00 00 
+  401034:	ba 13 00 00 00       	mov    edx,0x13
+  401039:	0f 05                	syscall
+  40103b:	c3                   	ret
+
+000000000040103c <_print2>:
+  40103c:	b8 01 00 00 00       	mov    eax,0x1
+  401041:	bf 01 00 00 00       	mov    edi,0x1
+  401046:	48 be 13 20 40 00 00 	movabs rsi,0x402013
+  40104d:	00 00 00 
+  401050:	ba 07 00 00 00       	mov    edx,0x7
+  401055:	0f 05                	syscall
+  401057:	c3                   	ret
+
+0000000000401058 <_scanName>:
+  401058:	b8 00 00 00 00       	mov    eax,0x0
+  40105d:	bf 00 00 00 00       	mov    edi,0x0
+  401062:	48 be 1c 20 40 00 00 	movabs rsi,0x40201c
+  401069:	00 00 00 
+  40106c:	ba 10 00 00 00       	mov    edx,0x10
+  401071:	0f 05                	syscall
+  401073:	c3                   	ret
+
+0000000000401074 <_printName>:
+  401074:	b8 01 00 00 00       	mov    eax,0x1
+  401079:	bf 01 00 00 00       	mov    edi,0x1
+  40107e:	48 be 1c 20 40 00 00 	movabs rsi,0x40201c
+  401085:	00 00 00 
+  401088:	ba 10 00 00 00       	mov    edx,0x10
+  40108d:	0f 05                	syscall
+  40108f:	c3                   	ret

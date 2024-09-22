@@ -1,0 +1,54 @@
+
+/home/aleksic/Assembly-Dasm/elf/print-int:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	b8 2c 0f 01 00       	mov    eax,0x10f2c
+  401005:	e8 0c 00 00 00       	call   401016 <_printRAX>
+  40100a:	b8 3c 00 00 00       	mov    eax,0x3c
+  40100f:	bf 00 00 00 00       	mov    edi,0x0
+  401014:	0f 05                	syscall
+
+0000000000401016 <_printRAX>:
+  401016:	48 b9 00 20 40 00 00 	movabs rcx,0x402000
+  40101d:	00 00 00 
+  401020:	bb 0a 00 00 00       	mov    ebx,0xa
+  401025:	48 89 19             	mov    QWORD PTR [rcx],rbx
+  401028:	48 ff c1             	inc    rcx
+  40102b:	48 89 0c 25 64 20 40 	mov    QWORD PTR ds:0x402064,rcx
+  401032:	00 
+
+0000000000401033 <_printRAXLoop>:
+  401033:	48 31 d2             	xor    rdx,rdx
+  401036:	bb 0a 00 00 00       	mov    ebx,0xa
+  40103b:	48 f7 f3             	div    rbx
+  40103e:	50                   	push   rax
+  40103f:	48 83 c2 30          	add    rdx,0x30
+  401043:	48 8b 0c 25 64 20 40 	mov    rcx,QWORD PTR ds:0x402064
+  40104a:	00 
+  40104b:	88 11                	mov    BYTE PTR [rcx],dl
+  40104d:	48 ff c1             	inc    rcx
+  401050:	48 89 0c 25 64 20 40 	mov    QWORD PTR ds:0x402064,rcx
+  401057:	00 
+  401058:	58                   	pop    rax
+  401059:	48 83 f8 00          	cmp    rax,0x0
+  40105d:	75 d4                	jne    401033 <_printRAXLoop>
+
+000000000040105f <_printRAXLoop2>:
+  40105f:	48 8b 0c 25 64 20 40 	mov    rcx,QWORD PTR ds:0x402064
+  401066:	00 
+  401067:	b8 01 00 00 00       	mov    eax,0x1
+  40106c:	bf 01 00 00 00       	mov    edi,0x1
+  401071:	48 89 ce             	mov    rsi,rcx
+  401074:	ba 01 00 00 00       	mov    edx,0x1
+  401079:	0f 05                	syscall
+  40107b:	48 8b 0c 25 64 20 40 	mov    rcx,QWORD PTR ds:0x402064
+  401082:	00 
+  401083:	48 ff c9             	dec    rcx
+  401086:	48 89 0c 25 64 20 40 	mov    QWORD PTR ds:0x402064,rcx
+  40108d:	00 
+  40108e:	48 81 f9 00 20 40 00 	cmp    rcx,0x402000
+  401095:	7d c8                	jge    40105f <_printRAXLoop2>
+  401097:	c3                   	ret

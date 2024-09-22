@@ -1,0 +1,24 @@
+
+/home/aleksic/Assembly-Dasm/elf/puts:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401007:	00 00 00 
+  40100a:	b8 01 00 00 00       	mov    eax,0x1
+  40100f:	bf 01 00 00 00       	mov    edi,0x1
+  401014:	48 31 d2             	xor    rdx,rdx
+
+0000000000401017 <..@3.lenloop>:
+  401017:	80 3c 16 00          	cmp    BYTE PTR [rsi+rdx*1],0x0
+  40101b:	74 06                	je     401023 <..@3.endlen>
+  40101d:	48 83 c2 01          	add    rdx,0x1
+  401021:	eb f4                	jmp    401017 <..@3.lenloop>
+
+0000000000401023 <..@3.endlen>:
+  401023:	0f 05                	syscall
+  401025:	b8 3c 00 00 00       	mov    eax,0x3c
+  40102a:	48 31 ff             	xor    rdi,rdi
+  40102d:	0f 05                	syscall

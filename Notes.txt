@@ -1,12 +1,23 @@
 Credits to:
 
-1. Creel on youtube for his material, 
+1. Creel on youtube for his material, [mostly finished]
 mainly focusing on the hardware specifics
 https://www.youtube.com/@WhatsACreel
 
-2. kupala on youtube for his material,
+2. kupala on youtube for his material, [finished]
 mainly focusing on the linux interactions with asm
 https://www.youtube.com/@khoraski
+
+3. Mike Shah, for his gasm beginner course, [finished]
+discrete maths, and C programming series and courses
+https://www.youtube.com/@MikeShah
+
+4. AMD architecture programmer's manual [unfinished]
+https://www.amd.com/content/dam/amd/en/documents/processor-tech-docs/programmer-references/24592.pdf
+
+5. This index/wiki/lookup for instructions on the web
+https://www.felixcloutier.com/x86/
+
 
 
 Flags contain 1 bit each, aka boolean
@@ -29,6 +40,7 @@ Control Flow is the direction of the program flow,
 the index pointer (rip) determines which line is next to execute
 
 Control Flow calls:
+loop, changing rip based on rcx
 jmp, changing rip
 cmp, used for setting a flag
   a==b sets ZF = 1
@@ -188,6 +200,20 @@ Using original registers generates more efficient machine code
 since the newer x64 registers and instructions add a REX prefix
 in the machine code translation.
 
+There are also further registers that are used for the internals 
+of the processor and not for user programs.
+Such as:
+- Control registers
+- Debug registers
+- Descriptor table registers
+- Task register
+- Extended feature enable register
+- System Configuration register
+- System-linkage registers
+- Memory typing registers 
+- Performance monitoring registers
+- Machine Check registers
+
 Datatypes in x64:
 Integers consist of byte, word, dword and qword
 Ints can also be signed or unsigned, but you keep track of that
@@ -240,6 +266,16 @@ for negative numbers, just flip all bits and then add 1
 This gives you only a value for zero
 and also simplified arithmetic since there is not special rules
 
+Endianness:
+The order of how bytes are stored in memory according to their 
+significance, in modern architectrures we use Little Endian, which means 
+the least significant byte is at the lowest address
+
+bswap is useful for this since it reverses all the bytes in a register 
+bswap 32/64 bit register
+
+to exchange to 16 bit words, you'd do
+xchg 16 reg, 16 reg
 
 Instructions:
 mov, only loads value
@@ -278,6 +314,9 @@ is slower than
 
 add rbx, rbx
 
+there is also adc, which will add the carry flag too
+and aaa which will adjust for ascii after addition
+
 
 Sub, only subtracts, obviously
 overflow means a signed borrow
@@ -286,6 +325,8 @@ a quick way to zero is sub reg, reg
 however
 xor reg, reg ; is faster
 sub reg, 1 is the same a dec reg, except it affects the carry flag
+
+there is also sbb, which is a subtracton with borrow, aka carry
 
 Mul, multiplication
 Imul, unsigned multiplication
@@ -300,6 +341,10 @@ not
 Pretty simple, and I dealt with this a bunch so I won't go into it
 and it's pretty much an entire seperate field.
 obviously out of this you can make more complex gates.
+
+the test instruction just performs a boolean and
+and it does not set the answer to the first input
+but it does set the flags: sign, parity, zeroflag
 
 Bit manipulations:
 
@@ -341,6 +386,26 @@ rord
 
 Concats two registers so we get 128 bits, and then shifts them.
 
+bit scans:
+There are two instructions, forwards and reverse
+
+bsf ax, bx
+goes from the lowest bit and wherever it finds the 1
+it will set the ax to that index
+
+bsr ax, bx
+does the same in reverse, but it will give the index 
+from the right side anyways (won't reverse the order of indexing)
+
+bit tests:
+BTR - bittest reset to 0
+BTS - set to 1
+BT - is bittest
+BTC - bit test then complement
+
+sets the carry flag to bit[x] of reg
+bt reg, {imm/reg}
+
 Basic Flags:
 0 - CF, carry, an unsigned overflow
 2 - PF, parity, old, backwards compat for data transmission
@@ -369,6 +434,12 @@ Other flags:
 30 - (none), AES key schedule loaded flag (VIA PadLock only)
 31 - AI, Alternate Instruction Set, enabled VIA C5XL processors only
 
+Flag instructions:
+std - set direction flag to 1
+cld - clear direction flag to 0
+cmc - complement carry flag
+there is also this for other flags which I wont go over.
+
 Rflags are reserved.
 
 Without the capability to do things conditionaly, computers would be
@@ -379,6 +450,8 @@ Conditionals:
 Jumps/jcc, if the condition cc is true, the processor would only change
 the instruction pointer by a relative offset, which in return will change
 the next line of instructions.
+
+Loops/loopcc, decrement rcx until condition is met
 
 Moves/cmovcc, if cc then it moves, it also doesn't support immediate 
 values, nor 8 bit version.
@@ -403,7 +476,27 @@ JNL/JGE: Not Less Signed
 JLE/JNG: Not Greater Signed
 JNLE/JG: Greater Signed
 
+To set these flags accordingly, you can really use
+any instruction that sets certain flags.
+
 Calling convention:
+
+-Prologue: setup the local data and rbp = rsp
+ //its important to save rbp so that relative addressing 
+ //remains the same even when there is more data pushed 
+ //onto the stack
+push rbp
+mov rbp, rsp
+; if you have local data, you need to sub rsp, 8*argc
+; to access local vars, its [rbp - x], 
+; to access args its, [rbp + x]
+
+-Epilogue: put everything back, aka rsp == rbp
+ //to immediatly get rid of every on the stack 
+ //until your rbp, you can simply mov rsp, rbp
+ mov rsp, rbp
+ pop rbp
+ ret
 
 Windows "C" Calling Convention 
 The first 4 args are stored in the registers
@@ -567,5 +660,81 @@ And compressed displacement, which is quite convinient.
 arithmetic:
 {V}[add/sub/mul/div][u/a/ ][s/p][s/d]
 
+String instructions:
+This does NOT operate on a STRING CLASS, as ascii text
+it operates on a continious memory (string) of [d/q/ ]words
+they also don't need to be null terminated
+
+Store String, stos[b/w/d/q] [mem] 
+and it always stores strings to rdi, [mem] shows from to point
+
+example:
+if you have been passed a character array in rcx then
+'''asm
+  mov rdi, rcx
+  mov al, 'a'
+  stosb
+  ; then stosb is equal to
+  ; mov byte ptr [rdi], al
+  ; add rdi, 1
+'''
+so it writes to rdi, from al
+this is for all string operations altho
+higher bit versions use higher version of al (rax)
+
+Conditional:
+you can use REPcc to repeat a string operation prefix
+
+asm'''
+  mov rcx, 5
+  rep stosb
+''' 
+
+would repeat the stosb 5 times based on rcx
+
+Scanning, scas[b/w/d/q]
+so for scasb it would be the same as 
+  add rdi, 1
+  cmp al, byte ptr [rdi - 1]
+it tells you if rdi is pointing to something that
+is the same as al
+
+with rep you can do 
+rep scanb, which means if equal continue until not equal
+
+Load, lods[b/d/w/q]
+it does
+  mov al, byte ptr [rsi]
+  add rsi, 1
+
+so it loades from rsi, to al
+so this uses the rsi, so the SOURCE index
+and this function can't be repeated really
+
+Compares, cmps[b/w/d/q]
+  cmp ptr[rsi], ptr[rdi]
+  add rsi, size
+  add rdi, size
+and like
+  while(rcx!=0)
+    dec rcx
+    cmp byte ptr[rsi], [rdi]
+    jne breakroop
+    add rsi, 1
+    add rdi, 1
+So you can jump out of the loop
+when the first values are equal or different
+
+Moves, movs
+moves [rdi], [rsi]
+  mov byte ptr [rdi], byte ptr [rsi] ; interesting that it does a mov between
+  add rsi, 1          ; two memory operands, which is usually impossible
+  add rdi, 1
+
+so lets say for an array
+  lea rdi, arrayB
+  lea rsi, arrayA
+  mov rcx, 100
+  rep movsd
 
 

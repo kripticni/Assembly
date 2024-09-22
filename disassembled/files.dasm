@@ -1,26 +1,26 @@
 
-/home/aleksic/Assembly/elf/files:     file format elf64-x86-64
+/home/aleksic/Assembly-Dasm/elf/files:     file format elf64-x86-64
 
 
 Disassembly of section .text:
 
 0000000000401000 <_start>:
-  401000:	b8 02 00 00 00       	mov    $0x2,%eax
-  401005:	48 bf 00 20 40 00 00 	movabs $0x402000,%rdi
+  401000:	b8 02 00 00 00       	mov    eax,0x2
+  401005:	48 bf 00 20 40 00 00 	movabs rdi,0x402000
   40100c:	00 00 00 
-  40100f:	be 41 00 00 00       	mov    $0x41,%esi
-  401014:	ba a4 01 00 00       	mov    $0x1a4,%edx
+  40100f:	be 41 00 00 00       	mov    esi,0x41
+  401014:	ba a4 01 00 00       	mov    edx,0x1a4
   401019:	0f 05                	syscall
-  40101b:	50                   	push   %rax
-  40101c:	48 89 c7             	mov    %rax,%rdi
-  40101f:	b8 01 00 00 00       	mov    $0x1,%eax
-  401024:	48 be 0c 20 40 00 00 	movabs $0x40200c,%rsi
+  40101b:	50                   	push   rax
+  40101c:	48 89 c7             	mov    rdi,rax
+  40101f:	b8 01 00 00 00       	mov    eax,0x1
+  401024:	48 be 0c 20 40 00 00 	movabs rsi,0x40200c
   40102b:	00 00 00 
-  40102e:	ba 0d 00 00 00       	mov    $0xd,%edx
+  40102e:	ba 0d 00 00 00       	mov    edx,0xd
   401033:	0f 05                	syscall
-  401035:	b8 03 00 00 00       	mov    $0x3,%eax
-  40103a:	5f                   	pop    %rdi
+  401035:	b8 03 00 00 00       	mov    eax,0x3
+  40103a:	5f                   	pop    rdi
   40103b:	0f 05                	syscall
-  40103d:	b8 3c 00 00 00       	mov    $0x3c,%eax
-  401042:	bf 00 00 00 00       	mov    $0x0,%edi
+  40103d:	b8 3c 00 00 00       	mov    eax,0x3c
+  401042:	bf 00 00 00 00       	mov    edi,0x0
   401047:	0f 05                	syscall

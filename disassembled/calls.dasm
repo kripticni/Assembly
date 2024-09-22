@@ -1,0 +1,20 @@
+
+/home/aleksic/Assembly-Dasm/elf/calls:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	e8 0c 00 00 00       	call   401011 <_printHW>
+  401005:	b8 3c 00 00 00       	mov    eax,0x3c
+  40100a:	bf 00 00 00 00       	mov    edi,0x0
+  40100f:	0f 05                	syscall
+
+0000000000401011 <_printHW>:
+  401011:	b8 01 00 00 00       	mov    eax,0x1
+  401016:	bf 01 00 00 00       	mov    edi,0x1
+  40101b:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401022:	00 00 00 
+  401025:	ba 0e 00 00 00       	mov    edx,0xe
+  40102a:	0f 05                	syscall
+  40102c:	c3                   	ret
