@@ -610,6 +610,10 @@ AVX (2011): YMM0-YMM15
 AVX512 (2016): ZMM0-ZMM15
 512/256/128/64
 
+MMX doesn't stand for anything, but its used in
+a way that we split up the registers so that we
+can do a single instruction on its multipul data
+
 SSE can do operations on as much variables you can
 fit within a single 128 bit space, so for example 
 it can do operations on 2 quad words at the same time.
@@ -618,6 +622,24 @@ Same aplies to AVX and AVX512.
 
 Data needs to be aligned aka evenly divisible by 
 some number the instruction and data decide.
+
+MMX info:
+x87 FPU is the unit that executes the actual mmx instructions,
+so mmx0-mmx7 is the same as st0-st7, they are just aliased
+but calling mmx and st will changed the mode of the FPU
+Modes:
+-Floating Point Instruction Set
+-Multimedia State
+when you are finished using mmx in a function,
+you need to restore the state of the fpu so that
+it can execute floating point arithmetic, you do this by
+'''asm
+  xmms ; exit multimedia state
+''' 
+for inputing data into the mmx registers, you use
+mov[b/w/d/q]
+padd[b/w/d/q] will add the packed bytes from one reg
+to another
 
 SSE instructions:
 for packed data aka simd you just add *ps at the end
@@ -656,9 +678,11 @@ kunpck[bw/wd/dq], kx[nor/or]*...
 It had also introduced casting floats to integers, or rounding.
 And compressed displacement, which is quite convinient.
 
-
 arithmetic:
 {V}[add/sub/mul/div][u/a/ ][s/p][s/d]
+
+SIMD instructions:
+
 
 String instructions:
 This does NOT operate on a STRING CLASS, as ascii text
