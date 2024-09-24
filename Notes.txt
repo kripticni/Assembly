@@ -151,7 +151,7 @@ cs, segment
 ds, segment
 es, segment
 ss, segment
-flags (comparasings and branching things alike, at the top of the txt file)
+flags (Comparisons and branching things alike, at the top of the txt file)
 
 Segments were used for segmented memory, but now we have flat memory.
 
@@ -614,11 +614,9 @@ MMX doesn't stand for anything, but its used in
 a way that we split up the registers so that we
 can do a single instruction on its multipul data
 
-SSE can do operations on as much variables you can
+SIMD can do operations on as much variables you can
 fit within a single 128 bit space, so for example 
 it can do operations on 2 quad words at the same time.
-
-Same aplies to AVX and AVX512.
 
 Data needs to be aligned aka evenly divisible by 
 some number the instruction and data decide.
@@ -639,15 +637,164 @@ it can execute floating point arithmetic, you do this by
 for inputing data into the mmx registers, you use
 mov[b/w/d/q]
 padd[b/w/d/q] will add the packed bytes from one reg
-to another
+to another, all at the same time
 
-SSE instructions:
+MMX instructions:
+[packed]
+[add/sub]
+[signed/unsigned]
+[saturation/wrap]
+[bytes/words/dwords]
+example: paddusw
+and the add/sub arithmetic operations would do as intended
+
+saturation means that things that overflow will be filled to the max
+value (signed or unsigned), wrap means after overflow they will go to 
+the lowest value
+
+[packed]
+[mul]
+[low/high]
+[signed/unsigned]
+[word/dword/quad]
+example: pmulld
+
+pmaddwd (the fused multiply add)
+would first multiply the data segments
+accordingly, and then it would add the two lower
+segments and the two upper segments and merge them
+wd stands for words to double words
+
+pmaddubsw,
+unsigned bytes saturate to signed word
+
+logical vs arithmetic shifts
+logical shifts fill the shifted part with 0s
+the arithmetic fill it with 1s or 0s, depending on the sign
+(made so you can divide with signed)
+shl and sal perform the same exact thing
+while sar and shr differ
+
+[packed]
+[shift]
+[logical/arithmetic] (unsigned/signed)
+[right/left]
+[byte/word/dword/quad]
+and there is no arithmetic shift for qwords
+
+multiply = shift left
+divide = shift left
+the first operand stores the values, the second one
+the amount of bits to shift
+
+Packing and unpacking, the args are mmx and mmx or mem64
+Converting large types to smaller ones is packing, 
+MMX packing is always saturated (signed or unsigned)
+[pack]
+[signed/unsigned]
+[saturation]
+[double to word/word to byte]
+
+example:
+op 1: b1,a1
+op 2: b2,a2
+all dwords get shortened to words
+ans in op1: b2,a2,b1,a1  
+
+Unpacking 
+[pack] 
+[unpack] {unpck}
+[low/high] (choose if you want to unpack the low or the high 32 bits)
+[bw/wd/dq]
+example: (punpcklbw)
+op 1: h1,g1,f1,e1 d1,c1,b1,a1
+op 2: h2,g2,f2,e2 d2,c2,b2,a2
+ans: d2,d1,c2,c1,b2,b1,a2,a1
+so they get crossed over
+
+Extending
+'''asm 
+  pxor mm7, mm7
+  punpcklbw mm0, mm7
+  ; this would zero extend all words
+'''
+'''asm
+  movq mm7, mm0
+  psraw mm7, 15
+  punpcklwd mm0, mm7
+  ; sign extends all dwords 
+'''
+'''asm
+  mov al, 'A' ; since you cant move immediates into mmx
+  and eax, 0ffh ; clears the top of eax, for saturation
+  movd mm0, eax ; clears the top of mm0, and the first 8 bits are al
+  punpckldq mm0, mm0 ; gives 000A000A
+  packssdw mm0, mm0  ; gives 0A0A0A0A
+  packuswb mm0, mm0  ; gives AAAAAAAA
+  ; effectively broadcasts all bytes
+'''
+
+Boolean and comparison:
+[packed]
+[and/or/xor/andn]
+*and not* is a new opperation from standard x64
+boolean instructions dont have size specifications
+
+andn flips all bits in op1, and then ands with op2
+so it would look as: (!A) & (B)
+this was included to help with the comparison instructions
+
+setting a register to all zeroes is as simple as 
+  pxor reg, reg
+or even
+  pandn reg, reg
+
+
+[packed]
+[cmp]
+[equality/greater] {eq/gt} (GREATER THAN IS ALWAYS SIGNED)
+[b/w/d] (what sizes to compare)
+the elements in op1 are compared to the corresponding
+elements in op2, if they pass, all bits are ones
+if they dont, all bits are zeroes
+
+gt is always signed, so for example a byte value higher
+than 128 will get converted to a negative, which might be
+difficult to track
+
+to set all to 1s
+  pcmpeqb reg, reg
+to all 0s
+  pcmpgtb reg, reg
+
+to flip all the bits
+  pcmpeqb mm7, mm7 ; set to all 1s
+  pxor mm0, mm7    ; xor with 1 flips all values
+
+to get gte (greater than or equal to)
+  pmov mm7, mm0
+  pmov mm6, mm0
+  pcmpgtb mm7, mm1
+  pcmpeqb mm6, mm1
+  por mm7, mm6 ; so now this gives the >=
+  ; you can optimize by not saving mm0
+
+you can figure out != and < and <=
+
+branching and simd dont really mix together
+its hard but possible, and certaintly worth it
+
+
+SSE info:
 for packed data aka simd you just add *ps at the end
 of an instruction, if you for some reason want to do 
 it with a scalar, you'd do *ss, pretty simple
 the s at the end stand for single precision tho 
 you can change it for a d for double precision
 if its unaligned you add *u* before the sufix
+
+SSE instructions:
+
 
 AVX instructions:
 same as SSE except you put a prefix of v* before
@@ -699,7 +846,7 @@ if you have been passed a character array in rcx then
   mov al, 'a'
   stosb
   ; then stosb is equal to
-  ; mov byte ptr [rdi], al
+  ; mov byte [rdi], al
   ; add rdi, 1
 '''
 so it writes to rdi, from al
@@ -719,7 +866,7 @@ would repeat the stosb 5 times based on rcx
 Scanning, scas[b/w/d/q]
 so for scasb it would be the same as 
   add rdi, 1
-  cmp al, byte ptr [rdi - 1]
+  cmp al, byte [rdi - 1]
 it tells you if rdi is pointing to something that
 is the same as al
 
@@ -728,7 +875,7 @@ rep scanb, which means if equal continue until not equal
 
 Load, lods[b/d/w/q]
 it does
-  mov al, byte ptr [rsi]
+  mov al, byte [rsi]
   add rsi, 1
 
 so it loades from rsi, to al
@@ -736,13 +883,13 @@ so this uses the rsi, so the SOURCE index
 and this function can't be repeated really
 
 Compares, cmps[b/w/d/q]
-  cmp ptr[rsi], ptr[rdi]
+  cmp [rsi], [rdi]
   add rsi, size
   add rdi, size
 and like
   while(rcx!=0)
     dec rcx
-    cmp byte ptr[rsi], [rdi]
+    cmp byte [rsi], [rdi]
     jne breakroop
     add rsi, 1
     add rdi, 1
@@ -751,7 +898,7 @@ when the first values are equal or different
 
 Moves, movs
 moves [rdi], [rsi]
-  mov byte ptr [rdi], byte ptr [rsi] ; interesting that it does a mov between
+  mov byte [rdi], byte [rsi] ; interesting that it does a mov between
   add rsi, 1          ; two memory operands, which is usually impossible
   add rdi, 1
 
