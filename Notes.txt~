@@ -18,8 +18,6 @@ https://www.amd.com/content/dam/amd/en/documents/processor-tech-docs/programmer-
 5. This index/wiki/lookup for instructions on the web
 https://www.felixcloutier.com/x86/
 
-6. Nasm docs
-
 
 
 Flags contain 1 bit each, aka boolean
@@ -55,23 +53,23 @@ Conditional Jumps:
 '''asm
   cmp rax, 23
   je _doThis
-'''
+''' 
 Moves to the label if rax is equal to 23.
 
 Also
 '''asm
   mov rax, rbx ; same as int a = b in C
   mov rax, [rbx]; would do int a = *b in C
-'''
+''' 
 [rbx] is the address, however you can only do this
 with 64bit registers, since thats the size of pointers
 
 
 Calls are pretty much jumps to specific functions,
-you need a defined block with a ret at the end, and they
+you need a defined block with a ret at the end, and they 
 work by changing rip and then changing it back with ret.
 
-The stack works with 64 bit values, so when you are
+The stack works with 64 bit values, so when you are 
 pushing a value from memory into the stack, you need
 to convert it to a qword (quad word is 64 bits).
 
@@ -86,7 +84,7 @@ into file management, so I won't go over this.
 SYS_OPEN returns you a file descriptor into the rax register.
 
 db == define bytes
-dw == define word, 16 bits/2 bytes
+dw == define word, 16 bits/2 bytes 
 dd == define double word, 32 bits/4 bytes
 dq == define quadruple word, 64 bits/8 bytes
 This is pretty elementary but I guess important so I'll leave it here.
@@ -106,7 +104,7 @@ And a prologue:
 '''asm
   push rbp
   mov rbp, rsp
-'''
+''' 
 
 And an epilogue:
 '''asm
@@ -114,13 +112,13 @@ And an epilogue:
   ; which is actually just
   ; mov rsp, rbp
   ; pop rbp
-'''
+''' 
 
 And a ret at the end so to not cause a seg fault and exit propertly.
 
 Also important to mention that the heap and the stack are both
 found in the RAM, the program's stack is mostly static, while
-the heap is dynamic and done at runtime with syscalls.
+the heap is dynamic and done at runtime with syscalls. 
 (which is very slow)
 The heap is also worse for cache locality but we can get virtually
 unlimited space, which is not the case for the stack.
@@ -130,8 +128,8 @@ since fragmentation is pretty trivial.
 The main point is that the stack never needs to use a fragmentator.
 
 This is also an insanely good case for how slow linked lists are
-compared to arrays and even vectors (ArrayLists).
-And it can be also used for the support of linear allocators or arenas.
+compared to arrays and even vectors (ArrayLists). 
+And it can be also used for the support of linear allocators or arenas. 
 
 If all of the above is done correctly, the heap can be about just as
 fast as the stack, when it comes to memory accessing, altho it's
@@ -165,12 +163,12 @@ edx, dx, dh/dl, general purpose
 esi, si, source index
 edi, di, destination index
 ebp, bp, base pointer
-esp, sp, stack pointer
+esp, sp, stack pointer 
 eip, ip, instruction pointer
 eFlags, Flags, just the basic flags
 
 And also the deprecated segment registers:
-cs, ds, es, ss, fs, gs
+cs, ds, es, ss, fs, gs 
 fs and gs were additions the segment registers
 instead of the increase in size of the existing ones.
 
@@ -182,7 +180,7 @@ rdx, edx, dx, dh/dl, general purpose
 rsi, esi, si, sil, source index (xil variant to get to the lowest)
 rdi, edi, di, dil, destination index
 rbp, ebp, bp, spl, base pointer (also the xpl)
-rsp, esp, sp, bpl, stack pointer
+rsp, esp, sp, bpl, stack pointer 
 rip, eip, instruction pointer (loss of ip)
 r8, r8d, r8w, r8b, general purpose
 r9, r9d, r9w, r9b, general purpose
@@ -202,7 +200,7 @@ Using original registers generates more efficient machine code
 since the newer x64 registers and instructions add a REX prefix
 in the machine code translation.
 
-There are also further registers that are used for the internals
+There are also further registers that are used for the internals 
 of the processor and not for user programs.
 Such as:
 - Control registers
@@ -212,7 +210,7 @@ Such as:
 - Extended feature enable register
 - System Configuration register
 - System-linkage registers
-- Memory typing registers
+- Memory typing registers 
 - Performance monitoring registers
 - Machine Check registers
 
@@ -269,11 +267,11 @@ This gives you only a value for zero
 and also simplified arithmetic since there is not special rules
 
 Endianness:
-The order of how bytes are stored in memory according to their
-significance, in modern architectrures we use Little Endian, which means
+The order of how bytes are stored in memory according to their 
+significance, in modern architectrures we use Little Endian, which means 
 the least significant byte is at the lowest address
 
-bswap is useful for this since it reverses all the bytes in a register
+bswap is useful for this since it reverses all the bytes in a register 
 bswap 32/64 bit register
 
 to exchange to 16 bit words, you'd do
@@ -285,14 +283,14 @@ mov ax, [RBP+RSI+5] ; gets the value at that address
 mov is also the only instruction that allows for immediate
 64 bit operands, others will cause sign extension.
 
-sign extension means that if the 31th bit is a 1, all the rest
+sign extension means that if the 31th bit is a 1, all the rest 
 would become 1s as well so 0xfffff...
 
 movzx, is the same as mov except it zero extends the smaller source operand
 
 
 lea, loads/calculates effective address
-lea ax, [RBP+RSI+5] ; gets the adress
+lea ax, [RBP+RSI+5] ; gets the adress 
 
 
 Arithmetic:
@@ -302,12 +300,12 @@ however you can use
 add REG, 0
 to update the flags according to the reg
 
-you can also do
+you can also do 
 add REG, 1
 to increment but also update the carry flag
 
 and since add is faster than mul
-doing
+doing 
 mov rax, 2
 mul rbx
 mov rbx, rax
@@ -355,7 +353,7 @@ shl
 shr
 
 if the final bit shifts out, it will set the carry flag as one.
-With a positive signed number, its faster to shr than div 2.
+With a positive signed number, its faster to shr than div 2. 
 (Unless you shift into the sign bit)
 Also with unsigned numbers, it has no downsides.
 
@@ -378,7 +376,7 @@ rotate through the carry flag:
 rcl
 rcr
 
-Sets the carry flag as an extra bit, so registers would act
+Sets the carry flag as an extra bit, so registers would act 
 as if they were 65 bit, pretty much just concats and then shifts.
 Hard to implement in many languages.
 
@@ -396,7 +394,7 @@ goes from the lowest bit and wherever it finds the 1
 it will set the ax to that index
 
 bsr ax, bx
-does the same in reverse, but it will give the index
+does the same in reverse, but it will give the index 
 from the right side anyways (won't reverse the order of indexing)
 
 bit tests:
@@ -455,7 +453,7 @@ the next line of instructions.
 
 Loops/loopcc, decrement rcx until condition is met
 
-Moves/cmovcc, if cc then it moves, it also doesn't support immediate
+Moves/cmovcc, if cc then it moves, it also doesn't support immediate 
 values, nor 8 bit version.
 
 Set Byte/setcc, if true, then it sets the byte to 00000001, else 0
@@ -484,23 +482,23 @@ any instruction that sets certain flags.
 Calling convention:
 
 -Prologue: setup the local data and rbp = rsp
- //its important to save rbp so that relative addressing
- //remains the same even when there is more data pushed
+ //its important to save rbp so that relative addressing 
+ //remains the same even when there is more data pushed 
  //onto the stack
 push rbp
 mov rbp, rsp
 ; if you have local data, you need to sub rsp, 8*argc
-; to access local vars, its [rbp - x],
+; to access local vars, its [rbp - x], 
 ; to access args its, [rbp + x]
 
 -Epilogue: put everything back, aka rsp == rbp
- //to immediatly get rid of every on the stack
+ //to immediatly get rid of every on the stack 
  //until your rbp, you can simply mov rsp, rbp
  mov rsp, rbp
  pop rbp
  ret
 
-Windows "C" Calling Convention
+Windows "C" Calling Convention 
 The first 4 args are stored in the registers
 xmm0 are used for floating points, while regular regs
 are for ints, pointers, arrays, objs
@@ -539,7 +537,7 @@ mov ax, [*name_struct*+*varx*]
 
 to have multipul structures with the same members
 you should prepend the variable with a dot
-in that case you would do
+in that case you would do 
 mov ax, [*name_struct*+*name.var*]
 
 to make an instance of a struct in your data segment
@@ -564,7 +562,7 @@ assembler doesn't know about classes and it does
 not care about private nor public, methods don't
 get defined, so its the same as structs
 
-for a union, you would just say one symbol is
+for a union, you would just say one symbol is 
 the same as another, so just use
   var1 resd 1
   var2 equ var1
@@ -574,7 +572,7 @@ you need to implement unions yourself
 since there is no native union support
 
 nested structures are quite simple
-in the struc declaration you would want to
+in the struc declaration you would want to 
 reserve bytes for the struct
 
 struc inner_struct
@@ -587,7 +585,7 @@ struc outer_struct
   var2: resw 1
 endstruc
 
-and for nested structs we actually need to
+and for nested structs we actually need to 
 use the dot operator
   mov ax, [outer_struct_instance.var1.var2]
 this would lead to the resb 30
@@ -595,7 +593,7 @@ this would lead to the resb 30
 
 SIMD:
 Single Instruction Multipul Data (MIMD AND MISD also exist)
-To achieve higher performance, architects started creating
+To achieve higher performance, architects started creating 
 processors with higher clock speeds, but that leads to more
 power drawing, as a solution they started making processors
 with multipul cores and achieveing paralelism
@@ -617,10 +615,10 @@ a way that we split up the registers so that we
 can do a single instruction on its multipul data
 
 SIMD can do operations on as much variables you can
-fit within a single 128 bit space, so for example
+fit within a single 128 bit space, so for example 
 it can do operations on 2 quad words at the same time.
 
-Data needs to be aligned aka evenly divisible by
+Data needs to be aligned aka evenly divisible by 
 some number the instruction and data decide.
 
 MMX info:
@@ -635,7 +633,7 @@ you need to restore the state of the fpu so that
 it can execute floating point arithmetic, you do this by
 '''asm
   xmms ; exit multimedia state
-'''
+''' 
 for inputing data into the mmx registers, you use
 mov[b/w/d/q]
 padd[b/w/d/q] will add the packed bytes from one reg
@@ -651,7 +649,7 @@ example: paddusw
 and the add/sub arithmetic operations would do as intended
 
 saturation means that things that overflow will be filled to the max
-value (signed or unsigned), wrap means after overflow they will go to
+value (signed or unsigned), wrap means after overflow they will go to 
 the lowest value
 
 [packed]
@@ -690,7 +688,7 @@ the first operand stores the values, the second one
 the amount of bits to shift
 
 Packing and unpacking, the args are mmx and mmx or mem64
-Converting large types to smaller ones is packing,
+Converting large types to smaller ones is packing, 
 MMX packing is always saturated (signed or unsigned)
 [pack]
 [signed/unsigned]
@@ -701,10 +699,10 @@ example:
 op 1: b1,a1
 op 2: b2,a2
 all dwords get shortened to words
-ans in op1: b2,a2,b1,a1
+ans in op1: b2,a2,b1,a1  
 
-Unpacking
-[pack]
+Unpacking 
+[pack] 
 [unpack] {unpck}
 [low/high] (choose if you want to unpack the low or the high 32 bits)
 [bw/wd/dq]
@@ -715,7 +713,7 @@ ans: d2,d1,c2,c1,b2,b1,a2,a1
 so they get crossed over
 
 Extending
-'''asm
+'''asm 
   pxor mm7, mm7
   punpcklbw mm0, mm7
   ; this would zero extend all words
@@ -724,7 +722,7 @@ Extending
   movq mm7, mm0
   psraw mm7, 15
   punpcklwd mm0, mm7
-  ; sign extends all dwords
+  ; sign extends all dwords 
 '''
 '''asm
   mov al, 'A' ; since you cant move immediates into mmx
@@ -746,7 +744,7 @@ andn flips all bits in op1, and then ands with op2
 so it would look as: (!A) & (B)
 this was included to help with the comparison instructions
 
-setting a register to all zeroes is as simple as
+setting a register to all zeroes is as simple as 
   pxor reg, reg
 or even
   pandn reg, reg
@@ -788,114 +786,31 @@ its hard but possible, and certaintly worth it
 
 
 SSE info:
-Streaming Simd Extensions
 for packed data aka simd you just add *ps at the end
-of an instruction, if you for some reason want to do
+of an instruction, if you for some reason want to do 
 it with a scalar, you'd do *ss, pretty simple
-the s at the end stand for single precision tho
+the s at the end stand for single precision tho 
 you can change it for a d for double precision
 if its unaligned you add *u* before the sufix
-xmm are the registers for SSE2, 128 bits wide
-8 regs for x86, 16 regs for x64
-mmx instructions are 3 bytes long instead of sse's 4
-mmx registers have more space
-some embedded microprocessors may not have sse2?
-however there is practically no reason to ever use mmx
-sse is much more flexible with the ability for floating points
-SSE - single precision floating
-SSE2 - double precision floating point, integers
-SSE3 - horizontal instructions (within a single register)
-SSSE3 - supplemental sse3 instructions (more horizontals)
-SSE4.1 - dot products, blends, min/max of ints, etc...
-SSE4.2 - few more misc. instructions
-SSE4a - amd extension, not supported by intel, pop counting and etc...
-
-Microsoft's x64 Calling Convention passes floats via SSE
-in the lowest 32/64 bits, xmm0-xmm3
-
-They come with a new control register, MXCSR
-Multimedia Extension Control and Status Register
-used to handle rounding functions, handling subnormal values, exceptions...
-
-Understanding SSE data movement requires understanding data alignment
-
-in nasm you can do
-segment code private align=16
-which makes it private and aligned by 16 bytes
-
-PRIVATE segments do not get combined with any others by the linker;
-PUBLIC and STACK segments get concatenated together at link time;
-and COMMON segments all get overlaid on top of each other rather than stuck end-to-end.
-
-Align is used to specify how many low bits of the segment start address must be forced to zero.
-the only values supported are 1, 2, 4, 16, 256 and 4096.
-
-CLASS can be used to specify the segment class;
-this feature indicates to the linker that segments of the same class
-should be placed near each other in the output file.
-The class name can be any word, e.g. CLASS=CODE.
-
-OVERLAY, like CLASS, is specified with an arbitrary word as an argument,
-and provides overlay information to an overlay-capable linker.
-
-Segments can be declared as USE16 or USE32, which has the effect of
-recording the choice in the object file and also ensuring that NASM's
-default assembly mode when assembling in that segment is 16-bit or 32-bit respectively.
-
-When writing OS/2 object files, you should declare 32-bit segments as FLAT,
-which causes the default segment base for anything in the segment to be the special group FLAT,
-and also defines the group if it is not already defined.
-
-Natural alignment means if the address is divisble by the data's size
-bytes are naturally aligned,
-so dwords are aligned on 4 byte boundaries
-
-The CPU accesses naturally aligned data quicker than not
-some instructions are made only with naturally 16 byte boundaries
-
-so dwords should be aligned on 4 bytes aka address divisible by 4
-and qword on addresses divisible by 8
-
 
 SSE instructions:
-To change or read the value of MXCSR
-STMXCSR dword [mem32]
-LDMXCSR dword [mem32]
 
-Data movement instructions:
-A rule of thumb is to try to keep the same data type in
-a single sse register because of the penalty for changing
-
-movd, moves 32 bits, but also 64 bits, the size of the value being moved
-is determined by the size of the source operand
-if the destination operand is an sse register or x86, then the top is zeroed
-
-movq, moves either the low 64 bits of sse, or 64 of memory to low sse
-if the destination is sse, then it zeroes the top
-
-movdqa, move aligned double quad word, moves 128 bits but it must be 16 bytes aligned
-movdqu, same but unaligned
-
-mov[a/u][p][s/d], move aligned or unaligned, packed, singles or doubles
-
-mov[s][s/d], move scalar single or double, moves bottom 32/64
-if both are sse, then the top is not changed, if the source is memory, the top is zeroed
 
 AVX instructions:
 same as SSE except you put a prefix of v* before
 the instruction.
-Also it supports 3 register instruction so you
+Also it supports 3 register instruction so you 
 dont need to align the store address
 dont need to be destructive with the inputs
-unlike SSE.
-It has upgraded sse by allowing it to be
+unlike SSE.  
+It has upgraded sse by allowing it to be 
 non distructive with the 128 bit registers.
 You can also add a prefix a* before the sufix
 if you know that your data is aligned.
 
 CPUID is used to check if the hardware is capable of
 performing some of these advanced instructions.
-If you run newer instructions on older hardware
+If you run newer instructions on older hardware 
 you will crash with an illegal instruction error.
 AVX512 is not supported by my cpu, checked by CPUID.
 
@@ -921,7 +836,7 @@ This does NOT operate on a STRING CLASS, as ascii text
 it operates on a continious memory (string) of [d/q/ ]words
 they also don't need to be null terminated
 
-Store String, stos[b/w/d/q] [mem]
+Store String, stos[b/w/d/q] [mem] 
 and it always stores strings to rdi, [mem] shows from to point
 
 example:
@@ -944,18 +859,18 @@ you can use REPcc to repeat a string operation prefix
 asm'''
   mov rcx, 5
   rep stosb
-'''
+''' 
 
 would repeat the stosb 5 times based on rcx
 
 Scanning, scas[b/w/d/q]
-so for scasb it would be the same as
+so for scasb it would be the same as 
   add rdi, 1
   cmp al, byte [rdi - 1]
 it tells you if rdi is pointing to something that
 is the same as al
 
-with rep you can do
+with rep you can do 
 rep scanb, which means if equal continue until not equal
 
 Load, lods[b/d/w/q]
