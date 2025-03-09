@@ -2,7 +2,7 @@ section .data
 section .bss
 
 section .text
-  global absoluteArray 
+  global absoluteArray
 
 absoluteArray:
   ;push rbp
