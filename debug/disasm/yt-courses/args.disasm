@@ -1,0 +1,141 @@
+
+/home/aleksic/Assembly/bin/args:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401000 <_start>:
+  401000:	48 be 02 20 40 00 00 	movabs rsi,0x402002
+  401007:	00 00 00 
+  40100a:	b8 01 00 00 00       	mov    eax,0x1
+  40100f:	bf 01 00 00 00       	mov    edi,0x1
+  401014:	48 31 d2             	xor    rdx,rdx
+
+0000000000401017 <..@4.lenloop>:
+  401017:	80 3c 16 00          	cmp    BYTE PTR [rsi+rdx*1],0x0
+  40101b:	74 06                	je     401023 <..@4.endlen>
+  40101d:	48 83 c2 01          	add    rdx,0x1
+  401021:	eb f4                	jmp    401017 <..@4.lenloop>
+
+0000000000401023 <..@4.endlen>:
+  401023:	0f 05                	syscall
+  401025:	58                   	pop    rax
+  401026:	49 89 c2             	mov    r10,rax
+  401029:	49 83 ea 30          	sub    r10,0x30
+  40102d:	48 83 c0 30          	add    rax,0x30
+  401031:	48 89 04 25 38 20 40 	mov    QWORD PTR ds:0x402038,rax
+  401038:	00 
+  401039:	b8 01 00 00 00       	mov    eax,0x1
+  40103e:	bf 01 00 00 00       	mov    edi,0x1
+  401043:	48 be 38 20 40 00 00 	movabs rsi,0x402038
+  40104a:	00 00 00 
+  40104d:	ba 01 00 00 00       	mov    edx,0x1
+  401052:	0f 05                	syscall
+  401054:	b8 01 00 00 00       	mov    eax,0x1
+  401059:	bf 01 00 00 00       	mov    edi,0x1
+  40105e:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401065:	00 00 00 
+  401068:	ba 01 00 00 00       	mov    edx,0x1
+  40106d:	0f 05                	syscall
+  40106f:	48 be 1a 20 40 00 00 	movabs rsi,0x40201a
+  401076:	00 00 00 
+  401079:	b8 01 00 00 00       	mov    eax,0x1
+  40107e:	bf 01 00 00 00       	mov    edi,0x1
+  401083:	48 31 d2             	xor    rdx,rdx
+
+0000000000401086 <..@7.lenloop>:
+  401086:	80 3c 16 00          	cmp    BYTE PTR [rsi+rdx*1],0x0
+  40108a:	74 06                	je     401092 <..@7.endlen>
+  40108c:	48 83 c2 01          	add    rdx,0x1
+  401090:	eb f4                	jmp    401086 <..@7.lenloop>
+
+0000000000401092 <..@7.endlen>:
+  401092:	0f 05                	syscall
+  401094:	58                   	pop    rax
+  401095:	48 89 c6             	mov    rsi,rax
+  401098:	b8 01 00 00 00       	mov    eax,0x1
+  40109d:	bf 01 00 00 00       	mov    edi,0x1
+  4010a2:	48 31 d2             	xor    rdx,rdx
+
+00000000004010a5 <..@8.lenloop>:
+  4010a5:	80 3c 16 00          	cmp    BYTE PTR [rsi+rdx*1],0x0
+  4010a9:	74 06                	je     4010b1 <..@8.endlen>
+  4010ab:	48 83 c2 01          	add    rdx,0x1
+  4010af:	eb f4                	jmp    4010a5 <..@8.lenloop>
+
+00000000004010b1 <..@8.endlen>:
+  4010b1:	0f 05                	syscall
+  4010b3:	b8 01 00 00 00       	mov    eax,0x1
+  4010b8:	bf 01 00 00 00       	mov    edi,0x1
+  4010bd:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  4010c4:	00 00 00 
+  4010c7:	ba 01 00 00 00       	mov    edx,0x1
+  4010cc:	0f 05                	syscall
+  4010ce:	41 b9 01 00 00 00    	mov    r9d,0x1
+
+00000000004010d4 <_argv_loop>:
+  4010d4:	48 be 28 20 40 00 00 	movabs rsi,0x402028
+  4010db:	00 00 00 
+  4010de:	b8 01 00 00 00       	mov    eax,0x1
+  4010e3:	bf 01 00 00 00       	mov    edi,0x1
+  4010e8:	48 31 d2             	xor    rdx,rdx
+
+00000000004010eb <..@10.lenloop>:
+  4010eb:	80 3c 16 00          	cmp    BYTE PTR [rsi+rdx*1],0x0
+  4010ef:	74 06                	je     4010f7 <..@10.endlen>
+  4010f1:	48 83 c2 01          	add    rdx,0x1
+  4010f5:	eb f4                	jmp    4010eb <..@10.lenloop>
+
+00000000004010f7 <..@10.endlen>:
+  4010f7:	0f 05                	syscall
+  4010f9:	49 83 c1 30          	add    r9,0x30
+  4010fd:	4c 89 0c 25 38 20 40 	mov    QWORD PTR ds:0x402038,r9
+  401104:	00 
+  401105:	b8 01 00 00 00       	mov    eax,0x1
+  40110a:	bf 01 00 00 00       	mov    edi,0x1
+  40110f:	48 be 38 20 40 00 00 	movabs rsi,0x402038
+  401116:	00 00 00 
+  401119:	ba 01 00 00 00       	mov    edx,0x1
+  40111e:	0f 05                	syscall
+  401120:	49 83 e9 30          	sub    r9,0x30
+  401124:	48 be 32 20 40 00 00 	movabs rsi,0x402032
+  40112b:	00 00 00 
+  40112e:	b8 01 00 00 00       	mov    eax,0x1
+  401133:	bf 01 00 00 00       	mov    edi,0x1
+  401138:	48 31 d2             	xor    rdx,rdx
+
+000000000040113b <..@12.lenloop>:
+  40113b:	80 3c 16 00          	cmp    BYTE PTR [rsi+rdx*1],0x0
+  40113f:	74 06                	je     401147 <..@12.endlen>
+  401141:	48 83 c2 01          	add    rdx,0x1
+  401145:	eb f4                	jmp    40113b <..@12.lenloop>
+
+0000000000401147 <..@12.endlen>:
+  401147:	0f 05                	syscall
+  401149:	58                   	pop    rax
+  40114a:	48 89 c6             	mov    rsi,rax
+  40114d:	b8 01 00 00 00       	mov    eax,0x1
+  401152:	bf 01 00 00 00       	mov    edi,0x1
+  401157:	48 31 d2             	xor    rdx,rdx
+
+000000000040115a <..@13.lenloop>:
+  40115a:	80 3c 16 00          	cmp    BYTE PTR [rsi+rdx*1],0x0
+  40115e:	74 06                	je     401166 <..@13.endlen>
+  401160:	48 83 c2 01          	add    rdx,0x1
+  401164:	eb f4                	jmp    40115a <..@13.lenloop>
+
+0000000000401166 <..@13.endlen>:
+  401166:	0f 05                	syscall
+  401168:	b8 01 00 00 00       	mov    eax,0x1
+  40116d:	bf 01 00 00 00       	mov    edi,0x1
+  401172:	48 be 00 20 40 00 00 	movabs rsi,0x402000
+  401179:	00 00 00 
+  40117c:	ba 01 00 00 00       	mov    edx,0x1
+  401181:	0f 05                	syscall
+  401183:	49 83 c1 02          	add    r9,0x2
+  401187:	4d 39 d1             	cmp    r9,r10
+  40118a:	49 83 e9 01          	sub    r9,0x1
+  40118e:	0f 8f 40 ff ff ff    	jg     4010d4 <_argv_loop>
+  401194:	b8 3c 00 00 00       	mov    eax,0x3c
+  401199:	bf 00 00 00 00       	mov    edi,0x0
+  40119e:	0f 05                	syscall
