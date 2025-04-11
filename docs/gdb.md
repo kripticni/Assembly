@@ -1,0 +1,165 @@
+# Gnu Debugger
+To select a file you simply need to put it as
+an cmdline argument, or input 
+file <filename>
+into gdb 
+
+To start gdb with a core dump we use
+gdb <program> <core dump>
+
+To specify args ahead of time
+gdb --args <program> <args...>
+or before running
+set args <args...>
+
+To attach to a running process
+gdb --pid <pid>
+
+## Running
+To run a binary you can use
+r, run
+start, to start at _start aka the entry point
+by setting a temporary breakpoint there
+
+to pass cmdline arguments you simply add them
+to the end of your command for starting
+ex: r arg1 arg2 arg3
+ex: start 123
+
+## Stoping
+To terminate a binary you can either send it
+a sigint with Ctrl + C (^C) while its
+running or use
+kill, simply terminates the process
+
+To simply take control you can do
+Ctrl + Z (^Z) to send a sigtstp to it
+
+## Breaking
+You can break simply using
+b <addr>/<symbol>, sets a breakpoint there
+
+Info a very valuable command that is used 
+to inspect anything and everything, it can
+be used to list breakpoints by doing
+i breakpoints
+i b
+
+To remove a breakpoint you have two options
+clear removes a breakpoint at a specific address
+cl *0xffff
+or using delete, to delete a specific numbered
+breakpoint
+d 1
+
+To temporarily disable and enable breakpoints
+dis <number>
+ena <number> (using en is also possible)
+
+## Stepping
+Step over is nexti, ni
+Step into is stepi, si
+Step out is finish, fi
+
+To step until an address is reached is until
+u <addr>
+however it also breaks upon exiting the function
+
+to continue a paused binary you simply use
+c, continue
+
+## Code/Disasm
+This is only available with debugging
+symbols being enabled so its only useful
+when you already have the source
+l, lists surrounding code from rip
+l ., resets the showcase back to rip
+l <func>, shows the source of a func and the surrounding code
+l <source name>:<line number>, code surrounding that line
+
+Disassembling on the other hand is always available
+disas <addr or symbol>, disassembles the specified memory 
+additionaly /r for raw bytes, /m for mixing with source code
+you can also stack them by doing /rm
+
+
+## Examining
+Firstly we need to know the format specifiers
+and also the unit sizes
+| Format | Description |
+|--------|-------------|
+| `x`    | Print as **hexadecimal**. |
+| `d`    | Print as **decimal** (signed). |
+| `u`    | Print as **decimal** (unsigned). |
+| `o`    | Print as **octal**. |
+| `t`    | Print as **binary** (`t` stands for "two"). |
+| `a`    | Print as an **address**, showing the symbol and offset (e.g., `0x54320 <_func+396>`). |
+| `c`    | Print as a **character constant** (numeric value + character). Non-ASCII printed as `\nnn`. |
+| `f`    | Print as a **floating point number**. |
+| `s`    | Print as a **string**, if possible (null-terminated or fixed-length arrays). |
+| `z`    | Print as **hex**, with **leading zeros** padded to the size of the type. |
+| `r`    | Print using **raw formatting**, bypassing Python pretty-printers. |
+
+| Unit | Size        | Description          |
+|------|-------------|----------------------|
+| `b`  | 1 byte      | **Byte**             |
+| `h`  | 2 bytes     | **Half-word**        |
+| `w`  | 4 bytes     | **Word**             |
+| `g`  | 8 bytes     | **Giant-word**       |
+
+
+To examine certain memory you can simply do
+x/<n><fmt><unit> <addr or symbol>
+ex: x/10xg main
+
+Alternatively for disassembly you can also use
+the examine command to look at instructions
+x/<n>i <addr>
+shows you n instructions from the addr
+
+Even better you can use display so that
+each time the program is stopped you get
+to see a number of instructions like this
+display/<n>i <instruction pointer for arch>
+ex: display/16i $rsp
+ex: display/16i $pc
+
+For viewing registers you can once again
+use the info command
+i r, info registers
+
+The print command is used for printing
+the value of any symbol/variable or
+even a singular register
+p/x $rax
+p/u a
+
+## Stack
+To setup an updating stack view, we can
+also use the display command 
+disp/10xg $rsp
+
+To get a call stack we simply use
+the backtrace command
+bt, backtrace
+
+## Modifying 
+For registers we use the set command
+set $rax = 0xface
+
+For modifying memory we also use
+the set command with a C-style type
+and all of its values are zero extended
+set {long long}$rsp = 0x13371337
+
+## Preferences
+To disable the use of ABI register names
+for Risc-V we can do
+set disassembler-options numeric
+also for pseudo-instructions aka aliases
+set disassembler-options no-aliases
+
+
+## Material
+OpenSecurityTraining2, Debuggers 1012: Introductory GDB
+https://apps.p.ost2.fyi/learning/course/course-v1:OpenSecurityTraining2+Dbg1012_IntroGDB+2024_v1/home
