@@ -1,34 +1,37 @@
 # Gnu Debugger
 
 To select a file you simply need to put it as 
-an cmdline argument, or input file
-<filename> into gdb
+an cmdline argument, or input 
+`file <filename>`
 
 To start gdb with a core dump we use 
-gdb <program> <core dump>
+`gdb <program> <core dump>`
 or before running
-core <file>
+`core <file>`
 
 For a symbol table
-symbol <file>
+`symbol <file>`
 
 To specify args ahead of time 
-gdb --args <program> <args...> 
+`gdb --args <program> <args...>`
 or before running
-set args <args...>
+`set args <args...>`
 
-To attach to a running process gdb --pid <pid>
-For choosing a thread which to operate on thread <thread>
+
+To attach to a running process 
+`gdb --pid <pid>`
+For choosing a thread which to operate on 
+`thread <thread>`
 or before running
-attach <pid>
+`attach <pid>`
 and to resume control
-detach
+`detach`
 
 To connect to a target machine, process, file
-target <type> <param>
+`target <type> <param>`
 
 For exiting its either 
-quit
+`quit`
 or Ctrl + D
 
 ## Running
@@ -282,9 +285,8 @@ To disable the use of ABI register names for Risc-V we can do set
 disassembler-options numeric also for pseudo-instructions aka aliases set
 disassembler-options no-aliases
 
-## Material
+## Sources
 
-OpenSecurityTraining2, Debuggers 1012: Introductory GDB
-https://apps.p.ost2.fyi/learning/course/course-v1:OpenSecurityTraining2+Dbg1012_IntroGDB+2024_v1/home
-Marc Haisenko's cheatsheet: https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf
-And this cheatsheet: https://users.ece.utexas.edu/~adnan/gdb-refcard.pdf
+- [OpenSecurityTraining2 – Debuggers 1012: Introductory GDB](https://apps.p.ost2.fyi/learning/course/course-v1:OpenSecurityTraining2+Dbg1012_IntroGDB+2024_v1/home)
+- [Marc Haisenko's GDB Cheat Sheet](https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf)
+- [UTexas GDB Reference Card](https://users.ece.utexas.edu/~adnan/gdb-refcard.pdf)
