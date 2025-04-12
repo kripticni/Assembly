@@ -244,6 +244,9 @@ ex: disp/16i $pc
 List with i disp,
 To remove a display is undisp
 
+To see the mappings in memory
+info proc mappings
+
 ## Stack
 
 To setup an updating stack view, we can also use the display 

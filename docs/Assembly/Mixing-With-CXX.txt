@@ -1,0 +1,49 @@
+Use any assembler, to create a object file and then
+link it with your C code
+And in the C code you need to declare the
+function with the extern keyword
+
+Or, write inline assembly
+Or, use intrinsics
+
+
+VisualStudio offers us intrinsics, that
+are basically instructions in form of functions
+http://msdn.microsoft.com/en-us/library/hh977022.aspx
+https://docs.microsoft.com/en-us/cpp/intrinsics/x64-amd64-intrinsics-list?view=msvc-160
+
+Inline assembly is only supported for the
+32 bit code in VisualStudio
+so we need to either use intrinsics
+or the MASM assembler for our assembly
+that gets linked into the C file
+
+To do that, we need to go to our
+VS Project, right click it, go to
+Build Dependencies -> Build Customizations
+and add masm there
+
+
+GCC, to write inline assembly
+simply add in your C code
+asm("<instructions here>");
+every instruction needs to be
+explicitly separated by a new line
+also everything is written in the AT&T syntax
+except,
+% means an operand
+%% means a register
+
+
+To get variables, we need the "extended asm"
+asm(assembly template:
+    output operands: //opt
+    input operands: //opt
+    list of clobbered registers //opt
+);
+
+asm("movl %0, %%eax" : : "r" (var)); //moves var into eax
+asm("movl %%eax, %0" : : "=r" (var)); //moves eax in var
+
+You can also give raw bytes with the .byte keyboard
+asm(".byte 0x48 ; .byte 0x89 ; .byte 0xe5"); // same as mov %rsp, %rbp

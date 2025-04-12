@@ -20,10 +20,60 @@ https://www.felixcloutier.com/x86/
 
 6. Nasm docs
 
+7. OpenSecurityTraining2 Course Arch1001
+https://apps.p.ost2.fyi/learning/course/course-v1:OpenSecurityTraining2+Arch1001_x86-64_Asm+2021_v1
 
+8. CMU architecture class
+http://csapp.cs.cmu.edu/
+
+
+Syntax:
+
+Intel Syntax:
+-Preferred nowadays
+-Dst <- Src
+-Decorators:
+  1. [] for dereferncing
+  2. ; for comments
+  3. Offsets written as '+ bytes'
+  mov rax, [rbp+8]
+  4. Displacement
+  mov rax, [eax + ecx*2 + 4]
+  5. Declaring size
+  Before a value simply put dword or qword or qword ptr...
+  byte, word, dword, qword
+mov rbp, rsp
+add rsp, 0x14 
+(rsp = rsp + 0x14)
+
+AT&T syntax:
+-Preferred on *nix
+-Src -> Dst
+-Decorators:
+  1. % for registers
+  2. $ for values
+  3. # for comments
+  4. Offsets go before the base register
+  5. () for dereferencing
+  mov 8(%rbp), rax
+  6. Displacement
+  mov 4(%eax, %ecx, 2), rax
+  means eax + ecx*2 + 4
+  7. Declaring size changes the instruction mnemonic
+  bytes, words, longs, quad words
+  movb, movw, movl, movq
+  8. Changes the names of some instructions
+  movsx -> movsbw
+  from move sign extend to move sign byte to word
+  cwde -> cwtl
+  convert sign extend to convert word to long
+  Harder to look up
+
+
+Registers:
 
 Flags contain 1 bit each, aka boolean
-They are *likely?* used to determine some other calls
+They are used to determine control flow
 CF = Carry
 PF = Parity
 ZF = Zero
@@ -526,6 +576,17 @@ rax is the return value
 rdx is optionally the 2nd return value
 rbx is optionally used as a base pointer
 
+Also for functions that are always
+considered as leaf functions you are
+allowed to use the "red zone", 
+this is all undefined memory that is
+128 up to bytes below rsp and it is reserved
+
+[[gnu::naked]] with inline assembly works 
+nicely for achieving this
+[[gnu::nocf_check]] for disable CET and
+compile with -fcf-protection
+
 Structures in Assembly:
 In nasm, you start a struct by doing
 struc *name*
@@ -915,6 +976,11 @@ arithmetic:
 
 SIMD instructions:
 
+Control-Flow Enforcement Technology Instructions (CET):
+endbr64, use for indirect branch tracking (IBT)
+ENd BRanch 64-bit, with CET enabled the cpu checks that all
+indirect branches land on a valid instruction being endbr64
+it otherwise raises control-protection fault
 
 String instructions:
 This does NOT operate on a STRING CLASS, as ascii text
@@ -994,3 +1060,27 @@ so lets say for an array
   rep movsd
 
 
+Optimizations
+
+Instead of using a div instruction, compilers usually
+calculate the reciprocal of the value and multiply by it
+instead, since that is faster
+
+REX byte
+
+The point of the rex byte is to allow for variants of
+instructions in 64 bit mode to access the only byte
+registers like spl, bpl, sil, dil and r8l-r15l
+
+Lock Prefix
+
+Makes the address inaccessible during the operation
+and makes the instruction atomic, so that it cannot
+be interrupted by other cores midway through
+They also only work when one operand is memory
+Its commonly used for synchronization
+
+SAHF
+
+Stores the contents of ah into
+the lower byte of eflags (the status flags)

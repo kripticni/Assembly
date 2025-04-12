@@ -169,6 +169,13 @@
 | `set $reg = val` | Modify register. |
 | `set {type}<addr> = val` | Modify memory. |
 
+## Info
+
+| Command | Description |
+|---------|-------------|
+| `info proc mappings` | Shows where segments are mapped in memory. |
+| `info file` | Shows where the entry point is. |
+
 ## Preferences
 
 ```bash

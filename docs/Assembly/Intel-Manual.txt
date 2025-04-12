@@ -1,0 +1,26 @@
+https://ost2images.s3.amazonaws.com/Arch2001/CourseMaterials/325462-sdm-vol-1-2abcd-3abcd.pdf
+
+
+Volume 1:
+Sections 3.4.1 "General-Purpose Registers"
+
+3.4.1.1 "General-Purpose Registers in 64-Bit Mode"
+
+Sections 3.4.3 "EFLAGS Register, 
+
+3.4.3.1 "Status Flags", 
+
+3.4.3.2 "DF Flag", 
+
+Skip, 3.4.3.3, that's covered in Arch1002
+
+3.4.3.4 "RFLAGS Register in 64-Bit Mode"
+
+Sections 5.1.1-5.1.13 under "General-Purpose Instructions" and 5.21 "64-bit Mode Instructions". This is just to give you a chance to see some of the types of instructions which exist. If any catch your curiosity, then you can go read about them too in their specific manual page.
+
+Appendix A & B: You don't need to read these, just to see that they exist in case you ever need to reference them.
+
+Volume 2:
+Sections 1.3.1 "Bit and Byte Order", this shows how you can expect to see bits and bytes represented in the rest of the manual. Low addresses low, high addresses high ;) But if you're coming from another architecture, their manuals may not have used this convention, so you should know how Intel writes stuff.
+
+IF you want to be an expert...(and I mean, if you got this far, I have to assume you want to be an expert ;)) you should read the manual page for every single instruction we learned about in this class. This way you can see where I was simplifying stuff for you, and learn how things actually work. You can also then know what you don't know. I.e. if it starts mentioning stuff you don't know about like "segments/segmentation", "far" control flow transfer, privilege levels, page faults, etc, don't worry about it (and just skip over it). You can learn about that in Arch2001!
