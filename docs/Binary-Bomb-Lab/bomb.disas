@@ -1,0 +1,1769 @@
+
+bomb:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+0000000000001000 <.init>:
+    1000:	f3 0f 1e fa          	endbr64
+    1004:	48 83 ec 08          	sub    rsp,0x8
+    1008:	48 8b 05 d9 3f 00 00 	mov    rax,QWORD PTR [rip+0x3fd9]        # 4fe8 <socket@plt+0x3c98>
+    100f:	48 85 c0             	test   rax,rax
+    1012:	74 02                	je     1016 <__cxa_finalize@plt-0x1aa>
+    1014:	ff d0                	call   rax
+    1016:	48 83 c4 08          	add    rsp,0x8
+    101a:	c3                   	ret
+
+Disassembly of section .plt:
+
+0000000000001020 <.plt>:
+    1020:	ff 35 da 3e 00 00    	push   QWORD PTR [rip+0x3eda]        # 4f00 <socket@plt+0x3bb0>
+    1026:	f2 ff 25 db 3e 00 00 	bnd jmp QWORD PTR [rip+0x3edb]        # 4f08 <socket@plt+0x3bb8>
+    102d:	0f 1f 00             	nop    DWORD PTR [rax]
+    1030:	f3 0f 1e fa          	endbr64
+    1034:	68 00 00 00 00       	push   0x0
+    1039:	f2 e9 e1 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    103f:	90                   	nop
+    1040:	f3 0f 1e fa          	endbr64
+    1044:	68 01 00 00 00       	push   0x1
+    1049:	f2 e9 d1 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    104f:	90                   	nop
+    1050:	f3 0f 1e fa          	endbr64
+    1054:	68 02 00 00 00       	push   0x2
+    1059:	f2 e9 c1 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    105f:	90                   	nop
+    1060:	f3 0f 1e fa          	endbr64
+    1064:	68 03 00 00 00       	push   0x3
+    1069:	f2 e9 b1 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    106f:	90                   	nop
+    1070:	f3 0f 1e fa          	endbr64
+    1074:	68 04 00 00 00       	push   0x4
+    1079:	f2 e9 a1 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    107f:	90                   	nop
+    1080:	f3 0f 1e fa          	endbr64
+    1084:	68 05 00 00 00       	push   0x5
+    1089:	f2 e9 91 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    108f:	90                   	nop
+    1090:	f3 0f 1e fa          	endbr64
+    1094:	68 06 00 00 00       	push   0x6
+    1099:	f2 e9 81 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    109f:	90                   	nop
+    10a0:	f3 0f 1e fa          	endbr64
+    10a4:	68 07 00 00 00       	push   0x7
+    10a9:	f2 e9 71 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    10af:	90                   	nop
+    10b0:	f3 0f 1e fa          	endbr64
+    10b4:	68 08 00 00 00       	push   0x8
+    10b9:	f2 e9 61 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    10bf:	90                   	nop
+    10c0:	f3 0f 1e fa          	endbr64
+    10c4:	68 09 00 00 00       	push   0x9
+    10c9:	f2 e9 51 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    10cf:	90                   	nop
+    10d0:	f3 0f 1e fa          	endbr64
+    10d4:	68 0a 00 00 00       	push   0xa
+    10d9:	f2 e9 41 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    10df:	90                   	nop
+    10e0:	f3 0f 1e fa          	endbr64
+    10e4:	68 0b 00 00 00       	push   0xb
+    10e9:	f2 e9 31 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    10ef:	90                   	nop
+    10f0:	f3 0f 1e fa          	endbr64
+    10f4:	68 0c 00 00 00       	push   0xc
+    10f9:	f2 e9 21 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    10ff:	90                   	nop
+    1100:	f3 0f 1e fa          	endbr64
+    1104:	68 0d 00 00 00       	push   0xd
+    1109:	f2 e9 11 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    110f:	90                   	nop
+    1110:	f3 0f 1e fa          	endbr64
+    1114:	68 0e 00 00 00       	push   0xe
+    1119:	f2 e9 01 ff ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    111f:	90                   	nop
+    1120:	f3 0f 1e fa          	endbr64
+    1124:	68 0f 00 00 00       	push   0xf
+    1129:	f2 e9 f1 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    112f:	90                   	nop
+    1130:	f3 0f 1e fa          	endbr64
+    1134:	68 10 00 00 00       	push   0x10
+    1139:	f2 e9 e1 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    113f:	90                   	nop
+    1140:	f3 0f 1e fa          	endbr64
+    1144:	68 11 00 00 00       	push   0x11
+    1149:	f2 e9 d1 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    114f:	90                   	nop
+    1150:	f3 0f 1e fa          	endbr64
+    1154:	68 12 00 00 00       	push   0x12
+    1159:	f2 e9 c1 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    115f:	90                   	nop
+    1160:	f3 0f 1e fa          	endbr64
+    1164:	68 13 00 00 00       	push   0x13
+    1169:	f2 e9 b1 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    116f:	90                   	nop
+    1170:	f3 0f 1e fa          	endbr64
+    1174:	68 14 00 00 00       	push   0x14
+    1179:	f2 e9 a1 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    117f:	90                   	nop
+    1180:	f3 0f 1e fa          	endbr64
+    1184:	68 15 00 00 00       	push   0x15
+    1189:	f2 e9 91 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    118f:	90                   	nop
+    1190:	f3 0f 1e fa          	endbr64
+    1194:	68 16 00 00 00       	push   0x16
+    1199:	f2 e9 81 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    119f:	90                   	nop
+    11a0:	f3 0f 1e fa          	endbr64
+    11a4:	68 17 00 00 00       	push   0x17
+    11a9:	f2 e9 71 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    11af:	90                   	nop
+    11b0:	f3 0f 1e fa          	endbr64
+    11b4:	68 18 00 00 00       	push   0x18
+    11b9:	f2 e9 61 fe ff ff    	bnd jmp 1020 <__cxa_finalize@plt-0x1a0>
+    11bf:	90                   	nop
+
+Disassembly of section .plt.got:
+
+00000000000011c0 <__cxa_finalize@plt>:
+    11c0:	f3 0f 1e fa          	endbr64
+    11c4:	f2 ff 25 2d 3e 00 00 	bnd jmp QWORD PTR [rip+0x3e2d]        # 4ff8 <socket@plt+0x3ca8>
+    11cb:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+Disassembly of section .plt.sec:
+
+00000000000011d0 <getenv@plt>:
+    11d0:	f3 0f 1e fa          	endbr64
+    11d4:	f2 ff 25 35 3d 00 00 	bnd jmp QWORD PTR [rip+0x3d35]        # 4f10 <socket@plt+0x3bc0>
+    11db:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+00000000000011e0 <__errno_location@plt>:
+    11e0:	f3 0f 1e fa          	endbr64
+    11e4:	f2 ff 25 2d 3d 00 00 	bnd jmp QWORD PTR [rip+0x3d2d]        # 4f18 <socket@plt+0x3bc8>
+    11eb:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+00000000000011f0 <strcpy@plt>:
+    11f0:	f3 0f 1e fa          	endbr64
+    11f4:	f2 ff 25 25 3d 00 00 	bnd jmp QWORD PTR [rip+0x3d25]        # 4f20 <socket@plt+0x3bd0>
+    11fb:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001200 <puts@plt>:
+    1200:	f3 0f 1e fa          	endbr64
+    1204:	f2 ff 25 1d 3d 00 00 	bnd jmp QWORD PTR [rip+0x3d1d]        # 4f28 <socket@plt+0x3bd8>
+    120b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001210 <write@plt>:
+    1210:	f3 0f 1e fa          	endbr64
+    1214:	f2 ff 25 15 3d 00 00 	bnd jmp QWORD PTR [rip+0x3d15]        # 4f30 <socket@plt+0x3be0>
+    121b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001220 <__stack_chk_fail@plt>:
+    1220:	f3 0f 1e fa          	endbr64
+    1224:	f2 ff 25 0d 3d 00 00 	bnd jmp QWORD PTR [rip+0x3d0d]        # 4f38 <socket@plt+0x3be8>
+    122b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001230 <alarm@plt>:
+    1230:	f3 0f 1e fa          	endbr64
+    1234:	f2 ff 25 05 3d 00 00 	bnd jmp QWORD PTR [rip+0x3d05]        # 4f40 <socket@plt+0x3bf0>
+    123b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001240 <close@plt>:
+    1240:	f3 0f 1e fa          	endbr64
+    1244:	f2 ff 25 fd 3c 00 00 	bnd jmp QWORD PTR [rip+0x3cfd]        # 4f48 <socket@plt+0x3bf8>
+    124b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001250 <read@plt>:
+    1250:	f3 0f 1e fa          	endbr64
+    1254:	f2 ff 25 f5 3c 00 00 	bnd jmp QWORD PTR [rip+0x3cf5]        # 4f50 <socket@plt+0x3c00>
+    125b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001260 <fgets@plt>:
+    1260:	f3 0f 1e fa          	endbr64
+    1264:	f2 ff 25 ed 3c 00 00 	bnd jmp QWORD PTR [rip+0x3ced]        # 4f58 <socket@plt+0x3c08>
+    126b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001270 <signal@plt>:
+    1270:	f3 0f 1e fa          	endbr64
+    1274:	f2 ff 25 e5 3c 00 00 	bnd jmp QWORD PTR [rip+0x3ce5]        # 4f60 <socket@plt+0x3c10>
+    127b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001280 <gethostbyname@plt>:
+    1280:	f3 0f 1e fa          	endbr64
+    1284:	f2 ff 25 dd 3c 00 00 	bnd jmp QWORD PTR [rip+0x3cdd]        # 4f68 <socket@plt+0x3c18>
+    128b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001290 <__memmove_chk@plt>:
+    1290:	f3 0f 1e fa          	endbr64
+    1294:	f2 ff 25 d5 3c 00 00 	bnd jmp QWORD PTR [rip+0x3cd5]        # 4f70 <socket@plt+0x3c20>
+    129b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+00000000000012a0 <strtol@plt>:
+    12a0:	f3 0f 1e fa          	endbr64
+    12a4:	f2 ff 25 cd 3c 00 00 	bnd jmp QWORD PTR [rip+0x3ccd]        # 4f78 <socket@plt+0x3c28>
+    12ab:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+00000000000012b0 <fflush@plt>:
+    12b0:	f3 0f 1e fa          	endbr64
+    12b4:	f2 ff 25 c5 3c 00 00 	bnd jmp QWORD PTR [rip+0x3cc5]        # 4f80 <socket@plt+0x3c30>
+    12bb:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+00000000000012c0 <__isoc99_sscanf@plt>:
+    12c0:	f3 0f 1e fa          	endbr64
+    12c4:	f2 ff 25 bd 3c 00 00 	bnd jmp QWORD PTR [rip+0x3cbd]        # 4f88 <socket@plt+0x3c38>
+    12cb:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+00000000000012d0 <__printf_chk@plt>:
+    12d0:	f3 0f 1e fa          	endbr64
+    12d4:	f2 ff 25 b5 3c 00 00 	bnd jmp QWORD PTR [rip+0x3cb5]        # 4f90 <socket@plt+0x3c40>
+    12db:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+00000000000012e0 <fopen@plt>:
+    12e0:	f3 0f 1e fa          	endbr64
+    12e4:	f2 ff 25 ad 3c 00 00 	bnd jmp QWORD PTR [rip+0x3cad]        # 4f98 <socket@plt+0x3c48>
+    12eb:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+00000000000012f0 <exit@plt>:
+    12f0:	f3 0f 1e fa          	endbr64
+    12f4:	f2 ff 25 a5 3c 00 00 	bnd jmp QWORD PTR [rip+0x3ca5]        # 4fa0 <socket@plt+0x3c50>
+    12fb:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001300 <connect@plt>:
+    1300:	f3 0f 1e fa          	endbr64
+    1304:	f2 ff 25 9d 3c 00 00 	bnd jmp QWORD PTR [rip+0x3c9d]        # 4fa8 <socket@plt+0x3c58>
+    130b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001310 <__fprintf_chk@plt>:
+    1310:	f3 0f 1e fa          	endbr64
+    1314:	f2 ff 25 95 3c 00 00 	bnd jmp QWORD PTR [rip+0x3c95]        # 4fb0 <socket@plt+0x3c60>
+    131b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001320 <sleep@plt>:
+    1320:	f3 0f 1e fa          	endbr64
+    1324:	f2 ff 25 8d 3c 00 00 	bnd jmp QWORD PTR [rip+0x3c8d]        # 4fb8 <socket@plt+0x3c68>
+    132b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001330 <__ctype_b_loc@plt>:
+    1330:	f3 0f 1e fa          	endbr64
+    1334:	f2 ff 25 85 3c 00 00 	bnd jmp QWORD PTR [rip+0x3c85]        # 4fc0 <socket@plt+0x3c70>
+    133b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001340 <__sprintf_chk@plt>:
+    1340:	f3 0f 1e fa          	endbr64
+    1344:	f2 ff 25 7d 3c 00 00 	bnd jmp QWORD PTR [rip+0x3c7d]        # 4fc8 <socket@plt+0x3c78>
+    134b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+0000000000001350 <socket@plt>:
+    1350:	f3 0f 1e fa          	endbr64
+    1354:	f2 ff 25 75 3c 00 00 	bnd jmp QWORD PTR [rip+0x3c75]        # 4fd0 <socket@plt+0x3c80>
+    135b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+
+Disassembly of section .text:
+
+0000000000001360 <.text>:
+    1360:	f3 0f 1e fa          	endbr64
+    1364:	31 ed                	xor    ebp,ebp
+    1366:	49 89 d1             	mov    r9,rdx
+    1369:	5e                   	pop    rsi
+    136a:	48 89 e2             	mov    rdx,rsp
+    136d:	48 83 e4 f0          	and    rsp,0xfffffffffffffff0
+    1371:	50                   	push   rax
+    1372:	54                   	push   rsp
+    1373:	4c 8d 05 06 17 00 00 	lea    r8,[rip+0x1706]        # 2a80 <socket@plt+0x1730>
+    137a:	48 8d 0d 8f 16 00 00 	lea    rcx,[rip+0x168f]        # 2a10 <socket@plt+0x16c0>
+    1381:	48 8d 3d c1 00 00 00 	lea    rdi,[rip+0xc1]        # 1449 <socket@plt+0xf9>
+    1388:	ff 15 52 3c 00 00    	call   QWORD PTR [rip+0x3c52]        # 4fe0 <socket@plt+0x3c90>
+    138e:	f4                   	hlt
+    138f:	90                   	nop
+    1390:	48 8d 3d c9 42 00 00 	lea    rdi,[rip+0x42c9]        # 5660 <stdout@GLIBC_2.2.5>
+    1397:	48 8d 05 c2 42 00 00 	lea    rax,[rip+0x42c2]        # 5660 <stdout@GLIBC_2.2.5>
+    139e:	48 39 f8             	cmp    rax,rdi
+    13a1:	74 15                	je     13b8 <socket@plt+0x68>
+    13a3:	48 8b 05 2e 3c 00 00 	mov    rax,QWORD PTR [rip+0x3c2e]        # 4fd8 <socket@plt+0x3c88>
+    13aa:	48 85 c0             	test   rax,rax
+    13ad:	74 09                	je     13b8 <socket@plt+0x68>
+    13af:	ff e0                	jmp    rax
+    13b1:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+    13b8:	c3                   	ret
+    13b9:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+    13c0:	48 8d 3d 99 42 00 00 	lea    rdi,[rip+0x4299]        # 5660 <stdout@GLIBC_2.2.5>
+    13c7:	48 8d 35 92 42 00 00 	lea    rsi,[rip+0x4292]        # 5660 <stdout@GLIBC_2.2.5>
+    13ce:	48 29 fe             	sub    rsi,rdi
+    13d1:	48 89 f0             	mov    rax,rsi
+    13d4:	48 c1 ee 3f          	shr    rsi,0x3f
+    13d8:	48 c1 f8 03          	sar    rax,0x3
+    13dc:	48 01 c6             	add    rsi,rax
+    13df:	48 d1 fe             	sar    rsi,1
+    13e2:	74 14                	je     13f8 <socket@plt+0xa8>
+    13e4:	48 8b 05 05 3c 00 00 	mov    rax,QWORD PTR [rip+0x3c05]        # 4ff0 <socket@plt+0x3ca0>
+    13eb:	48 85 c0             	test   rax,rax
+    13ee:	74 08                	je     13f8 <socket@plt+0xa8>
+    13f0:	ff e0                	jmp    rax
+    13f2:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+    13f8:	c3                   	ret
+    13f9:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+    1400:	f3 0f 1e fa          	endbr64
+    1404:	80 3d 7d 42 00 00 00 	cmp    BYTE PTR [rip+0x427d],0x0        # 5688 <stderr@GLIBC_2.2.5+0x8>
+    140b:	75 2b                	jne    1438 <socket@plt+0xe8>
+    140d:	55                   	push   rbp
+    140e:	48 83 3d e2 3b 00 00 	cmp    QWORD PTR [rip+0x3be2],0x0        # 4ff8 <socket@plt+0x3ca8>
+    1415:	00 
+    1416:	48 89 e5             	mov    rbp,rsp
+    1419:	74 0c                	je     1427 <socket@plt+0xd7>
+    141b:	48 8b 3d e6 3b 00 00 	mov    rdi,QWORD PTR [rip+0x3be6]        # 5008 <socket@plt+0x3cb8>
+    1422:	e8 99 fd ff ff       	call   11c0 <__cxa_finalize@plt>
+    1427:	e8 64 ff ff ff       	call   1390 <socket@plt+0x40>
+    142c:	c6 05 55 42 00 00 01 	mov    BYTE PTR [rip+0x4255],0x1        # 5688 <stderr@GLIBC_2.2.5+0x8>
+    1433:	5d                   	pop    rbp
+    1434:	c3                   	ret
+    1435:	0f 1f 00             	nop    DWORD PTR [rax]
+    1438:	c3                   	ret
+    1439:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+    1440:	f3 0f 1e fa          	endbr64
+    1444:	e9 77 ff ff ff       	jmp    13c0 <socket@plt+0x70>
+    1449:	f3 0f 1e fa          	endbr64
+    144d:	53                   	push   rbx
+    144e:	83 ff 01             	cmp    edi,0x1
+    1451:	0f 84 f8 00 00 00    	je     154f <socket@plt+0x1ff>
+    1457:	48 89 f3             	mov    rbx,rsi
+    145a:	83 ff 02             	cmp    edi,0x2
+    145d:	0f 85 21 01 00 00    	jne    1584 <socket@plt+0x234>
+    1463:	48 8b 7e 08          	mov    rdi,QWORD PTR [rsi+0x8]
+    1467:	48 8d 35 96 1b 00 00 	lea    rsi,[rip+0x1b96]        # 3004 <socket@plt+0x1cb4>
+    146e:	e8 6d fe ff ff       	call   12e0 <fopen@plt>
+    1473:	48 89 05 1e 42 00 00 	mov    QWORD PTR [rip+0x421e],rax        # 5698 <stderr@GLIBC_2.2.5+0x18>
+    147a:	48 85 c0             	test   rax,rax
+    147d:	0f 84 df 00 00 00    	je     1562 <socket@plt+0x212>
+    1483:	e8 a9 06 00 00       	call   1b31 <socket@plt+0x7e1>
+    1488:	48 8d 3d f9 1b 00 00 	lea    rdi,[rip+0x1bf9]        # 3088 <socket@plt+0x1d38>
+    148f:	e8 6c fd ff ff       	call   1200 <puts@plt>
+    1494:	48 8d 3d 2d 1c 00 00 	lea    rdi,[rip+0x1c2d]        # 30c8 <socket@plt+0x1d78>
+    149b:	e8 60 fd ff ff       	call   1200 <puts@plt>
+    14a0:	e8 b1 07 00 00       	call   1c56 <socket@plt+0x906>
+    14a5:	48 89 c7             	mov    rdi,rax
+    14a8:	e8 fa 00 00 00       	call   15a7 <socket@plt+0x257>
+    14ad:	e8 ec 08 00 00       	call   1d9e <socket@plt+0xa4e>
+    14b2:	48 8d 3d 3f 1c 00 00 	lea    rdi,[rip+0x1c3f]        # 30f8 <socket@plt+0x1da8>
+    14b9:	e8 42 fd ff ff       	call   1200 <puts@plt>
+    14be:	e8 93 07 00 00       	call   1c56 <socket@plt+0x906>
+    14c3:	48 89 c7             	mov    rdi,rax
+    14c6:	e8 00 01 00 00       	call   15cb <socket@plt+0x27b>
+    14cb:	e8 ce 08 00 00       	call   1d9e <socket@plt+0xa4e>
+    14d0:	48 8d 3d 66 1b 00 00 	lea    rdi,[rip+0x1b66]        # 303d <socket@plt+0x1ced>
+    14d7:	e8 24 fd ff ff       	call   1200 <puts@plt>
+    14dc:	e8 75 07 00 00       	call   1c56 <socket@plt+0x906>
+    14e1:	48 89 c7             	mov    rdi,rax
+    14e4:	e8 50 01 00 00       	call   1639 <socket@plt+0x2e9>
+    14e9:	e8 b0 08 00 00       	call   1d9e <socket@plt+0xa4e>
+    14ee:	48 8d 3d 66 1b 00 00 	lea    rdi,[rip+0x1b66]        # 305b <socket@plt+0x1d0b>
+    14f5:	e8 06 fd ff ff       	call   1200 <puts@plt>
+    14fa:	e8 57 07 00 00       	call   1c56 <socket@plt+0x906>
+    14ff:	48 89 c7             	mov    rdi,rax
+    1502:	e8 44 02 00 00       	call   174b <socket@plt+0x3fb>
+    1507:	e8 92 08 00 00       	call   1d9e <socket@plt+0xa4e>
+    150c:	48 8d 3d 15 1c 00 00 	lea    rdi,[rip+0x1c15]        # 3128 <socket@plt+0x1dd8>
+    1513:	e8 e8 fc ff ff       	call   1200 <puts@plt>
+    1518:	e8 39 07 00 00       	call   1c56 <socket@plt+0x906>
+    151d:	48 89 c7             	mov    rdi,rax
+    1520:	e8 9f 02 00 00       	call   17c4 <socket@plt+0x474>
+    1525:	e8 74 08 00 00       	call   1d9e <socket@plt+0xa4e>
+    152a:	48 8d 3d 39 1b 00 00 	lea    rdi,[rip+0x1b39]        # 306a <socket@plt+0x1d1a>
+    1531:	e8 ca fc ff ff       	call   1200 <puts@plt>
+    1536:	e8 1b 07 00 00       	call   1c56 <socket@plt+0x906>
+    153b:	48 89 c7             	mov    rdi,rax
+    153e:	e8 18 03 00 00       	call   185b <socket@plt+0x50b>
+    1543:	e8 56 08 00 00       	call   1d9e <socket@plt+0xa4e>
+    1548:	b8 00 00 00 00       	mov    eax,0x0
+    154d:	5b                   	pop    rbx
+    154e:	c3                   	ret
+    154f:	48 8b 05 1a 41 00 00 	mov    rax,QWORD PTR [rip+0x411a]        # 5670 <stdin@GLIBC_2.2.5>
+    1556:	48 89 05 3b 41 00 00 	mov    QWORD PTR [rip+0x413b],rax        # 5698 <stderr@GLIBC_2.2.5+0x18>
+    155d:	e9 21 ff ff ff       	jmp    1483 <socket@plt+0x133>
+    1562:	48 8b 4b 08          	mov    rcx,QWORD PTR [rbx+0x8]
+    1566:	48 8b 13             	mov    rdx,QWORD PTR [rbx]
+    1569:	48 8d 35 96 1a 00 00 	lea    rsi,[rip+0x1a96]        # 3006 <socket@plt+0x1cb6>
+    1570:	bf 01 00 00 00       	mov    edi,0x1
+    1575:	e8 56 fd ff ff       	call   12d0 <__printf_chk@plt>
+    157a:	bf 08 00 00 00       	mov    edi,0x8
+    157f:	e8 6c fd ff ff       	call   12f0 <exit@plt>
+    1584:	48 8b 16             	mov    rdx,QWORD PTR [rsi]
+    1587:	48 8d 35 95 1a 00 00 	lea    rsi,[rip+0x1a95]        # 3023 <socket@plt+0x1cd3>
+    158e:	bf 01 00 00 00       	mov    edi,0x1
+    1593:	b8 00 00 00 00       	mov    eax,0x0
+    1598:	e8 33 fd ff ff       	call   12d0 <__printf_chk@plt>
+    159d:	bf 08 00 00 00       	mov    edi,0x8
+    15a2:	e8 49 fd ff ff       	call   12f0 <exit@plt>
+    15a7:	f3 0f 1e fa          	endbr64
+    15ab:	48 83 ec 08          	sub    rsp,0x8
+    15af:	48 8d 35 9a 1b 00 00 	lea    rsi,[rip+0x1b9a]        # 3150 <socket@plt+0x1e00>
+    15b6:	e8 16 05 00 00       	call   1ad1 <socket@plt+0x781>
+    15bb:	85 c0                	test   eax,eax
+    15bd:	75 05                	jne    15c4 <socket@plt+0x274>
+    15bf:	48 83 c4 08          	add    rsp,0x8
+    15c3:	c3                   	ret
+    15c4:	e8 1c 06 00 00       	call   1be5 <socket@plt+0x895>
+    15c9:	eb f4                	jmp    15bf <socket@plt+0x26f>
+    15cb:	f3 0f 1e fa          	endbr64
+    15cf:	55                   	push   rbp
+    15d0:	53                   	push   rbx
+    15d1:	48 83 ec 28          	sub    rsp,0x28
+    15d5:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+    15dc:	00 00 
+    15de:	48 89 44 24 18       	mov    QWORD PTR [rsp+0x18],rax
+    15e3:	31 c0                	xor    eax,eax
+    15e5:	48 89 e6             	mov    rsi,rsp
+    15e8:	e8 24 06 00 00       	call   1c11 <socket@plt+0x8c1>
+    15ed:	83 3c 24 01          	cmp    DWORD PTR [rsp],0x1
+    15f1:	75 0a                	jne    15fd <socket@plt+0x2ad>
+    15f3:	48 89 e3             	mov    rbx,rsp
+    15f6:	48 8d 6c 24 14       	lea    rbp,[rsp+0x14]
+    15fb:	eb 15                	jmp    1612 <socket@plt+0x2c2>
+    15fd:	e8 e3 05 00 00       	call   1be5 <socket@plt+0x895>
+    1602:	eb ef                	jmp    15f3 <socket@plt+0x2a3>
+    1604:	e8 dc 05 00 00       	call   1be5 <socket@plt+0x895>
+    1609:	48 83 c3 04          	add    rbx,0x4
+    160d:	48 39 eb             	cmp    rbx,rbp
+    1610:	74 0b                	je     161d <socket@plt+0x2cd>
+    1612:	8b 03                	mov    eax,DWORD PTR [rbx]
+    1614:	01 c0                	add    eax,eax
+    1616:	39 43 04             	cmp    DWORD PTR [rbx+0x4],eax
+    1619:	74 ee                	je     1609 <socket@plt+0x2b9>
+    161b:	eb e7                	jmp    1604 <socket@plt+0x2b4>
+    161d:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+    1622:	64 48 33 04 25 28 00 	xor    rax,QWORD PTR fs:0x28
+    1629:	00 00 
+    162b:	75 07                	jne    1634 <socket@plt+0x2e4>
+    162d:	48 83 c4 28          	add    rsp,0x28
+    1631:	5b                   	pop    rbx
+    1632:	5d                   	pop    rbp
+    1633:	c3                   	ret
+    1634:	e8 e7 fb ff ff       	call   1220 <__stack_chk_fail@plt>
+    1639:	f3 0f 1e fa          	endbr64
+    163d:	48 83 ec 18          	sub    rsp,0x18
+    1641:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+    1648:	00 00 
+    164a:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+    164f:	31 c0                	xor    eax,eax
+    1651:	48 8d 4c 24 04       	lea    rcx,[rsp+0x4]
+    1656:	48 89 e2             	mov    rdx,rsp
+    1659:	48 8d 35 af 1c 00 00 	lea    rsi,[rip+0x1caf]        # 330f <socket@plt+0x1fbf>
+    1660:	e8 5b fc ff ff       	call   12c0 <__isoc99_sscanf@plt>
+    1665:	83 f8 01             	cmp    eax,0x1
+    1668:	7e 1e                	jle    1688 <socket@plt+0x338>
+    166a:	83 3c 24 07          	cmp    DWORD PTR [rsp],0x7
+    166e:	0f 87 90 00 00 00    	ja     1704 <socket@plt+0x3b4>
+    1674:	8b 04 24             	mov    eax,DWORD PTR [rsp]
+    1677:	48 8d 15 22 1b 00 00 	lea    rdx,[rip+0x1b22]        # 31a0 <socket@plt+0x1e50>
+    167e:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+    1682:	48 01 d0             	add    rax,rdx
+    1685:	3e ff e0             	notrack jmp rax
+    1688:	e8 58 05 00 00       	call   1be5 <socket@plt+0x895>
+    168d:	eb db                	jmp    166a <socket@plt+0x31a>
+    168f:	b8 74 02 00 00       	mov    eax,0x274
+    1694:	2d 4c 02 00 00       	sub    eax,0x24c
+    1699:	05 b0 02 00 00       	add    eax,0x2b0
+    169e:	83 e8 7e             	sub    eax,0x7e
+    16a1:	83 c0 7e             	add    eax,0x7e
+    16a4:	83 e8 7e             	sub    eax,0x7e
+    16a7:	83 c0 7e             	add    eax,0x7e
+    16aa:	83 e8 7e             	sub    eax,0x7e
+    16ad:	83 3c 24 05          	cmp    DWORD PTR [rsp],0x5
+    16b1:	7f 06                	jg     16b9 <socket@plt+0x369>
+    16b3:	39 44 24 04          	cmp    DWORD PTR [rsp+0x4],eax
+    16b7:	74 05                	je     16be <socket@plt+0x36e>
+    16b9:	e8 27 05 00 00       	call   1be5 <socket@plt+0x895>
+    16be:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+    16c3:	64 48 33 04 25 28 00 	xor    rax,QWORD PTR fs:0x28
+    16ca:	00 00 
+    16cc:	75 42                	jne    1710 <socket@plt+0x3c0>
+    16ce:	48 83 c4 18          	add    rsp,0x18
+    16d2:	c3                   	ret
+    16d3:	b8 00 00 00 00       	mov    eax,0x0
+    16d8:	eb ba                	jmp    1694 <socket@plt+0x344>
+    16da:	b8 00 00 00 00       	mov    eax,0x0
+    16df:	eb b8                	jmp    1699 <socket@plt+0x349>
+    16e1:	b8 00 00 00 00       	mov    eax,0x0
+    16e6:	eb b6                	jmp    169e <socket@plt+0x34e>
+    16e8:	b8 00 00 00 00       	mov    eax,0x0
+    16ed:	eb b2                	jmp    16a1 <socket@plt+0x351>
+    16ef:	b8 00 00 00 00       	mov    eax,0x0
+    16f4:	eb ae                	jmp    16a4 <socket@plt+0x354>
+    16f6:	b8 00 00 00 00       	mov    eax,0x0
+    16fb:	eb aa                	jmp    16a7 <socket@plt+0x357>
+    16fd:	b8 00 00 00 00       	mov    eax,0x0
+    1702:	eb a6                	jmp    16aa <socket@plt+0x35a>
+    1704:	e8 dc 04 00 00       	call   1be5 <socket@plt+0x895>
+    1709:	b8 00 00 00 00       	mov    eax,0x0
+    170e:	eb 9d                	jmp    16ad <socket@plt+0x35d>
+    1710:	e8 0b fb ff ff       	call   1220 <__stack_chk_fail@plt>
+    1715:	f3 0f 1e fa          	endbr64
+    1719:	53                   	push   rbx
+    171a:	89 d0                	mov    eax,edx
+    171c:	29 f0                	sub    eax,esi
+    171e:	89 c3                	mov    ebx,eax
+    1720:	c1 eb 1f             	shr    ebx,0x1f
+    1723:	01 c3                	add    ebx,eax
+    1725:	d1 fb                	sar    ebx,1
+    1727:	01 f3                	add    ebx,esi
+    1729:	39 fb                	cmp    ebx,edi
+    172b:	7f 06                	jg     1733 <socket@plt+0x3e3>
+    172d:	7c 10                	jl     173f <socket@plt+0x3ef>
+    172f:	89 d8                	mov    eax,ebx
+    1731:	5b                   	pop    rbx
+    1732:	c3                   	ret
+    1733:	8d 53 ff             	lea    edx,[rbx-0x1]
+    1736:	e8 da ff ff ff       	call   1715 <socket@plt+0x3c5>
+    173b:	01 c3                	add    ebx,eax
+    173d:	eb f0                	jmp    172f <socket@plt+0x3df>
+    173f:	8d 73 01             	lea    esi,[rbx+0x1]
+    1742:	e8 ce ff ff ff       	call   1715 <socket@plt+0x3c5>
+    1747:	01 c3                	add    ebx,eax
+    1749:	eb e4                	jmp    172f <socket@plt+0x3df>
+    174b:	f3 0f 1e fa          	endbr64
+    174f:	48 83 ec 18          	sub    rsp,0x18
+    1753:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+    175a:	00 00 
+    175c:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+    1761:	31 c0                	xor    eax,eax
+    1763:	48 8d 4c 24 04       	lea    rcx,[rsp+0x4]
+    1768:	48 89 e2             	mov    rdx,rsp
+    176b:	48 8d 35 9d 1b 00 00 	lea    rsi,[rip+0x1b9d]        # 330f <socket@plt+0x1fbf>
+    1772:	e8 49 fb ff ff       	call   12c0 <__isoc99_sscanf@plt>
+    1777:	83 f8 02             	cmp    eax,0x2
+    177a:	75 06                	jne    1782 <socket@plt+0x432>
+    177c:	83 3c 24 0e          	cmp    DWORD PTR [rsp],0xe
+    1780:	76 05                	jbe    1787 <socket@plt+0x437>
+    1782:	e8 5e 04 00 00       	call   1be5 <socket@plt+0x895>
+    1787:	ba 0e 00 00 00       	mov    edx,0xe
+    178c:	be 00 00 00 00       	mov    esi,0x0
+    1791:	8b 3c 24             	mov    edi,DWORD PTR [rsp]
+    1794:	e8 7c ff ff ff       	call   1715 <socket@plt+0x3c5>
+    1799:	83 f8 0a             	cmp    eax,0xa
+    179c:	75 07                	jne    17a5 <socket@plt+0x455>
+    179e:	83 7c 24 04 0a       	cmp    DWORD PTR [rsp+0x4],0xa
+    17a3:	74 05                	je     17aa <socket@plt+0x45a>
+    17a5:	e8 3b 04 00 00       	call   1be5 <socket@plt+0x895>
+    17aa:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+    17af:	64 48 33 04 25 28 00 	xor    rax,QWORD PTR fs:0x28
+    17b6:	00 00 
+    17b8:	75 05                	jne    17bf <socket@plt+0x46f>
+    17ba:	48 83 c4 18          	add    rsp,0x18
+    17be:	c3                   	ret
+    17bf:	e8 5c fa ff ff       	call   1220 <__stack_chk_fail@plt>
+    17c4:	f3 0f 1e fa          	endbr64
+    17c8:	48 83 ec 18          	sub    rsp,0x18
+    17cc:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+    17d3:	00 00 
+    17d5:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+    17da:	31 c0                	xor    eax,eax
+    17dc:	48 8d 4c 24 04       	lea    rcx,[rsp+0x4]
+    17e1:	48 89 e2             	mov    rdx,rsp
+    17e4:	48 8d 35 24 1b 00 00 	lea    rsi,[rip+0x1b24]        # 330f <socket@plt+0x1fbf>
+    17eb:	e8 d0 fa ff ff       	call   12c0 <__isoc99_sscanf@plt>
+    17f0:	83 f8 01             	cmp    eax,0x1
+    17f3:	7e 5a                	jle    184f <socket@plt+0x4ff>
+    17f5:	8b 04 24             	mov    eax,DWORD PTR [rsp]
+    17f8:	83 e0 0f             	and    eax,0xf
+    17fb:	89 04 24             	mov    DWORD PTR [rsp],eax
+    17fe:	83 f8 0f             	cmp    eax,0xf
+    1801:	74 32                	je     1835 <socket@plt+0x4e5>
+    1803:	b9 00 00 00 00       	mov    ecx,0x0
+    1808:	ba 00 00 00 00       	mov    edx,0x0
+    180d:	48 8d 35 ac 19 00 00 	lea    rsi,[rip+0x19ac]        # 31c0 <socket@plt+0x1e70>
+    1814:	83 c2 01             	add    edx,0x1
+    1817:	48 98                	cdqe
+    1819:	8b 04 86             	mov    eax,DWORD PTR [rsi+rax*4]
+    181c:	01 c1                	add    ecx,eax
+    181e:	83 f8 0f             	cmp    eax,0xf
+    1821:	75 f1                	jne    1814 <socket@plt+0x4c4>
+    1823:	c7 04 24 0f 00 00 00 	mov    DWORD PTR [rsp],0xf
+    182a:	83 fa 0f             	cmp    edx,0xf
+    182d:	75 06                	jne    1835 <socket@plt+0x4e5>
+    182f:	39 4c 24 04          	cmp    DWORD PTR [rsp+0x4],ecx
+    1833:	74 05                	je     183a <socket@plt+0x4ea>
+    1835:	e8 ab 03 00 00       	call   1be5 <socket@plt+0x895>
+    183a:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+    183f:	64 48 33 04 25 28 00 	xor    rax,QWORD PTR fs:0x28
+    1846:	00 00 
+    1848:	75 0c                	jne    1856 <socket@plt+0x506>
+    184a:	48 83 c4 18          	add    rsp,0x18
+    184e:	c3                   	ret
+    184f:	e8 91 03 00 00       	call   1be5 <socket@plt+0x895>
+    1854:	eb 9f                	jmp    17f5 <socket@plt+0x4a5>
+    1856:	e8 c5 f9 ff ff       	call   1220 <__stack_chk_fail@plt>
+    185b:	f3 0f 1e fa          	endbr64
+    185f:	41 56                	push   r14
+    1861:	41 55                	push   r13
+    1863:	41 54                	push   r12
+    1865:	55                   	push   rbp
+    1866:	53                   	push   rbx
+    1867:	48 83 ec 60          	sub    rsp,0x60
+    186b:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+    1872:	00 00 
+    1874:	48 89 44 24 58       	mov    QWORD PTR [rsp+0x58],rax
+    1879:	31 c0                	xor    eax,eax
+    187b:	49 89 e5             	mov    r13,rsp
+    187e:	4c 89 ee             	mov    rsi,r13
+    1881:	e8 8b 03 00 00       	call   1c11 <socket@plt+0x8c1>
+    1886:	41 be 01 00 00 00    	mov    r14d,0x1
+    188c:	49 89 e4             	mov    r12,rsp
+    188f:	eb 28                	jmp    18b9 <socket@plt+0x569>
+    1891:	e8 4f 03 00 00       	call   1be5 <socket@plt+0x895>
+    1896:	eb 30                	jmp    18c8 <socket@plt+0x578>
+    1898:	48 83 c3 01          	add    rbx,0x1
+    189c:	83 fb 05             	cmp    ebx,0x5
+    189f:	7f 10                	jg     18b1 <socket@plt+0x561>
+    18a1:	41 8b 04 9c          	mov    eax,DWORD PTR [r12+rbx*4]
+    18a5:	39 45 00             	cmp    DWORD PTR [rbp+0x0],eax
+    18a8:	75 ee                	jne    1898 <socket@plt+0x548>
+    18aa:	e8 36 03 00 00       	call   1be5 <socket@plt+0x895>
+    18af:	eb e7                	jmp    1898 <socket@plt+0x548>
+    18b1:	49 83 c6 01          	add    r14,0x1
+    18b5:	49 83 c5 04          	add    r13,0x4
+    18b9:	4c 89 ed             	mov    rbp,r13
+    18bc:	41 8b 45 00          	mov    eax,DWORD PTR [r13+0x0]
+    18c0:	83 e8 01             	sub    eax,0x1
+    18c3:	83 f8 05             	cmp    eax,0x5
+    18c6:	77 c9                	ja     1891 <socket@plt+0x541>
+    18c8:	41 83 fe 05          	cmp    r14d,0x5
+    18cc:	7f 05                	jg     18d3 <socket@plt+0x583>
+    18ce:	4c 89 f3             	mov    rbx,r14
+    18d1:	eb ce                	jmp    18a1 <socket@plt+0x551>
+    18d3:	be 00 00 00 00       	mov    esi,0x0
+    18d8:	8b 0c b4             	mov    ecx,DWORD PTR [rsp+rsi*4]
+    18db:	b8 01 00 00 00       	mov    eax,0x1
+    18e0:	48 8d 15 19 39 00 00 	lea    rdx,[rip+0x3919]        # 5200 <socket@plt+0x3eb0>
+    18e7:	83 f9 01             	cmp    ecx,0x1
+    18ea:	7e 0b                	jle    18f7 <socket@plt+0x5a7>
+    18ec:	48 8b 52 08          	mov    rdx,QWORD PTR [rdx+0x8]
+    18f0:	83 c0 01             	add    eax,0x1
+    18f3:	39 c8                	cmp    eax,ecx
+    18f5:	75 f5                	jne    18ec <socket@plt+0x59c>
+    18f7:	48 89 54 f4 20       	mov    QWORD PTR [rsp+rsi*8+0x20],rdx
+    18fc:	48 83 c6 01          	add    rsi,0x1
+    1900:	48 83 fe 06          	cmp    rsi,0x6
+    1904:	75 d2                	jne    18d8 <socket@plt+0x588>
+    1906:	48 8b 5c 24 20       	mov    rbx,QWORD PTR [rsp+0x20]
+    190b:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+    1910:	48 89 43 08          	mov    QWORD PTR [rbx+0x8],rax
+    1914:	48 8b 54 24 30       	mov    rdx,QWORD PTR [rsp+0x30]
+    1919:	48 89 50 08          	mov    QWORD PTR [rax+0x8],rdx
+    191d:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+    1922:	48 89 42 08          	mov    QWORD PTR [rdx+0x8],rax
+    1926:	48 8b 54 24 40       	mov    rdx,QWORD PTR [rsp+0x40]
+    192b:	48 89 50 08          	mov    QWORD PTR [rax+0x8],rdx
+    192f:	48 8b 44 24 48       	mov    rax,QWORD PTR [rsp+0x48]
+    1934:	48 89 42 08          	mov    QWORD PTR [rdx+0x8],rax
+    1938:	48 c7 40 08 00 00 00 	mov    QWORD PTR [rax+0x8],0x0
+    193f:	00 
+    1940:	bd 05 00 00 00       	mov    ebp,0x5
+    1945:	eb 09                	jmp    1950 <socket@plt+0x600>
+    1947:	48 8b 5b 08          	mov    rbx,QWORD PTR [rbx+0x8]
+    194b:	83 ed 01             	sub    ebp,0x1
+    194e:	74 11                	je     1961 <socket@plt+0x611>
+    1950:	48 8b 43 08          	mov    rax,QWORD PTR [rbx+0x8]
+    1954:	8b 00                	mov    eax,DWORD PTR [rax]
+    1956:	39 03                	cmp    DWORD PTR [rbx],eax
+    1958:	7d ed                	jge    1947 <socket@plt+0x5f7>
+    195a:	e8 86 02 00 00       	call   1be5 <socket@plt+0x895>
+    195f:	eb e6                	jmp    1947 <socket@plt+0x5f7>
+    1961:	48 8b 44 24 58       	mov    rax,QWORD PTR [rsp+0x58]
+    1966:	64 48 33 04 25 28 00 	xor    rax,QWORD PTR fs:0x28
+    196d:	00 00 
+    196f:	75 0d                	jne    197e <socket@plt+0x62e>
+    1971:	48 83 c4 60          	add    rsp,0x60
+    1975:	5b                   	pop    rbx
+    1976:	5d                   	pop    rbp
+    1977:	41 5c                	pop    r12
+    1979:	41 5d                	pop    r13
+    197b:	41 5e                	pop    r14
+    197d:	c3                   	ret
+    197e:	e8 9d f8 ff ff       	call   1220 <__stack_chk_fail@plt>
+    1983:	f3 0f 1e fa          	endbr64
+    1987:	48 85 ff             	test   rdi,rdi
+    198a:	74 32                	je     19be <socket@plt+0x66e>
+    198c:	48 83 ec 08          	sub    rsp,0x8
+    1990:	8b 17                	mov    edx,DWORD PTR [rdi]
+    1992:	39 f2                	cmp    edx,esi
+    1994:	7f 0c                	jg     19a2 <socket@plt+0x652>
+    1996:	b8 00 00 00 00       	mov    eax,0x0
+    199b:	75 12                	jne    19af <socket@plt+0x65f>
+    199d:	48 83 c4 08          	add    rsp,0x8
+    19a1:	c3                   	ret
+    19a2:	48 8b 7f 08          	mov    rdi,QWORD PTR [rdi+0x8]
+    19a6:	e8 d8 ff ff ff       	call   1983 <socket@plt+0x633>
+    19ab:	01 c0                	add    eax,eax
+    19ad:	eb ee                	jmp    199d <socket@plt+0x64d>
+    19af:	48 8b 7f 10          	mov    rdi,QWORD PTR [rdi+0x10]
+    19b3:	e8 cb ff ff ff       	call   1983 <socket@plt+0x633>
+    19b8:	8d 44 00 01          	lea    eax,[rax+rax*1+0x1]
+    19bc:	eb df                	jmp    199d <socket@plt+0x64d>
+    19be:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    19c3:	c3                   	ret
+    19c4:	f3 0f 1e fa          	endbr64
+    19c8:	53                   	push   rbx
+    19c9:	e8 88 02 00 00       	call   1c56 <socket@plt+0x906>
+    19ce:	48 89 c7             	mov    rdi,rax
+    19d1:	ba 0a 00 00 00       	mov    edx,0xa
+    19d6:	be 00 00 00 00       	mov    esi,0x0
+    19db:	e8 c0 f8 ff ff       	call   12a0 <strtol@plt>
+    19e0:	48 89 c3             	mov    rbx,rax
+    19e3:	8d 40 ff             	lea    eax,[rax-0x1]
+    19e6:	3d e8 03 00 00       	cmp    eax,0x3e8
+    19eb:	77 26                	ja     1a13 <socket@plt+0x6c3>
+    19ed:	89 de                	mov    esi,ebx
+    19ef:	48 8d 3d 2a 37 00 00 	lea    rdi,[rip+0x372a]        # 5120 <socket@plt+0x3dd0>
+    19f6:	e8 88 ff ff ff       	call   1983 <socket@plt+0x633>
+    19fb:	83 f8 05             	cmp    eax,0x5
+    19fe:	75 1a                	jne    1a1a <socket@plt+0x6ca>
+    1a00:	48 8d 3d 71 17 00 00 	lea    rdi,[rip+0x1771]        # 3178 <socket@plt+0x1e28>
+    1a07:	e8 f4 f7 ff ff       	call   1200 <puts@plt>
+    1a0c:	e8 8d 03 00 00       	call   1d9e <socket@plt+0xa4e>
+    1a11:	5b                   	pop    rbx
+    1a12:	c3                   	ret
+    1a13:	e8 cd 01 00 00       	call   1be5 <socket@plt+0x895>
+    1a18:	eb d3                	jmp    19ed <socket@plt+0x69d>
+    1a1a:	e8 c6 01 00 00       	call   1be5 <socket@plt+0x895>
+    1a1f:	eb df                	jmp    1a00 <socket@plt+0x6b0>
+    1a21:	f3 0f 1e fa          	endbr64
+    1a25:	50                   	push   rax
+    1a26:	58                   	pop    rax
+    1a27:	48 83 ec 08          	sub    rsp,0x8
+    1a2b:	48 8d 3d ce 17 00 00 	lea    rdi,[rip+0x17ce]        # 3200 <socket@plt+0x1eb0>
+    1a32:	e8 c9 f7 ff ff       	call   1200 <puts@plt>
+    1a37:	bf 03 00 00 00       	mov    edi,0x3
+    1a3c:	e8 df f8 ff ff       	call   1320 <sleep@plt>
+    1a41:	48 8d 35 7a 18 00 00 	lea    rsi,[rip+0x187a]        # 32c2 <socket@plt+0x1f72>
+    1a48:	bf 01 00 00 00       	mov    edi,0x1
+    1a4d:	b8 00 00 00 00       	mov    eax,0x0
+    1a52:	e8 79 f8 ff ff       	call   12d0 <__printf_chk@plt>
+    1a57:	48 8b 3d 02 3c 00 00 	mov    rdi,QWORD PTR [rip+0x3c02]        # 5660 <stdout@GLIBC_2.2.5>
+    1a5e:	e8 4d f8 ff ff       	call   12b0 <fflush@plt>
+    1a63:	bf 01 00 00 00       	mov    edi,0x1
+    1a68:	e8 b3 f8 ff ff       	call   1320 <sleep@plt>
+    1a6d:	48 8d 3d 56 18 00 00 	lea    rdi,[rip+0x1856]        # 32ca <socket@plt+0x1f7a>
+    1a74:	e8 87 f7 ff ff       	call   1200 <puts@plt>
+    1a79:	bf 10 00 00 00       	mov    edi,0x10
+    1a7e:	e8 6d f8 ff ff       	call   12f0 <exit@plt>
+    1a83:	f3 0f 1e fa          	endbr64
+    1a87:	50                   	push   rax
+    1a88:	58                   	pop    rax
+    1a89:	48 83 ec 08          	sub    rsp,0x8
+    1a8d:	48 89 fa             	mov    rdx,rdi
+    1a90:	48 8d 35 3b 18 00 00 	lea    rsi,[rip+0x183b]        # 32d2 <socket@plt+0x1f82>
+    1a97:	bf 01 00 00 00       	mov    edi,0x1
+    1a9c:	b8 00 00 00 00       	mov    eax,0x0
+    1aa1:	e8 2a f8 ff ff       	call   12d0 <__printf_chk@plt>
+    1aa6:	bf 08 00 00 00       	mov    edi,0x8
+    1aab:	e8 40 f8 ff ff       	call   12f0 <exit@plt>
+    1ab0:	f3 0f 1e fa          	endbr64
+    1ab4:	80 3f 00             	cmp    BYTE PTR [rdi],0x0
+    1ab7:	74 12                	je     1acb <socket@plt+0x77b>
+    1ab9:	b8 00 00 00 00       	mov    eax,0x0
+    1abe:	48 83 c7 01          	add    rdi,0x1
+    1ac2:	83 c0 01             	add    eax,0x1
+    1ac5:	80 3f 00             	cmp    BYTE PTR [rdi],0x0
+    1ac8:	75 f4                	jne    1abe <socket@plt+0x76e>
+    1aca:	c3                   	ret
+    1acb:	b8 00 00 00 00       	mov    eax,0x0
+    1ad0:	c3                   	ret
+    1ad1:	f3 0f 1e fa          	endbr64
+    1ad5:	41 54                	push   r12
+    1ad7:	55                   	push   rbp
+    1ad8:	53                   	push   rbx
+    1ad9:	48 89 fb             	mov    rbx,rdi
+    1adc:	48 89 f5             	mov    rbp,rsi
+    1adf:	e8 cc ff ff ff       	call   1ab0 <socket@plt+0x760>
+    1ae4:	41 89 c4             	mov    r12d,eax
+    1ae7:	48 89 ef             	mov    rdi,rbp
+    1aea:	e8 c1 ff ff ff       	call   1ab0 <socket@plt+0x760>
+    1aef:	89 c2                	mov    edx,eax
+    1af1:	b8 01 00 00 00       	mov    eax,0x1
+    1af6:	41 39 d4             	cmp    r12d,edx
+    1af9:	75 31                	jne    1b2c <socket@plt+0x7dc>
+    1afb:	0f b6 13             	movzx  edx,BYTE PTR [rbx]
+    1afe:	84 d2                	test   dl,dl
+    1b00:	74 1e                	je     1b20 <socket@plt+0x7d0>
+    1b02:	b8 00 00 00 00       	mov    eax,0x0
+    1b07:	38 54 05 00          	cmp    BYTE PTR [rbp+rax*1+0x0],dl
+    1b0b:	75 1a                	jne    1b27 <socket@plt+0x7d7>
+    1b0d:	48 83 c0 01          	add    rax,0x1
+    1b11:	0f b6 14 03          	movzx  edx,BYTE PTR [rbx+rax*1]
+    1b15:	84 d2                	test   dl,dl
+    1b17:	75 ee                	jne    1b07 <socket@plt+0x7b7>
+    1b19:	b8 00 00 00 00       	mov    eax,0x0
+    1b1e:	eb 0c                	jmp    1b2c <socket@plt+0x7dc>
+    1b20:	b8 00 00 00 00       	mov    eax,0x0
+    1b25:	eb 05                	jmp    1b2c <socket@plt+0x7dc>
+    1b27:	b8 01 00 00 00       	mov    eax,0x1
+    1b2c:	5b                   	pop    rbx
+    1b2d:	5d                   	pop    rbp
+    1b2e:	41 5c                	pop    r12
+    1b30:	c3                   	ret
+    1b31:	f3 0f 1e fa          	endbr64
+    1b35:	48 83 ec 08          	sub    rsp,0x8
+    1b39:	48 8d 35 e1 fe ff ff 	lea    rsi,[rip+0xfffffffffffffee1]        # 1a21 <socket@plt+0x6d1>
+    1b40:	bf 02 00 00 00       	mov    edi,0x2
+    1b45:	e8 26 f7 ff ff       	call   1270 <signal@plt>
+    1b4a:	48 83 c4 08          	add    rsp,0x8
+    1b4e:	c3                   	ret
+    1b4f:	f3 0f 1e fa          	endbr64
+    1b53:	c3                   	ret
+    1b54:	f3 0f 1e fa          	endbr64
+    1b58:	55                   	push   rbp
+    1b59:	53                   	push   rbx
+    1b5a:	48 83 ec 08          	sub    rsp,0x8
+    1b5e:	48 89 fd             	mov    rbp,rdi
+    1b61:	0f b6 5d 00          	movzx  ebx,BYTE PTR [rbp+0x0]
+    1b65:	84 db                	test   bl,bl
+    1b67:	74 1e                	je     1b87 <socket@plt+0x837>
+    1b69:	e8 c2 f7 ff ff       	call   1330 <__ctype_b_loc@plt>
+    1b6e:	48 83 c5 01          	add    rbp,0x1
+    1b72:	48 0f be db          	movsx  rbx,bl
+    1b76:	48 8b 00             	mov    rax,QWORD PTR [rax]
+    1b79:	f6 44 58 01 20       	test   BYTE PTR [rax+rbx*2+0x1],0x20
+    1b7e:	75 e1                	jne    1b61 <socket@plt+0x811>
+    1b80:	b8 00 00 00 00       	mov    eax,0x0
+    1b85:	eb 05                	jmp    1b8c <socket@plt+0x83c>
+    1b87:	b8 01 00 00 00       	mov    eax,0x1
+    1b8c:	48 83 c4 08          	add    rsp,0x8
+    1b90:	5b                   	pop    rbx
+    1b91:	5d                   	pop    rbp
+    1b92:	c3                   	ret
+    1b93:	f3 0f 1e fa          	endbr64
+    1b97:	55                   	push   rbp
+    1b98:	53                   	push   rbx
+    1b99:	48 83 ec 08          	sub    rsp,0x8
+    1b9d:	48 8d 2d fc 3a 00 00 	lea    rbp,[rip+0x3afc]        # 56a0 <stderr@GLIBC_2.2.5+0x20>
+    1ba4:	48 63 05 e5 3a 00 00 	movsxd rax,DWORD PTR [rip+0x3ae5]        # 5690 <stderr@GLIBC_2.2.5+0x10>
+    1bab:	48 8d 3c 80          	lea    rdi,[rax+rax*4]
+    1baf:	48 c1 e7 04          	shl    rdi,0x4
+    1bb3:	48 01 ef             	add    rdi,rbp
+    1bb6:	48 8b 15 db 3a 00 00 	mov    rdx,QWORD PTR [rip+0x3adb]        # 5698 <stderr@GLIBC_2.2.5+0x18>
+    1bbd:	be 50 00 00 00       	mov    esi,0x50
+    1bc2:	e8 99 f6 ff ff       	call   1260 <fgets@plt>
+    1bc7:	48 89 c3             	mov    rbx,rax
+    1bca:	48 85 c0             	test   rax,rax
+    1bcd:	74 0c                	je     1bdb <socket@plt+0x88b>
+    1bcf:	48 89 c7             	mov    rdi,rax
+    1bd2:	e8 7d ff ff ff       	call   1b54 <socket@plt+0x804>
+    1bd7:	85 c0                	test   eax,eax
+    1bd9:	75 c9                	jne    1ba4 <socket@plt+0x854>
+    1bdb:	48 89 d8             	mov    rax,rbx
+    1bde:	48 83 c4 08          	add    rsp,0x8
+    1be2:	5b                   	pop    rbx
+    1be3:	5d                   	pop    rbp
+    1be4:	c3                   	ret
+    1be5:	f3 0f 1e fa          	endbr64
+    1be9:	50                   	push   rax
+    1bea:	58                   	pop    rax
+    1beb:	48 83 ec 08          	sub    rsp,0x8
+    1bef:	48 8d 3d ed 16 00 00 	lea    rdi,[rip+0x16ed]        # 32e3 <socket@plt+0x1f93>
+    1bf6:	e8 05 f6 ff ff       	call   1200 <puts@plt>
+    1bfb:	48 8d 3d ea 16 00 00 	lea    rdi,[rip+0x16ea]        # 32ec <socket@plt+0x1f9c>
+    1c02:	e8 f9 f5 ff ff       	call   1200 <puts@plt>
+    1c07:	bf 08 00 00 00       	mov    edi,0x8
+    1c0c:	e8 df f6 ff ff       	call   12f0 <exit@plt>
+    1c11:	f3 0f 1e fa          	endbr64
+    1c15:	48 83 ec 08          	sub    rsp,0x8
+    1c19:	48 89 f2             	mov    rdx,rsi
+    1c1c:	48 8d 4e 04          	lea    rcx,[rsi+0x4]
+    1c20:	48 8d 46 14          	lea    rax,[rsi+0x14]
+    1c24:	50                   	push   rax
+    1c25:	48 8d 46 10          	lea    rax,[rsi+0x10]
+    1c29:	50                   	push   rax
+    1c2a:	4c 8d 4e 0c          	lea    r9,[rsi+0xc]
+    1c2e:	4c 8d 46 08          	lea    r8,[rsi+0x8]
+    1c32:	48 8d 35 ca 16 00 00 	lea    rsi,[rip+0x16ca]        # 3303 <socket@plt+0x1fb3>
+    1c39:	b8 00 00 00 00       	mov    eax,0x0
+    1c3e:	e8 7d f6 ff ff       	call   12c0 <__isoc99_sscanf@plt>
+    1c43:	48 83 c4 10          	add    rsp,0x10
+    1c47:	83 f8 05             	cmp    eax,0x5
+    1c4a:	7e 05                	jle    1c51 <socket@plt+0x901>
+    1c4c:	48 83 c4 08          	add    rsp,0x8
+    1c50:	c3                   	ret
+    1c51:	e8 8f ff ff ff       	call   1be5 <socket@plt+0x895>
+    1c56:	f3 0f 1e fa          	endbr64
+    1c5a:	48 83 ec 08          	sub    rsp,0x8
+    1c5e:	b8 00 00 00 00       	mov    eax,0x0
+    1c63:	e8 2b ff ff ff       	call   1b93 <socket@plt+0x843>
+    1c68:	48 85 c0             	test   rax,rax
+    1c6b:	74 6f                	je     1cdc <socket@plt+0x98c>
+    1c6d:	8b 35 1d 3a 00 00    	mov    esi,DWORD PTR [rip+0x3a1d]        # 5690 <stderr@GLIBC_2.2.5+0x10>
+    1c73:	48 63 c6             	movsxd rax,esi
+    1c76:	48 8d 14 80          	lea    rdx,[rax+rax*4]
+    1c7a:	48 c1 e2 04          	shl    rdx,0x4
+    1c7e:	48 8d 05 1b 3a 00 00 	lea    rax,[rip+0x3a1b]        # 56a0 <stderr@GLIBC_2.2.5+0x20>
+    1c85:	48 01 c2             	add    rdx,rax
+    1c88:	48 c7 c1 ff ff ff ff 	mov    rcx,0xffffffffffffffff
+    1c8f:	b8 00 00 00 00       	mov    eax,0x0
+    1c94:	48 89 d7             	mov    rdi,rdx
+    1c97:	f2 ae                	repnz scas al,BYTE PTR es:[rdi]
+    1c99:	48 f7 d1             	not    rcx
+    1c9c:	48 83 e9 01          	sub    rcx,0x1
+    1ca0:	83 f9 4e             	cmp    ecx,0x4e
+    1ca3:	0f 8f ab 00 00 00    	jg     1d54 <socket@plt+0xa04>
+    1ca9:	83 e9 01             	sub    ecx,0x1
+    1cac:	48 63 c9             	movsxd rcx,ecx
+    1caf:	48 63 c6             	movsxd rax,esi
+    1cb2:	48 8d 04 80          	lea    rax,[rax+rax*4]
+    1cb6:	48 c1 e0 04          	shl    rax,0x4
+    1cba:	48 89 c7             	mov    rdi,rax
+    1cbd:	48 8d 05 dc 39 00 00 	lea    rax,[rip+0x39dc]        # 56a0 <stderr@GLIBC_2.2.5+0x20>
+    1cc4:	48 01 f8             	add    rax,rdi
+    1cc7:	c6 04 08 00          	mov    BYTE PTR [rax+rcx*1],0x0
+    1ccb:	83 c6 01             	add    esi,0x1
+    1cce:	89 35 bc 39 00 00    	mov    DWORD PTR [rip+0x39bc],esi        # 5690 <stderr@GLIBC_2.2.5+0x10>
+    1cd4:	48 89 d0             	mov    rax,rdx
+    1cd7:	48 83 c4 08          	add    rsp,0x8
+    1cdb:	c3                   	ret
+    1cdc:	48 8b 05 8d 39 00 00 	mov    rax,QWORD PTR [rip+0x398d]        # 5670 <stdin@GLIBC_2.2.5>
+    1ce3:	48 39 05 ae 39 00 00 	cmp    QWORD PTR [rip+0x39ae],rax        # 5698 <stderr@GLIBC_2.2.5+0x18>
+    1cea:	74 1b                	je     1d07 <socket@plt+0x9b7>
+    1cec:	48 8d 3d 40 16 00 00 	lea    rdi,[rip+0x1640]        # 3333 <socket@plt+0x1fe3>
+    1cf3:	e8 d8 f4 ff ff       	call   11d0 <getenv@plt>
+    1cf8:	48 85 c0             	test   rax,rax
+    1cfb:	74 20                	je     1d1d <socket@plt+0x9cd>
+    1cfd:	bf 00 00 00 00       	mov    edi,0x0
+    1d02:	e8 e9 f5 ff ff       	call   12f0 <exit@plt>
+    1d07:	48 8d 3d 07 16 00 00 	lea    rdi,[rip+0x1607]        # 3315 <socket@plt+0x1fc5>
+    1d0e:	e8 ed f4 ff ff       	call   1200 <puts@plt>
+    1d13:	bf 08 00 00 00       	mov    edi,0x8
+    1d18:	e8 d3 f5 ff ff       	call   12f0 <exit@plt>
+    1d1d:	48 8b 05 4c 39 00 00 	mov    rax,QWORD PTR [rip+0x394c]        # 5670 <stdin@GLIBC_2.2.5>
+    1d24:	48 89 05 6d 39 00 00 	mov    QWORD PTR [rip+0x396d],rax        # 5698 <stderr@GLIBC_2.2.5+0x18>
+    1d2b:	b8 00 00 00 00       	mov    eax,0x0
+    1d30:	e8 5e fe ff ff       	call   1b93 <socket@plt+0x843>
+    1d35:	48 85 c0             	test   rax,rax
+    1d38:	0f 85 2f ff ff ff    	jne    1c6d <socket@plt+0x91d>
+    1d3e:	48 8d 3d d0 15 00 00 	lea    rdi,[rip+0x15d0]        # 3315 <socket@plt+0x1fc5>
+    1d45:	e8 b6 f4 ff ff       	call   1200 <puts@plt>
+    1d4a:	bf 00 00 00 00       	mov    edi,0x0
+    1d4f:	e8 9c f5 ff ff       	call   12f0 <exit@plt>
+    1d54:	48 8d 3d e3 15 00 00 	lea    rdi,[rip+0x15e3]        # 333e <socket@plt+0x1fee>
+    1d5b:	e8 a0 f4 ff ff       	call   1200 <puts@plt>
+    1d60:	8b 05 2a 39 00 00    	mov    eax,DWORD PTR [rip+0x392a]        # 5690 <stderr@GLIBC_2.2.5+0x10>
+    1d66:	8d 50 01             	lea    edx,[rax+0x1]
+    1d69:	89 15 21 39 00 00    	mov    DWORD PTR [rip+0x3921],edx        # 5690 <stderr@GLIBC_2.2.5+0x10>
+    1d6f:	48 98                	cdqe
+    1d71:	48 6b c0 50          	imul   rax,rax,0x50
+    1d75:	48 8d 15 24 39 00 00 	lea    rdx,[rip+0x3924]        # 56a0 <stderr@GLIBC_2.2.5+0x20>
+    1d7c:	48 be 2a 2a 2a 74 72 	movabs rsi,0x636e7572742a2a2a
+    1d83:	75 6e 63 
+    1d86:	48 bf 61 74 65 64 2a 	movabs rdi,0x2a2a2a64657461
+    1d8d:	2a 2a 00 
+    1d90:	48 89 34 02          	mov    QWORD PTR [rdx+rax*1],rsi
+    1d94:	48 89 7c 02 08       	mov    QWORD PTR [rdx+rax*1+0x8],rdi
+    1d99:	e8 47 fe ff ff       	call   1be5 <socket@plt+0x895>
+    1d9e:	f3 0f 1e fa          	endbr64
+    1da2:	48 83 ec 78          	sub    rsp,0x78
+    1da6:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+    1dad:	00 00 
+    1daf:	48 89 44 24 68       	mov    QWORD PTR [rsp+0x68],rax
+    1db4:	31 c0                	xor    eax,eax
+    1db6:	83 3d d3 38 00 00 06 	cmp    DWORD PTR [rip+0x38d3],0x6        # 5690 <stderr@GLIBC_2.2.5+0x10>
+    1dbd:	74 15                	je     1dd4 <socket@plt+0xa84>
+    1dbf:	48 8b 44 24 68       	mov    rax,QWORD PTR [rsp+0x68]
+    1dc4:	64 48 33 04 25 28 00 	xor    rax,QWORD PTR fs:0x28
+    1dcb:	00 00 
+    1dcd:	75 73                	jne    1e42 <socket@plt+0xaf2>
+    1dcf:	48 83 c4 78          	add    rsp,0x78
+    1dd3:	c3                   	ret
+    1dd4:	48 8d 4c 24 0c       	lea    rcx,[rsp+0xc]
+    1dd9:	48 8d 54 24 08       	lea    rdx,[rsp+0x8]
+    1dde:	4c 8d 44 24 10       	lea    r8,[rsp+0x10]
+    1de3:	48 8d 35 6f 15 00 00 	lea    rsi,[rip+0x156f]        # 3359 <socket@plt+0x2009>
+    1dea:	48 8d 3d 9f 39 00 00 	lea    rdi,[rip+0x399f]        # 5790 <stderr@GLIBC_2.2.5+0x110>
+    1df1:	e8 ca f4 ff ff       	call   12c0 <__isoc99_sscanf@plt>
+    1df6:	83 f8 03             	cmp    eax,0x3
+    1df9:	74 0e                	je     1e09 <socket@plt+0xab9>
+    1dfb:	48 8d 3d 96 14 00 00 	lea    rdi,[rip+0x1496]        # 3298 <socket@plt+0x1f48>
+    1e02:	e8 f9 f3 ff ff       	call   1200 <puts@plt>
+    1e07:	eb b6                	jmp    1dbf <socket@plt+0xa6f>
+    1e09:	48 8d 7c 24 10       	lea    rdi,[rsp+0x10]
+    1e0e:	48 8d 35 4d 15 00 00 	lea    rsi,[rip+0x154d]        # 3362 <socket@plt+0x2012>
+    1e15:	e8 b7 fc ff ff       	call   1ad1 <socket@plt+0x781>
+    1e1a:	85 c0                	test   eax,eax
+    1e1c:	75 dd                	jne    1dfb <socket@plt+0xaab>
+    1e1e:	48 8d 3d 13 14 00 00 	lea    rdi,[rip+0x1413]        # 3238 <socket@plt+0x1ee8>
+    1e25:	e8 d6 f3 ff ff       	call   1200 <puts@plt>
+    1e2a:	48 8d 3d 2f 14 00 00 	lea    rdi,[rip+0x142f]        # 3260 <socket@plt+0x1f10>
+    1e31:	e8 ca f3 ff ff       	call   1200 <puts@plt>
+    1e36:	b8 00 00 00 00       	mov    eax,0x0
+    1e3b:	e8 84 fb ff ff       	call   19c4 <socket@plt+0x674>
+    1e40:	eb b9                	jmp    1dfb <socket@plt+0xaab>
+    1e42:	e8 d9 f3 ff ff       	call   1220 <__stack_chk_fail@plt>
+    1e47:	f3 0f 1e fa          	endbr64
+    1e4b:	50                   	push   rax
+    1e4c:	58                   	pop    rax
+    1e4d:	48 83 ec 08          	sub    rsp,0x8
+    1e51:	b9 00 00 00 00       	mov    ecx,0x0
+    1e56:	48 8d 15 5b 15 00 00 	lea    rdx,[rip+0x155b]        # 33b8 <socket@plt+0x2068>
+    1e5d:	be 01 00 00 00       	mov    esi,0x1
+    1e62:	48 8b 3d 17 38 00 00 	mov    rdi,QWORD PTR [rip+0x3817]        # 5680 <stderr@GLIBC_2.2.5>
+    1e69:	b8 00 00 00 00       	mov    eax,0x0
+    1e6e:	e8 9d f4 ff ff       	call   1310 <__fprintf_chk@plt>
+    1e73:	bf 01 00 00 00       	mov    edi,0x1
+    1e78:	e8 73 f4 ff ff       	call   12f0 <exit@plt>
+    1e7d:	41 56                	push   r14
+    1e7f:	41 55                	push   r13
+    1e81:	41 54                	push   r12
+    1e83:	55                   	push   rbp
+    1e84:	53                   	push   rbx
+    1e85:	48 89 f5             	mov    rbp,rsi
+    1e88:	48 83 fa 01          	cmp    rdx,0x1
+    1e8c:	0f 86 90 00 00 00    	jbe    1f22 <socket@plt+0xbd2>
+    1e92:	48 89 fb             	mov    rbx,rdi
+    1e95:	4c 8d 74 16 ff       	lea    r14,[rsi+rdx*1-0x1]
+    1e9a:	41 bd 01 00 00 00    	mov    r13d,0x1
+    1ea0:	4c 8d 67 10          	lea    r12,[rdi+0x10]
+    1ea4:	eb 54                	jmp    1efa <socket@plt+0xbaa>
+    1ea6:	e8 35 f3 ff ff       	call   11e0 <__errno_location@plt>
+    1eab:	83 38 04             	cmp    DWORD PTR [rax],0x4
+    1eae:	75 53                	jne    1f03 <socket@plt+0xbb3>
+    1eb0:	ba 00 20 00 00       	mov    edx,0x2000
+    1eb5:	4c 89 e6             	mov    rsi,r12
+    1eb8:	8b 3b                	mov    edi,DWORD PTR [rbx]
+    1eba:	e8 91 f3 ff ff       	call   1250 <read@plt>
+    1ebf:	89 c2                	mov    edx,eax
+    1ec1:	89 43 04             	mov    DWORD PTR [rbx+0x4],eax
+    1ec4:	85 c0                	test   eax,eax
+    1ec6:	78 de                	js     1ea6 <socket@plt+0xb56>
+    1ec8:	85 c0                	test   eax,eax
+    1eca:	74 40                	je     1f0c <socket@plt+0xbbc>
+    1ecc:	4c 89 63 08          	mov    QWORD PTR [rbx+0x8],r12
+    1ed0:	48 8b 43 08          	mov    rax,QWORD PTR [rbx+0x8]
+    1ed4:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+    1ed7:	48 83 c0 01          	add    rax,0x1
+    1edb:	48 89 43 08          	mov    QWORD PTR [rbx+0x8],rax
+    1edf:	83 ea 01             	sub    edx,0x1
+    1ee2:	89 53 04             	mov    DWORD PTR [rbx+0x4],edx
+    1ee5:	48 83 c5 01          	add    rbp,0x1
+    1ee9:	88 4d ff             	mov    BYTE PTR [rbp-0x1],cl
+    1eec:	80 f9 0a             	cmp    cl,0xa
+    1eef:	74 3c                	je     1f2d <socket@plt+0xbdd>
+    1ef1:	41 83 c5 01          	add    r13d,0x1
+    1ef5:	4c 39 f5             	cmp    rbp,r14
+    1ef8:	74 30                	je     1f2a <socket@plt+0xbda>
+    1efa:	8b 53 04             	mov    edx,DWORD PTR [rbx+0x4]
+    1efd:	85 d2                	test   edx,edx
+    1eff:	7e af                	jle    1eb0 <socket@plt+0xb60>
+    1f01:	eb cd                	jmp    1ed0 <socket@plt+0xb80>
+    1f03:	48 c7 c0 ff ff ff ff 	mov    rax,0xffffffffffffffff
+    1f0a:	eb 05                	jmp    1f11 <socket@plt+0xbc1>
+    1f0c:	b8 00 00 00 00       	mov    eax,0x0
+    1f11:	85 c0                	test   eax,eax
+    1f13:	75 28                	jne    1f3d <socket@plt+0xbed>
+    1f15:	b8 00 00 00 00       	mov    eax,0x0
+    1f1a:	41 83 fd 01          	cmp    r13d,0x1
+    1f1e:	75 0d                	jne    1f2d <socket@plt+0xbdd>
+    1f20:	eb 12                	jmp    1f34 <socket@plt+0xbe4>
+    1f22:	41 bd 01 00 00 00    	mov    r13d,0x1
+    1f28:	eb 03                	jmp    1f2d <socket@plt+0xbdd>
+    1f2a:	4c 89 f5             	mov    rbp,r14
+    1f2d:	c6 45 00 00          	mov    BYTE PTR [rbp+0x0],0x0
+    1f31:	49 63 c5             	movsxd rax,r13d
+    1f34:	5b                   	pop    rbx
+    1f35:	5d                   	pop    rbp
+    1f36:	41 5c                	pop    r12
+    1f38:	41 5d                	pop    r13
+    1f3a:	41 5e                	pop    r14
+    1f3c:	c3                   	ret
+    1f3d:	48 c7 c0 ff ff ff ff 	mov    rax,0xffffffffffffffff
+    1f44:	eb ee                	jmp    1f34 <socket@plt+0xbe4>
+    1f46:	f3 0f 1e fa          	endbr64
+    1f4a:	41 57                	push   r15
+    1f4c:	41 56                	push   r14
+    1f4e:	41 55                	push   r13
+    1f50:	41 54                	push   r12
+    1f52:	55                   	push   rbp
+    1f53:	53                   	push   rbx
+    1f54:	4c 8d 9c 24 00 60 ff 	lea    r11,[rsp-0xa000]
+    1f5b:	ff 
+    1f5c:	48 81 ec 00 10 00 00 	sub    rsp,0x1000
+    1f63:	48 83 0c 24 00       	or     QWORD PTR [rsp],0x0
+    1f68:	4c 39 dc             	cmp    rsp,r11
+    1f6b:	75 ef                	jne    1f5c <socket@plt+0xc0c>
+    1f6d:	48 83 ec 68          	sub    rsp,0x68
+    1f71:	48 89 fd             	mov    rbp,rdi
+    1f74:	41 89 f5             	mov    r13d,esi
+    1f77:	48 89 54 24 08       	mov    QWORD PTR [rsp+0x8],rdx
+    1f7c:	48 89 4c 24 10       	mov    QWORD PTR [rsp+0x10],rcx
+    1f81:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+    1f86:	4c 89 cb             	mov    rbx,r9
+    1f89:	4c 8b bc 24 a0 a0 00 	mov    r15,QWORD PTR [rsp+0xa0a0]
+    1f90:	00 
+    1f91:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+    1f98:	00 00 
+    1f9a:	48 89 84 24 58 a0 00 	mov    QWORD PTR [rsp+0xa058],rax
+    1fa1:	00 
+    1fa2:	31 c0                	xor    eax,eax
+    1fa4:	c7 44 24 2c 00 00 00 	mov    DWORD PTR [rsp+0x2c],0x0
+    1fab:	00 
+    1fac:	ba 00 00 00 00       	mov    edx,0x0
+    1fb1:	be 01 00 00 00       	mov    esi,0x1
+    1fb6:	bf 02 00 00 00       	mov    edi,0x2
+    1fbb:	e8 90 f3 ff ff       	call   1350 <socket@plt>
+    1fc0:	85 c0                	test   eax,eax
+    1fc2:	0f 88 1a 01 00 00    	js     20e2 <socket@plt+0xd92>
+    1fc8:	41 89 c4             	mov    r12d,eax
+    1fcb:	48 89 ef             	mov    rdi,rbp
+    1fce:	e8 ad f2 ff ff       	call   1280 <gethostbyname@plt>
+    1fd3:	48 85 c0             	test   rax,rax
+    1fd6:	0f 84 56 01 00 00    	je     2132 <socket@plt+0xde2>
+    1fdc:	48 8d 6c 24 30       	lea    rbp,[rsp+0x30]
+    1fe1:	48 c7 44 24 30 00 00 	mov    QWORD PTR [rsp+0x30],0x0
+    1fe8:	00 00 
+    1fea:	48 c7 44 24 38 00 00 	mov    QWORD PTR [rsp+0x38],0x0
+    1ff1:	00 00 
+    1ff3:	66 c7 44 24 30 02 00 	mov    WORD PTR [rsp+0x30],0x2
+    1ffa:	48 63 50 14          	movsxd rdx,DWORD PTR [rax+0x14]
+    1ffe:	48 8b 40 18          	mov    rax,QWORD PTR [rax+0x18]
+    2002:	48 8d 7c 24 34       	lea    rdi,[rsp+0x34]
+    2007:	b9 0c 00 00 00       	mov    ecx,0xc
+    200c:	48 8b 30             	mov    rsi,QWORD PTR [rax]
+    200f:	e8 7c f2 ff ff       	call   1290 <__memmove_chk@plt>
+    2014:	66 41 c1 c5 08       	rol    r13w,0x8
+    2019:	66 44 89 6c 24 32    	mov    WORD PTR [rsp+0x32],r13w
+    201f:	ba 10 00 00 00       	mov    edx,0x10
+    2024:	48 89 ee             	mov    rsi,rbp
+    2027:	44 89 e7             	mov    edi,r12d
+    202a:	e8 d1 f2 ff ff       	call   1300 <connect@plt>
+    202f:	85 c0                	test   eax,eax
+    2031:	0f 88 66 01 00 00    	js     219d <socket@plt+0xe4d>
+    2037:	49 c7 c1 ff ff ff ff 	mov    r9,0xffffffffffffffff
+    203e:	b8 00 00 00 00       	mov    eax,0x0
+    2043:	4c 89 c9             	mov    rcx,r9
+    2046:	48 89 df             	mov    rdi,rbx
+    2049:	f2 ae                	repnz scas al,BYTE PTR es:[rdi]
+    204b:	48 f7 d1             	not    rcx
+    204e:	48 89 ce             	mov    rsi,rcx
+    2051:	4c 89 c9             	mov    rcx,r9
+    2054:	48 8b 7c 24 08       	mov    rdi,QWORD PTR [rsp+0x8]
+    2059:	f2 ae                	repnz scas al,BYTE PTR es:[rdi]
+    205b:	49 89 c8             	mov    r8,rcx
+    205e:	4c 89 c9             	mov    rcx,r9
+    2061:	48 8b 7c 24 10       	mov    rdi,QWORD PTR [rsp+0x10]
+    2066:	f2 ae                	repnz scas al,BYTE PTR es:[rdi]
+    2068:	48 89 ca             	mov    rdx,rcx
+    206b:	48 f7 d2             	not    rdx
+    206e:	4c 89 c9             	mov    rcx,r9
+    2071:	48 8b 7c 24 18       	mov    rdi,QWORD PTR [rsp+0x18]
+    2076:	f2 ae                	repnz scas al,BYTE PTR es:[rdi]
+    2078:	4c 29 c2             	sub    rdx,r8
+    207b:	48 29 ca             	sub    rdx,rcx
+    207e:	48 8d 44 76 fd       	lea    rax,[rsi+rsi*2-0x3]
+    2083:	48 8d 44 02 7b       	lea    rax,[rdx+rax*1+0x7b]
+    2088:	48 3d 00 20 00 00    	cmp    rax,0x2000
+    208e:	0f 87 66 01 00 00    	ja     21fa <socket@plt+0xeaa>
+    2094:	48 8d 94 24 50 40 00 	lea    rdx,[rsp+0x4050]
+    209b:	00 
+    209c:	b9 00 04 00 00       	mov    ecx,0x400
+    20a1:	b8 00 00 00 00       	mov    eax,0x0
+    20a6:	48 89 d7             	mov    rdi,rdx
+    20a9:	f3 48 ab             	rep stos QWORD PTR es:[rdi],rax
+    20ac:	48 c7 c1 ff ff ff ff 	mov    rcx,0xffffffffffffffff
+    20b3:	48 89 df             	mov    rdi,rbx
+    20b6:	f2 ae                	repnz scas al,BYTE PTR es:[rdi]
+    20b8:	48 f7 d1             	not    rcx
+    20bb:	48 8d 41 ff          	lea    rax,[rcx-0x1]
+    20bf:	83 f9 01             	cmp    ecx,0x1
+    20c2:	0f 84 08 05 00 00    	je     25d0 <socket@plt+0x1280>
+    20c8:	8d 40 ff             	lea    eax,[rax-0x1]
+    20cb:	4c 8d 74 03 01       	lea    r14,[rbx+rax*1+0x1]
+    20d0:	48 89 d5             	mov    rbp,rdx
+    20d3:	49 bd d9 ff 00 00 00 	movabs r13,0x2000000000ffd9
+    20da:	00 20 00 
+    20dd:	e9 a6 01 00 00       	jmp    2288 <socket@plt+0xf38>
+    20e2:	48 b8 45 72 72 6f 72 	movabs rax,0x43203a726f727245
+    20e9:	3a 20 43 
+    20ec:	48 ba 6c 69 65 6e 74 	movabs rdx,0x6e7520746e65696c
+    20f3:	20 75 6e 
+    20f6:	49 89 07             	mov    QWORD PTR [r15],rax
+    20f9:	49 89 57 08          	mov    QWORD PTR [r15+0x8],rdx
+    20fd:	48 b8 61 62 6c 65 20 	movabs rax,0x206f7420656c6261
+    2104:	74 6f 20 
+    2107:	48 ba 63 72 65 61 74 	movabs rdx,0x7320657461657263
+    210e:	65 20 73 
+    2111:	49 89 47 10          	mov    QWORD PTR [r15+0x10],rax
+    2115:	49 89 57 18          	mov    QWORD PTR [r15+0x18],rdx
+    2119:	41 c7 47 20 6f 63 6b 	mov    DWORD PTR [r15+0x20],0x656b636f
+    2120:	65 
+    2121:	66 41 c7 47 24 74 00 	mov    WORD PTR [r15+0x24],0x74
+    2128:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    212d:	e9 16 03 00 00       	jmp    2448 <socket@plt+0x10f8>
+    2132:	48 b8 45 72 72 6f 72 	movabs rax,0x44203a726f727245
+    2139:	3a 20 44 
+    213c:	48 ba 4e 53 20 69 73 	movabs rdx,0x6e7520736920534e
+    2143:	20 75 6e 
+    2146:	49 89 07             	mov    QWORD PTR [r15],rax
+    2149:	49 89 57 08          	mov    QWORD PTR [r15+0x8],rdx
+    214d:	48 b8 61 62 6c 65 20 	movabs rax,0x206f7420656c6261
+    2154:	74 6f 20 
+    2157:	48 ba 72 65 73 6f 6c 	movabs rdx,0x2065766c6f736572
+    215e:	76 65 20 
+    2161:	49 89 47 10          	mov    QWORD PTR [r15+0x10],rax
+    2165:	49 89 57 18          	mov    QWORD PTR [r15+0x18],rdx
+    2169:	48 b8 73 65 72 76 65 	movabs rax,0x6120726576726573
+    2170:	72 20 61 
+    2173:	49 89 47 20          	mov    QWORD PTR [r15+0x20],rax
+    2177:	41 c7 47 28 64 64 72 	mov    DWORD PTR [r15+0x28],0x65726464
+    217e:	65 
+    217f:	66 41 c7 47 2c 73 73 	mov    WORD PTR [r15+0x2c],0x7373
+    2186:	41 c6 47 2e 00       	mov    BYTE PTR [r15+0x2e],0x0
+    218b:	44 89 e7             	mov    edi,r12d
+    218e:	e8 ad f0 ff ff       	call   1240 <close@plt>
+    2193:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    2198:	e9 ab 02 00 00       	jmp    2448 <socket@plt+0x10f8>
+    219d:	48 b8 45 72 72 6f 72 	movabs rax,0x55203a726f727245
+    21a4:	3a 20 55 
+    21a7:	48 ba 6e 61 62 6c 65 	movabs rdx,0x6f7420656c62616e
+    21ae:	20 74 6f 
+    21b1:	49 89 07             	mov    QWORD PTR [r15],rax
+    21b4:	49 89 57 08          	mov    QWORD PTR [r15+0x8],rdx
+    21b8:	48 b8 20 63 6f 6e 6e 	movabs rax,0x7463656e6e6f6320
+    21bf:	65 63 74 
+    21c2:	48 ba 20 74 6f 20 74 	movabs rdx,0x20656874206f7420
+    21c9:	68 65 20 
+    21cc:	49 89 47 10          	mov    QWORD PTR [r15+0x10],rax
+    21d0:	49 89 57 18          	mov    QWORD PTR [r15+0x18],rdx
+    21d4:	41 c7 47 20 73 65 72 	mov    DWORD PTR [r15+0x20],0x76726573
+    21db:	76 
+    21dc:	66 41 c7 47 24 65 72 	mov    WORD PTR [r15+0x24],0x7265
+    21e3:	41 c6 47 26 00       	mov    BYTE PTR [r15+0x26],0x0
+    21e8:	44 89 e7             	mov    edi,r12d
+    21eb:	e8 50 f0 ff ff       	call   1240 <close@plt>
+    21f0:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    21f5:	e9 4e 02 00 00       	jmp    2448 <socket@plt+0x10f8>
+    21fa:	48 b8 45 72 72 6f 72 	movabs rax,0x52203a726f727245
+    2201:	3a 20 52 
+    2204:	48 ba 65 73 75 6c 74 	movabs rdx,0x747320746c757365
+    220b:	20 73 74 
+    220e:	49 89 07             	mov    QWORD PTR [r15],rax
+    2211:	49 89 57 08          	mov    QWORD PTR [r15+0x8],rdx
+    2215:	48 b8 72 69 6e 67 20 	movabs rax,0x6f6f7420676e6972
+    221c:	74 6f 6f 
+    221f:	48 ba 20 6c 61 72 67 	movabs rdx,0x202e656772616c20
+    2226:	65 2e 20 
+    2229:	49 89 47 10          	mov    QWORD PTR [r15+0x10],rax
+    222d:	49 89 57 18          	mov    QWORD PTR [r15+0x18],rdx
+    2231:	48 b8 49 6e 63 72 65 	movabs rax,0x6573616572636e49
+    2238:	61 73 65 
+    223b:	48 ba 20 53 55 42 4d 	movabs rdx,0x5254494d42555320
+    2242:	49 54 52 
+    2245:	49 89 47 20          	mov    QWORD PTR [r15+0x20],rax
+    2249:	49 89 57 28          	mov    QWORD PTR [r15+0x28],rdx
+    224d:	48 b8 5f 4d 41 58 42 	movabs rax,0x46554258414d5f
+    2254:	55 46 00 
+    2257:	49 89 47 30          	mov    QWORD PTR [r15+0x30],rax
+    225b:	44 89 e7             	mov    edi,r12d
+    225e:	e8 dd ef ff ff       	call   1240 <close@plt>
+    2263:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    2268:	e9 db 01 00 00       	jmp    2448 <socket@plt+0x10f8>
+    226d:	49 0f a3 c5          	bt     r13,rax
+    2271:	73 21                	jae    2294 <socket@plt+0xf44>
+    2273:	44 88 45 00          	mov    BYTE PTR [rbp+0x0],r8b
+    2277:	48 8d 6d 01          	lea    rbp,[rbp+0x1]
+    227b:	48 83 c3 01          	add    rbx,0x1
+    227f:	4c 39 f3             	cmp    rbx,r14
+    2282:	0f 84 48 03 00 00    	je     25d0 <socket@plt+0x1280>
+    2288:	44 0f b6 03          	movzx  r8d,BYTE PTR [rbx]
+    228c:	41 8d 40 d6          	lea    eax,[r8-0x2a]
+    2290:	3c 35                	cmp    al,0x35
+    2292:	76 d9                	jbe    226d <socket@plt+0xf1d>
+    2294:	44 89 c0             	mov    eax,r8d
+    2297:	83 e0 df             	and    eax,0xffffffdf
+    229a:	83 e8 41             	sub    eax,0x41
+    229d:	3c 19                	cmp    al,0x19
+    229f:	76 d2                	jbe    2273 <socket@plt+0xf23>
+    22a1:	41 80 f8 20          	cmp    r8b,0x20
+    22a5:	74 63                	je     230a <socket@plt+0xfba>
+    22a7:	41 8d 40 e0          	lea    eax,[r8-0x20]
+    22ab:	3c 5f                	cmp    al,0x5f
+    22ad:	76 0a                	jbe    22b9 <socket@plt+0xf69>
+    22af:	41 80 f8 09          	cmp    r8b,0x9
+    22b3:	0f 85 8a 02 00 00    	jne    2543 <socket@plt+0x11f3>
+    22b9:	48 8d bc 24 50 80 00 	lea    rdi,[rsp+0x8050]
+    22c0:	00 
+    22c1:	45 0f b6 c0          	movzx  r8d,r8b
+    22c5:	48 8d 0d ba 11 00 00 	lea    rcx,[rip+0x11ba]        # 3486 <socket@plt+0x2136>
+    22cc:	ba 08 00 00 00       	mov    edx,0x8
+    22d1:	be 01 00 00 00       	mov    esi,0x1
+    22d6:	b8 00 00 00 00       	mov    eax,0x0
+    22db:	e8 60 f0 ff ff       	call   1340 <__sprintf_chk@plt>
+    22e0:	0f b6 84 24 50 80 00 	movzx  eax,BYTE PTR [rsp+0x8050]
+    22e7:	00 
+    22e8:	88 45 00             	mov    BYTE PTR [rbp+0x0],al
+    22eb:	0f b6 84 24 51 80 00 	movzx  eax,BYTE PTR [rsp+0x8051]
+    22f2:	00 
+    22f3:	88 45 01             	mov    BYTE PTR [rbp+0x1],al
+    22f6:	0f b6 84 24 52 80 00 	movzx  eax,BYTE PTR [rsp+0x8052]
+    22fd:	00 
+    22fe:	88 45 02             	mov    BYTE PTR [rbp+0x2],al
+    2301:	48 8d 6d 03          	lea    rbp,[rbp+0x3]
+    2305:	e9 71 ff ff ff       	jmp    227b <socket@plt+0xf2b>
+    230a:	c6 45 00 2b          	mov    BYTE PTR [rbp+0x0],0x2b
+    230e:	48 8d 6d 01          	lea    rbp,[rbp+0x1]
+    2312:	e9 64 ff ff ff       	jmp    227b <socket@plt+0xf2b>
+    2317:	48 01 c5             	add    rbp,rax
+    231a:	48 29 c3             	sub    rbx,rax
+    231d:	0f 84 1d 03 00 00    	je     2640 <socket@plt+0x12f0>
+    2323:	48 89 da             	mov    rdx,rbx
+    2326:	48 89 ee             	mov    rsi,rbp
+    2329:	44 89 e7             	mov    edi,r12d
+    232c:	e8 df ee ff ff       	call   1210 <write@plt>
+    2331:	48 85 c0             	test   rax,rax
+    2334:	7f e1                	jg     2317 <socket@plt+0xfc7>
+    2336:	e8 a5 ee ff ff       	call   11e0 <__errno_location@plt>
+    233b:	83 38 04             	cmp    DWORD PTR [rax],0x4
+    233e:	0f 85 a0 01 00 00    	jne    24e4 <socket@plt+0x1194>
+    2344:	4c 89 e8             	mov    rax,r13
+    2347:	eb ce                	jmp    2317 <socket@plt+0xfc7>
+    2349:	48 b8 45 72 72 6f 72 	movabs rax,0x43203a726f727245
+    2350:	3a 20 43 
+    2353:	48 ba 6c 69 65 6e 74 	movabs rdx,0x6e7520746e65696c
+    235a:	20 75 6e 
+    235d:	49 89 07             	mov    QWORD PTR [r15],rax
+    2360:	49 89 57 08          	mov    QWORD PTR [r15+0x8],rdx
+    2364:	48 b8 61 62 6c 65 20 	movabs rax,0x206f7420656c6261
+    236b:	74 6f 20 
+    236e:	48 ba 72 65 61 64 20 	movabs rdx,0x7269662064616572
+    2375:	66 69 72 
+    2378:	49 89 47 10          	mov    QWORD PTR [r15+0x10],rax
+    237c:	49 89 57 18          	mov    QWORD PTR [r15+0x18],rdx
+    2380:	48 b8 73 74 20 68 65 	movabs rax,0x6564616568207473
+    2387:	61 64 65 
+    238a:	48 ba 72 20 66 72 6f 	movabs rdx,0x73206d6f72662072
+    2391:	6d 20 73 
+    2394:	49 89 47 20          	mov    QWORD PTR [r15+0x20],rax
+    2398:	49 89 57 28          	mov    QWORD PTR [r15+0x28],rdx
+    239c:	41 c7 47 30 65 72 76 	mov    DWORD PTR [r15+0x30],0x65767265
+    23a3:	65 
+    23a4:	66 41 c7 47 34 72 00 	mov    WORD PTR [r15+0x34],0x72
+    23ab:	44 89 e7             	mov    edi,r12d
+    23ae:	e8 8d ee ff ff       	call   1240 <close@plt>
+    23b3:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    23b8:	e9 8b 00 00 00       	jmp    2448 <socket@plt+0x10f8>
+    23bd:	4c 8d 8c 24 50 80 00 	lea    r9,[rsp+0x8050]
+    23c4:	00 
+    23c5:	48 8d 0d 14 10 00 00 	lea    rcx,[rip+0x1014]        # 33e0 <socket@plt+0x2090>
+    23cc:	48 c7 c2 ff ff ff ff 	mov    rdx,0xffffffffffffffff
+    23d3:	be 01 00 00 00       	mov    esi,0x1
+    23d8:	4c 89 ff             	mov    rdi,r15
+    23db:	b8 00 00 00 00       	mov    eax,0x0
+    23e0:	e8 5b ef ff ff       	call   1340 <__sprintf_chk@plt>
+    23e5:	44 89 e7             	mov    edi,r12d
+    23e8:	e8 53 ee ff ff       	call   1240 <close@plt>
+    23ed:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    23f2:	eb 54                	jmp    2448 <socket@plt+0x10f8>
+    23f4:	48 8d b4 24 50 20 00 	lea    rsi,[rsp+0x2050]
+    23fb:	00 
+    23fc:	48 8d 7c 24 40       	lea    rdi,[rsp+0x40]
+    2401:	ba 00 20 00 00       	mov    edx,0x2000
+    2406:	e8 72 fa ff ff       	call   1e7d <socket@plt+0xb2d>
+    240b:	48 85 c0             	test   rax,rax
+    240e:	7e 61                	jle    2471 <socket@plt+0x1121>
+    2410:	48 8d b4 24 50 20 00 	lea    rsi,[rsp+0x2050]
+    2417:	00 
+    2418:	4c 89 ff             	mov    rdi,r15
+    241b:	e8 d0 ed ff ff       	call   11f0 <strcpy@plt>
+    2420:	44 89 e7             	mov    edi,r12d
+    2423:	e8 18 ee ff ff       	call   1240 <close@plt>
+    2428:	b9 03 00 00 00       	mov    ecx,0x3
+    242d:	48 8d 3d 6d 10 00 00 	lea    rdi,[rip+0x106d]        # 34a1 <socket@plt+0x2151>
+    2434:	4c 89 fe             	mov    rsi,r15
+    2437:	f3 a6                	repz cmps BYTE PTR ds:[rsi],BYTE PTR es:[rdi]
+    2439:	0f 97 c0             	seta   al
+    243c:	1c 00                	sbb    al,0x0
+    243e:	84 c0                	test   al,al
+    2440:	0f 95 c0             	setne  al
+    2443:	0f b6 c0             	movzx  eax,al
+    2446:	f7 d8                	neg    eax
+    2448:	48 8b 94 24 58 a0 00 	mov    rdx,QWORD PTR [rsp+0xa058]
+    244f:	00 
+    2450:	64 48 33 14 25 28 00 	xor    rdx,QWORD PTR fs:0x28
+    2457:	00 00 
+    2459:	0f 85 04 03 00 00    	jne    2763 <socket@plt+0x1413>
+    245f:	48 81 c4 68 a0 00 00 	add    rsp,0xa068
+    2466:	5b                   	pop    rbx
+    2467:	5d                   	pop    rbp
+    2468:	41 5c                	pop    r12
+    246a:	41 5d                	pop    r13
+    246c:	41 5e                	pop    r14
+    246e:	41 5f                	pop    r15
+    2470:	c3                   	ret
+    2471:	48 b8 45 72 72 6f 72 	movabs rax,0x43203a726f727245
+    2478:	3a 20 43 
+    247b:	48 ba 6c 69 65 6e 74 	movabs rdx,0x6e7520746e65696c
+    2482:	20 75 6e 
+    2485:	49 89 07             	mov    QWORD PTR [r15],rax
+    2488:	49 89 57 08          	mov    QWORD PTR [r15+0x8],rdx
+    248c:	48 b8 61 62 6c 65 20 	movabs rax,0x206f7420656c6261
+    2493:	74 6f 20 
+    2496:	48 ba 72 65 61 64 20 	movabs rdx,0x6174732064616572
+    249d:	73 74 61 
+    24a0:	49 89 47 10          	mov    QWORD PTR [r15+0x10],rax
+    24a4:	49 89 57 18          	mov    QWORD PTR [r15+0x18],rdx
+    24a8:	48 b8 74 75 73 20 6d 	movabs rax,0x7373656d20737574
+    24af:	65 73 73 
+    24b2:	48 ba 61 67 65 20 66 	movabs rdx,0x6d6f726620656761
+    24b9:	72 6f 6d 
+    24bc:	49 89 47 20          	mov    QWORD PTR [r15+0x20],rax
+    24c0:	49 89 57 28          	mov    QWORD PTR [r15+0x28],rdx
+    24c4:	48 b8 20 73 65 72 76 	movabs rax,0x72657672657320
+    24cb:	65 72 00 
+    24ce:	49 89 47 30          	mov    QWORD PTR [r15+0x30],rax
+    24d2:	44 89 e7             	mov    edi,r12d
+    24d5:	e8 66 ed ff ff       	call   1240 <close@plt>
+    24da:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    24df:	e9 64 ff ff ff       	jmp    2448 <socket@plt+0x10f8>
+    24e4:	48 b8 45 72 72 6f 72 	movabs rax,0x43203a726f727245
+    24eb:	3a 20 43 
+    24ee:	48 ba 6c 69 65 6e 74 	movabs rdx,0x6e7520746e65696c
+    24f5:	20 75 6e 
+    24f8:	49 89 07             	mov    QWORD PTR [r15],rax
+    24fb:	49 89 57 08          	mov    QWORD PTR [r15+0x8],rdx
+    24ff:	48 b8 61 62 6c 65 20 	movabs rax,0x206f7420656c6261
+    2506:	74 6f 20 
+    2509:	48 ba 77 72 69 74 65 	movabs rdx,0x6f74206574697277
+    2510:	20 74 6f 
+    2513:	49 89 47 10          	mov    QWORD PTR [r15+0x10],rax
+    2517:	49 89 57 18          	mov    QWORD PTR [r15+0x18],rdx
+    251b:	48 b8 20 74 68 65 20 	movabs rax,0x7265732065687420
+    2522:	73 65 72 
+    2525:	49 89 47 20          	mov    QWORD PTR [r15+0x20],rax
+    2529:	41 c7 47 28 76 65 72 	mov    DWORD PTR [r15+0x28],0x726576
+    2530:	00 
+    2531:	44 89 e7             	mov    edi,r12d
+    2534:	e8 07 ed ff ff       	call   1240 <close@plt>
+    2539:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    253e:	e9 05 ff ff ff       	jmp    2448 <socket@plt+0x10f8>
+    2543:	48 b8 45 72 72 6f 72 	movabs rax,0x52203a726f727245
+    254a:	3a 20 52 
+    254d:	48 ba 65 73 75 6c 74 	movabs rdx,0x747320746c757365
+    2554:	20 73 74 
+    2557:	49 89 07             	mov    QWORD PTR [r15],rax
+    255a:	49 89 57 08          	mov    QWORD PTR [r15+0x8],rdx
+    255e:	48 b8 72 69 6e 67 20 	movabs rax,0x6e6f6320676e6972
+    2565:	63 6f 6e 
+    2568:	48 ba 74 61 69 6e 73 	movabs rdx,0x6e6120736e696174
+    256f:	20 61 6e 
+    2572:	49 89 47 10          	mov    QWORD PTR [r15+0x10],rax
+    2576:	49 89 57 18          	mov    QWORD PTR [r15+0x18],rdx
+    257a:	48 b8 20 69 6c 6c 65 	movabs rax,0x6c6167656c6c6920
+    2581:	67 61 6c 
+    2584:	48 ba 20 6f 72 20 75 	movabs rdx,0x72706e7520726f20
+    258b:	6e 70 72 
+    258e:	49 89 47 20          	mov    QWORD PTR [r15+0x20],rax
+    2592:	49 89 57 28          	mov    QWORD PTR [r15+0x28],rdx
+    2596:	48 b8 69 6e 74 61 62 	movabs rax,0x20656c6261746e69
+    259d:	6c 65 20 
+    25a0:	48 ba 63 68 61 72 61 	movabs rdx,0x6574636172616863
+    25a7:	63 74 65 
+    25aa:	49 89 47 30          	mov    QWORD PTR [r15+0x30],rax
+    25ae:	49 89 57 38          	mov    QWORD PTR [r15+0x38],rdx
+    25b2:	66 41 c7 47 40 72 2e 	mov    WORD PTR [r15+0x40],0x2e72
+    25b9:	41 c6 47 42 00       	mov    BYTE PTR [r15+0x42],0x0
+    25be:	44 89 e7             	mov    edi,r12d
+    25c1:	e8 7a ec ff ff       	call   1240 <close@plt>
+    25c6:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    25cb:	e9 78 fe ff ff       	jmp    2448 <socket@plt+0x10f8>
+    25d0:	48 8d ac 24 50 20 00 	lea    rbp,[rsp+0x2050]
+    25d7:	00 
+    25d8:	48 8d 84 24 50 40 00 	lea    rax,[rsp+0x4050]
+    25df:	00 
+    25e0:	50                   	push   rax
+    25e1:	ff 74 24 20          	push   QWORD PTR [rsp+0x20]
+    25e5:	4c 8b 4c 24 20       	mov    r9,QWORD PTR [rsp+0x20]
+    25ea:	4c 8b 44 24 18       	mov    r8,QWORD PTR [rsp+0x18]
+    25ef:	48 8d 0d 1a 0e 00 00 	lea    rcx,[rip+0xe1a]        # 3410 <socket@plt+0x20c0>
+    25f6:	ba 00 20 00 00       	mov    edx,0x2000
+    25fb:	be 01 00 00 00       	mov    esi,0x1
+    2600:	48 89 ef             	mov    rdi,rbp
+    2603:	b8 00 00 00 00       	mov    eax,0x0
+    2608:	e8 33 ed ff ff       	call   1340 <__sprintf_chk@plt>
+    260d:	48 c7 c1 ff ff ff ff 	mov    rcx,0xffffffffffffffff
+    2614:	b8 00 00 00 00       	mov    eax,0x0
+    2619:	48 89 ef             	mov    rdi,rbp
+    261c:	f2 ae                	repnz scas al,BYTE PTR es:[rdi]
+    261e:	48 f7 d1             	not    rcx
+    2621:	48 83 c4 10          	add    rsp,0x10
+    2625:	48 8d ac 24 50 20 00 	lea    rbp,[rsp+0x2050]
+    262c:	00 
+    262d:	41 bd 00 00 00 00    	mov    r13d,0x0
+    2633:	48 89 cb             	mov    rbx,rcx
+    2636:	48 83 eb 01          	sub    rbx,0x1
+    263a:	0f 85 e3 fc ff ff    	jne    2323 <socket@plt+0xfd3>
+    2640:	44 89 64 24 40       	mov    DWORD PTR [rsp+0x40],r12d
+    2645:	c7 44 24 44 00 00 00 	mov    DWORD PTR [rsp+0x44],0x0
+    264c:	00 
+    264d:	48 8d 7c 24 40       	lea    rdi,[rsp+0x40]
+    2652:	48 8d 44 24 50       	lea    rax,[rsp+0x50]
+    2657:	48 89 44 24 48       	mov    QWORD PTR [rsp+0x48],rax
+    265c:	48 8d b4 24 50 20 00 	lea    rsi,[rsp+0x2050]
+    2663:	00 
+    2664:	ba 00 20 00 00       	mov    edx,0x2000
+    2669:	e8 0f f8 ff ff       	call   1e7d <socket@plt+0xb2d>
+    266e:	48 85 c0             	test   rax,rax
+    2671:	0f 8e d2 fc ff ff    	jle    2349 <socket@plt+0xff9>
+    2677:	48 8d 4c 24 2c       	lea    rcx,[rsp+0x2c]
+    267c:	48 8d 94 24 50 60 00 	lea    rdx,[rsp+0x6050]
+    2683:	00 
+    2684:	48 8d bc 24 50 20 00 	lea    rdi,[rsp+0x2050]
+    268b:	00 
+    268c:	4c 8d 84 24 50 80 00 	lea    r8,[rsp+0x8050]
+    2693:	00 
+    2694:	48 8d 35 f2 0d 00 00 	lea    rsi,[rip+0xdf2]        # 348d <socket@plt+0x213d>
+    269b:	b8 00 00 00 00       	mov    eax,0x0
+    26a0:	e8 1b ec ff ff       	call   12c0 <__isoc99_sscanf@plt>
+    26a5:	44 8b 44 24 2c       	mov    r8d,DWORD PTR [rsp+0x2c]
+    26aa:	41 81 f8 c8 00 00 00 	cmp    r8d,0xc8
+    26b1:	0f 85 06 fd ff ff    	jne    23bd <socket@plt+0x106d>
+    26b7:	48 8d 1d e0 0d 00 00 	lea    rbx,[rip+0xde0]        # 349e <socket@plt+0x214e>
+    26be:	48 8d b4 24 50 20 00 	lea    rsi,[rsp+0x2050]
+    26c5:	00 
+    26c6:	b9 03 00 00 00       	mov    ecx,0x3
+    26cb:	48 89 df             	mov    rdi,rbx
+    26ce:	f3 a6                	repz cmps BYTE PTR ds:[rsi],BYTE PTR es:[rdi]
+    26d0:	0f 97 c0             	seta   al
+    26d3:	1c 00                	sbb    al,0x0
+    26d5:	84 c0                	test   al,al
+    26d7:	0f 84 17 fd ff ff    	je     23f4 <socket@plt+0x10a4>
+    26dd:	48 8d b4 24 50 20 00 	lea    rsi,[rsp+0x2050]
+    26e4:	00 
+    26e5:	48 8d 7c 24 40       	lea    rdi,[rsp+0x40]
+    26ea:	ba 00 20 00 00       	mov    edx,0x2000
+    26ef:	e8 89 f7 ff ff       	call   1e7d <socket@plt+0xb2d>
+    26f4:	48 85 c0             	test   rax,rax
+    26f7:	7f c5                	jg     26be <socket@plt+0x136e>
+    26f9:	48 b8 45 72 72 6f 72 	movabs rax,0x43203a726f727245
+    2700:	3a 20 43 
+    2703:	48 ba 6c 69 65 6e 74 	movabs rdx,0x6e7520746e65696c
+    270a:	20 75 6e 
+    270d:	49 89 07             	mov    QWORD PTR [r15],rax
+    2710:	49 89 57 08          	mov    QWORD PTR [r15+0x8],rdx
+    2714:	48 b8 61 62 6c 65 20 	movabs rax,0x206f7420656c6261
+    271b:	74 6f 20 
+    271e:	48 ba 72 65 61 64 20 	movabs rdx,0x6165682064616572
+    2725:	68 65 61 
+    2728:	49 89 47 10          	mov    QWORD PTR [r15+0x10],rax
+    272c:	49 89 57 18          	mov    QWORD PTR [r15+0x18],rdx
+    2730:	48 b8 64 65 72 73 20 	movabs rax,0x6f72662073726564
+    2737:	66 72 6f 
+    273a:	48 ba 6d 20 73 65 72 	movabs rdx,0x726576726573206d
+    2741:	76 65 72 
+    2744:	49 89 47 20          	mov    QWORD PTR [r15+0x20],rax
+    2748:	49 89 57 28          	mov    QWORD PTR [r15+0x28],rdx
+    274c:	41 c6 47 30 00       	mov    BYTE PTR [r15+0x30],0x0
+    2751:	44 89 e7             	mov    edi,r12d
+    2754:	e8 e7 ea ff ff       	call   1240 <close@plt>
+    2759:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    275e:	e9 e5 fc ff ff       	jmp    2448 <socket@plt+0x10f8>
+    2763:	e8 b8 ea ff ff       	call   1220 <__stack_chk_fail@plt>
+    2768:	f3 0f 1e fa          	endbr64
+    276c:	85 ff                	test   edi,edi
+    276e:	75 01                	jne    2771 <socket@plt+0x1421>
+    2770:	c3                   	ret
+    2771:	53                   	push   rbx
+    2772:	89 fb                	mov    ebx,edi
+    2774:	48 8d 35 cc f6 ff ff 	lea    rsi,[rip+0xfffffffffffff6cc]        # 1e47 <socket@plt+0xaf7>
+    277b:	bf 0e 00 00 00       	mov    edi,0xe
+    2780:	e8 eb ea ff ff       	call   1270 <signal@plt>
+    2785:	85 db                	test   ebx,ebx
+    2787:	bf 00 00 00 00       	mov    edi,0x0
+    278c:	0f 49 fb             	cmovns edi,ebx
+    278f:	e8 9c ea ff ff       	call   1230 <alarm@plt>
+    2794:	5b                   	pop    rbx
+    2795:	c3                   	ret
+    2796:	f3 0f 1e fa          	endbr64
+    279a:	41 54                	push   r12
+    279c:	55                   	push   rbp
+    279d:	53                   	push   rbx
+    279e:	48 83 ec 20          	sub    rsp,0x20
+    27a2:	48 89 fd             	mov    rbp,rdi
+    27a5:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+    27ac:	00 00 
+    27ae:	48 89 44 24 18       	mov    QWORD PTR [rsp+0x18],rax
+    27b3:	31 c0                	xor    eax,eax
+    27b5:	be 01 00 00 00       	mov    esi,0x1
+    27ba:	bf 0d 00 00 00       	mov    edi,0xd
+    27bf:	e8 ac ea ff ff       	call   1270 <signal@plt>
+    27c4:	be 01 00 00 00       	mov    esi,0x1
+    27c9:	bf 1d 00 00 00       	mov    edi,0x1d
+    27ce:	e8 9d ea ff ff       	call   1270 <signal@plt>
+    27d3:	be 01 00 00 00       	mov    esi,0x1
+    27d8:	bf 1d 00 00 00       	mov    edi,0x1d
+    27dd:	e8 8e ea ff ff       	call   1270 <signal@plt>
+    27e2:	ba 00 00 00 00       	mov    edx,0x0
+    27e7:	be 01 00 00 00       	mov    esi,0x1
+    27ec:	bf 02 00 00 00       	mov    edi,0x2
+    27f1:	e8 5a eb ff ff       	call   1350 <socket@plt>
+    27f6:	85 c0                	test   eax,eax
+    27f8:	0f 88 9c 00 00 00    	js     289a <socket@plt+0x154a>
+    27fe:	89 c3                	mov    ebx,eax
+    2800:	48 8d 3d 9d 0c 00 00 	lea    rdi,[rip+0xc9d]        # 34a4 <socket@plt+0x2154>
+    2807:	e8 74 ea ff ff       	call   1280 <gethostbyname@plt>
+    280c:	48 85 c0             	test   rax,rax
+    280f:	0f 84 d1 00 00 00    	je     28e6 <socket@plt+0x1596>
+    2815:	49 89 e4             	mov    r12,rsp
+    2818:	48 c7 04 24 00 00 00 	mov    QWORD PTR [rsp],0x0
+    281f:	00 
+    2820:	48 c7 44 24 08 00 00 	mov    QWORD PTR [rsp+0x8],0x0
+    2827:	00 00 
+    2829:	66 c7 04 24 02 00    	mov    WORD PTR [rsp],0x2
+    282f:	48 63 50 14          	movsxd rdx,DWORD PTR [rax+0x14]
+    2833:	48 8b 40 18          	mov    rax,QWORD PTR [rax+0x18]
+    2837:	48 8d 7c 24 04       	lea    rdi,[rsp+0x4]
+    283c:	b9 0c 00 00 00       	mov    ecx,0xc
+    2841:	48 8b 30             	mov    rsi,QWORD PTR [rax]
+    2844:	e8 47 ea ff ff       	call   1290 <__memmove_chk@plt>
+    2849:	66 c7 44 24 02 3b 6e 	mov    WORD PTR [rsp+0x2],0x6e3b
+    2850:	ba 10 00 00 00       	mov    edx,0x10
+    2855:	4c 89 e6             	mov    rsi,r12
+    2858:	89 df                	mov    edi,ebx
+    285a:	e8 a1 ea ff ff       	call   1300 <connect@plt>
+    285f:	85 c0                	test   eax,eax
+    2861:	0f 88 e7 00 00 00    	js     294e <socket@plt+0x15fe>
+    2867:	89 df                	mov    edi,ebx
+    2869:	e8 d2 e9 ff ff       	call   1240 <close@plt>
+    286e:	66 c7 45 00 4f 4b    	mov    WORD PTR [rbp+0x0],0x4b4f
+    2874:	c6 45 02 00          	mov    BYTE PTR [rbp+0x2],0x0
+    2878:	b8 00 00 00 00       	mov    eax,0x0
+    287d:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+    2882:	64 48 33 0c 25 28 00 	xor    rcx,QWORD PTR fs:0x28
+    2889:	00 00 
+    288b:	0f 85 f5 00 00 00    	jne    2986 <socket@plt+0x1636>
+    2891:	48 83 c4 20          	add    rsp,0x20
+    2895:	5b                   	pop    rbx
+    2896:	5d                   	pop    rbp
+    2897:	41 5c                	pop    r12
+    2899:	c3                   	ret
+    289a:	48 b8 45 72 72 6f 72 	movabs rax,0x43203a726f727245
+    28a1:	3a 20 43 
+    28a4:	48 ba 6c 69 65 6e 74 	movabs rdx,0x6e7520746e65696c
+    28ab:	20 75 6e 
+    28ae:	48 89 45 00          	mov    QWORD PTR [rbp+0x0],rax
+    28b2:	48 89 55 08          	mov    QWORD PTR [rbp+0x8],rdx
+    28b6:	48 b8 61 62 6c 65 20 	movabs rax,0x206f7420656c6261
+    28bd:	74 6f 20 
+    28c0:	48 ba 63 72 65 61 74 	movabs rdx,0x7320657461657263
+    28c7:	65 20 73 
+    28ca:	48 89 45 10          	mov    QWORD PTR [rbp+0x10],rax
+    28ce:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+    28d2:	c7 45 20 6f 63 6b 65 	mov    DWORD PTR [rbp+0x20],0x656b636f
+    28d9:	66 c7 45 24 74 00    	mov    WORD PTR [rbp+0x24],0x74
+    28df:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    28e4:	eb 97                	jmp    287d <socket@plt+0x152d>
+    28e6:	48 b8 45 72 72 6f 72 	movabs rax,0x44203a726f727245
+    28ed:	3a 20 44 
+    28f0:	48 ba 4e 53 20 69 73 	movabs rdx,0x6e7520736920534e
+    28f7:	20 75 6e 
+    28fa:	48 89 45 00          	mov    QWORD PTR [rbp+0x0],rax
+    28fe:	48 89 55 08          	mov    QWORD PTR [rbp+0x8],rdx
+    2902:	48 b8 61 62 6c 65 20 	movabs rax,0x206f7420656c6261
+    2909:	74 6f 20 
+    290c:	48 ba 72 65 73 6f 6c 	movabs rdx,0x2065766c6f736572
+    2913:	76 65 20 
+    2916:	48 89 45 10          	mov    QWORD PTR [rbp+0x10],rax
+    291a:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+    291e:	48 b8 73 65 72 76 65 	movabs rax,0x6120726576726573
+    2925:	72 20 61 
+    2928:	48 89 45 20          	mov    QWORD PTR [rbp+0x20],rax
+    292c:	c7 45 28 64 64 72 65 	mov    DWORD PTR [rbp+0x28],0x65726464
+    2933:	66 c7 45 2c 73 73    	mov    WORD PTR [rbp+0x2c],0x7373
+    2939:	c6 45 2e 00          	mov    BYTE PTR [rbp+0x2e],0x0
+    293d:	89 df                	mov    edi,ebx
+    293f:	e8 fc e8 ff ff       	call   1240 <close@plt>
+    2944:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    2949:	e9 2f ff ff ff       	jmp    287d <socket@plt+0x152d>
+    294e:	4c 8d 05 4f 0b 00 00 	lea    r8,[rip+0xb4f]        # 34a4 <socket@plt+0x2154>
+    2955:	48 8d 0d 04 0b 00 00 	lea    rcx,[rip+0xb04]        # 3460 <socket@plt+0x2110>
+    295c:	48 c7 c2 ff ff ff ff 	mov    rdx,0xffffffffffffffff
+    2963:	be 01 00 00 00       	mov    esi,0x1
+    2968:	48 89 ef             	mov    rdi,rbp
+    296b:	b8 00 00 00 00       	mov    eax,0x0
+    2970:	e8 cb e9 ff ff       	call   1340 <__sprintf_chk@plt>
+    2975:	89 df                	mov    edi,ebx
+    2977:	e8 c4 e8 ff ff       	call   1240 <close@plt>
+    297c:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    2981:	e9 f7 fe ff ff       	jmp    287d <socket@plt+0x152d>
+    2986:	e8 95 e8 ff ff       	call   1220 <__stack_chk_fail@plt>
+    298b:	f3 0f 1e fa          	endbr64
+    298f:	53                   	push   rbx
+    2990:	48 89 cb             	mov    rbx,rcx
+    2993:	85 d2                	test   edx,edx
+    2995:	75 17                	jne    29ae <socket@plt+0x165e>
+    2997:	48 85 ff             	test   rdi,rdi
+    299a:	74 05                	je     29a1 <socket@plt+0x1651>
+    299c:	80 3f 00             	cmp    BYTE PTR [rdi],0x0
+    299f:	75 36                	jne    29d7 <socket@plt+0x1687>
+    29a1:	66 c7 03 4f 4b       	mov    WORD PTR [rbx],0x4b4f
+    29a6:	c6 43 02 00          	mov    BYTE PTR [rbx+0x2],0x0
+    29aa:	89 d0                	mov    eax,edx
+    29ac:	5b                   	pop    rbx
+    29ad:	c3                   	ret
+    29ae:	48 89 f2             	mov    rdx,rsi
+    29b1:	48 8d 35 04 0b 00 00 	lea    rsi,[rip+0xb04]        # 34bc <socket@plt+0x216c>
+    29b8:	bf 01 00 00 00       	mov    edi,0x1
+    29bd:	b8 00 00 00 00       	mov    eax,0x0
+    29c2:	e8 09 e9 ff ff       	call   12d0 <__printf_chk@plt>
+    29c7:	66 c7 03 4f 4b       	mov    WORD PTR [rbx],0x4b4f
+    29cc:	c6 43 02 00          	mov    BYTE PTR [rbx+0x2],0x0
+    29d0:	b8 00 00 00 00       	mov    eax,0x0
+    29d5:	eb d5                	jmp    29ac <socket@plt+0x165c>
+    29d7:	48 83 ec 08          	sub    rsp,0x8
+    29db:	51                   	push   rcx
+    29dc:	49 89 f1             	mov    r9,rsi
+    29df:	4c 8d 05 ba 0a 00 00 	lea    r8,[rip+0xaba]        # 34a0 <socket@plt+0x2150>
+    29e6:	48 89 f9             	mov    rcx,rdi
+    29e9:	48 8d 15 e3 0a 00 00 	lea    rdx,[rip+0xae3]        # 34d3 <socket@plt+0x2183>
+    29f0:	be 6e 3b 00 00       	mov    esi,0x3b6e
+    29f5:	48 8d 3d a8 0a 00 00 	lea    rdi,[rip+0xaa8]        # 34a4 <socket@plt+0x2154>
+    29fc:	e8 45 f5 ff ff       	call   1f46 <socket@plt+0xbf6>
+    2a01:	48 83 c4 10          	add    rsp,0x10
+    2a05:	eb a5                	jmp    29ac <socket@plt+0x165c>
+    2a07:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+    2a0e:	00 00 
+    2a10:	f3 0f 1e fa          	endbr64
+    2a14:	41 57                	push   r15
+    2a16:	4c 8d 3d db 22 00 00 	lea    r15,[rip+0x22db]        # 4cf8 <socket@plt+0x39a8>
+    2a1d:	41 56                	push   r14
+    2a1f:	49 89 d6             	mov    r14,rdx
+    2a22:	41 55                	push   r13
+    2a24:	49 89 f5             	mov    r13,rsi
+    2a27:	41 54                	push   r12
+    2a29:	41 89 fc             	mov    r12d,edi
+    2a2c:	55                   	push   rbp
+    2a2d:	48 8d 2d cc 22 00 00 	lea    rbp,[rip+0x22cc]        # 4d00 <socket@plt+0x39b0>
+    2a34:	53                   	push   rbx
+    2a35:	4c 29 fd             	sub    rbp,r15
+    2a38:	48 83 ec 08          	sub    rsp,0x8
+    2a3c:	e8 bf e5 ff ff       	call   1000 <__cxa_finalize@plt-0x1c0>
+    2a41:	48 c1 fd 03          	sar    rbp,0x3
+    2a45:	74 1f                	je     2a66 <socket@plt+0x1716>
+    2a47:	31 db                	xor    ebx,ebx
+    2a49:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+    2a50:	4c 89 f2             	mov    rdx,r14
+    2a53:	4c 89 ee             	mov    rsi,r13
+    2a56:	44 89 e7             	mov    edi,r12d
+    2a59:	41 ff 14 df          	call   QWORD PTR [r15+rbx*8]
+    2a5d:	48 83 c3 01          	add    rbx,0x1
+    2a61:	48 39 dd             	cmp    rbp,rbx
+    2a64:	75 ea                	jne    2a50 <socket@plt+0x1700>
+    2a66:	48 83 c4 08          	add    rsp,0x8
+    2a6a:	5b                   	pop    rbx
+    2a6b:	5d                   	pop    rbp
+    2a6c:	41 5c                	pop    r12
+    2a6e:	41 5d                	pop    r13
+    2a70:	41 5e                	pop    r14
+    2a72:	41 5f                	pop    r15
+    2a74:	c3                   	ret
+    2a75:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+    2a7c:	00 00 00 00 
+    2a80:	f3 0f 1e fa          	endbr64
+    2a84:	c3                   	ret
+
+Disassembly of section .fini:
+
+0000000000002a88 <.fini>:
+    2a88:	f3 0f 1e fa          	endbr64
+    2a8c:	48 83 ec 08          	sub    rsp,0x8
+    2a90:	48 83 c4 08          	add    rsp,0x8
+    2a94:	c3                   	ret
