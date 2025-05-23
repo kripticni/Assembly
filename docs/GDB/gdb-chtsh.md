@@ -179,9 +179,18 @@
 ## Preferences
 
 ```bash
+break __libc_start_main
+break __libc_start_call_main
+
+```
+
+```bash
 set disassembler-options numeric
 set disassembler-options no-aliases
+set disassembly-flavor intel
 ```
+
+## Stripped Binaries
 
 ---
 

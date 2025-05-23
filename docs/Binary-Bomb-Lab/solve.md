@@ -101,7 +101,8 @@ so I just decided to write my own.
 
 Looking down through .text
 we can see that the first thing that is called is 
-socket, well lets see this in gdb
+socket, but thats due to the disassembler 
+giving misinformation due to no symbols
 
 To start debugging a stripped binary we want to
 run info file to see the entry point, then break
@@ -109,10 +110,36 @@ at the entry point and run the file, to see the
 next instructions we can only use the
 x/<n>i $rip
 
-```bash
-i file
-b *<entry point>
-x/30i $rsp
-b *0x555555555381 # right before the call to socket
+To get to our main function we'll just
+break on __libc_start_call_main, then 
+we obtain 
+
 ```
+Breakpoint 3, __libc_start_call_main (main=main@entry=0x555555555449, argc=argc@entry=1, argv=argv@entry=0x7fffffffbd98)
+```
+
+Break at the main addr main=main@entry=0x555555555449
+from there we can disable the __libc_start_call_main breakpoint
+
+Looking at the binary of main, we can see 
+that if edi is 1, we get the standard output
+If edi is not 2 nor 1, we get the usage of it, 
+saying to provide as an argument
+And if it is 2, then we get into opening a file
+with fopen
+
+We can also see that the structure of main is 
+mainly a series of calls and prints, we'll
+need to reverse engineer all of those calls
+
+---
+
+## Solution
+
+```bash
+break __libc_start_call_main
+# set break point at main
+del 1 # remove __libc_start_call_main bp
+set args file.txt
+set $edi = 2
 
