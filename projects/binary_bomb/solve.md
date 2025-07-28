@@ -9,13 +9,15 @@ However it was originally made for CMU arch course.
 To improve my writeup skills and note-taking I'll be
 writing down the steps I take here.
 
+## _start
+
+As I want to learn the most at actual debugging,  
+and reverse engineering, I'll be using the ghidra kit  
+and also stripping the binary for increased difficulty.  
+
 ## Reconnaissance
 
-Firstly, it is said that if you want to do
-the challenge on expert mode, the binary should
-be stripped.
-As I want to learn the most from this exercise
-I will also be stripping the binary.
+Firstly, we'll strip our binary for added difficulty.  
 
 ```bash
 $ strip bomb
@@ -23,9 +25,10 @@ $ file bomb
 bomb: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=7dd166a66acce52fc6103bbf61a0c32b7e667841, for GNU/Linux 3.2.0, stripped
 ```
 
-Having done that, I'll also read the elf for any
-kind of useful hints, see the readelf in readelf.txt
-I'll also checksec it and run strings
+Having done that, I'll also read the elf for any  
+kind of useful hints, see the readelf in readelf.txt  
+I'll also checksec it and run strings  
+
 ```bash
 readelf -a bomb > readelf.txt
 strings bomb > strings.txt
@@ -77,9 +80,9 @@ instantly halts
 
 ## Phase 1
 
-Firstly, this has obviously been compiled for standard
-linux distros so I'll have to pull out distrobox for 
-running dynamic analysis.
+Since I'm now using Gentoo which complies to the FHS  
+I'll no longer need to use distrobox for dynamic analysis  
+as i once did on NixOS.  
 
 Blindly running it also tells us there is 6 phases,
 sending it a Ctrl+C gives us a message:
@@ -97,7 +100,9 @@ Also noticing ill need to do a lot of hex math
 i found a project on github that has an implementation
 of a hex calculator in python: [https://github.com/zachMelby/Hex_Calculator](https://github.com/zachMelby/Hex_Calculator)
 But it ended up not working as I wanted it to, 
-so I just decided to write my own.
+so I just decided to write my own, but I ended
+up scraping it too in favor of improving at
+hex math myself.
 
 Looking down through .text
 we can see that the first thing that is called is 
@@ -121,25 +126,6 @@ Breakpoint 3, __libc_start_call_main (main=main@entry=0x555555555449, argc=argc@
 Break at the main addr main=main@entry=0x555555555449
 from there we can disable the __libc_start_call_main breakpoint
 
-Looking at the binary of main, we can see 
-that if edi is 1, we get the standard output
-If edi is not 2 nor 1, we get the usage of it, 
-saying to provide as an argument
-And if it is 2, then we get into opening a file
-with fopen
-
-We can also see that the structure of main is 
-mainly a series of calls and prints, we'll
-need to reverse engineer all of those calls
-
----
-
-## Solution
-
-```bash
-break __libc_start_call_main
-# set break point at main
-del 1 # remove __libc_start_call_main bp
-set args file.txt
-set $edi = 2
-
+From here on, I'll be using ghidra and making
+a project instead of going at it with gdb and
+raw assembly understanding.
