@@ -1,0 +1,507 @@
+# Binary Bomb Lab
+
+This is a part of OST2's course on [arch1001](https://apps.p.ost2.fyi/learning/course/course-v1:OpenSecurityTraining2+Arch1001_x86-64_Asm+2021_v1/)
+
+I will be taking it in expert mode, with only gdb 
+and with a stripped binary.
+
+However it was originally made for CMU arch course.
+To improve my writeup skills and note-taking I'll be
+writing down the steps I take here.
+
+## _start
+
+As I want to learn the most at actual debugging,  
+and reverse engineering, I'll be using the ghidra kit  
+and also stripping the binary for increased difficulty.  
+
+## Reconnaissance
+
+Firstly, we'll strip our binary for added difficulty.  
+
+```bash
+$ strip bomb
+$ file bomb
+bomb: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=7dd166a66acce52fc6103bbf61a0c32b7e667841, for GNU/Linux 3.2.0, stripped
+```
+
+Having done that, I'll also read the elf for any  
+kind of useful hints, see the readelf in readelf.txt  
+I'll also checksec it and run strings  
+
+```bash
+readelf -a bomb > readelf.txt
+strings bomb > strings.txt
+checksec bomb
+objdump -d bomb -Mintel > bomb.disas
+```
+
+**Readelf** gives us some nice hints by confirming
+the use of:
+puts, write alarm, close, read, fgets fopen, exit
+sleep, stdin, stderr, stdout, memmove strtol, fflush, sprintf, socket
+gethostbyname, signal, strcpy, getenv
+OS/ABI: UNIX - System V
+Clib: glibc
+`Entry point address: 0x1360`
+So now we know where to start and what to expect
+
+
+**Strings** lets us know that gcc 9.3.0 was used,
+it also lets us know that there is a weird GET request
+for http, also these sites:
+- [greatwhite.ics.cs.cmu.edu](greatwhite.ics.cs.cmu.edu)
+- [angelshark.ics.cs.cmu.edu](angelshark.ics.cs.cmu.edu)
+- [makoshark.ics.cs.cmu.edu](makoshark.ics.cs.cmu.edu)
+Along with some error/success messages.
+It also reveals that there are 6 phases.
+
+**Checksec** gives us the following:
+    Arch:       amd64-64-little
+    RELRO:      Full RELRO
+    Stack:      Canary found
+    NX:         NX enabled
+    PIE:        PIE enabled
+    FORTIFY:    Enabled
+    SHSTK:      Enabled
+    IBT:        Enabled
+
+Because I dont have enough experience with reverse
+engineering, I first needed to find out what are
+FORTITY and SHSTK
+
+Its also my first time encountering a full relro binary
+but I doubt I'll have to do anything with the global offset table
+
+SHSTK, a shadow stack (sound familiar with the shadow store from MS)
+its used for maintaining a separate stack that mirrors return addresses
+if there is a mismatch (a overwrite of the return has occured) it 
+instantly halts
+
+Since I'm now using Gentoo which complies to the FHS  
+I'll no longer need to use distrobox for dynamic analysis  
+as i once did on NixOS.  
+
+Blindly running it also tells us there is 6 phases,
+sending it a Ctrl+C gives us a message:
+"So you think you can stop the bomb with ctrl-c, do you?
+Well...OK. :-)"
+This obviously means that it wasnt the right way to go 
+about it (no suprises there) but it also reveals that
+there is a signal handler in the binary.
+
+The entry point of our binary is hardcoded into
+the elf header, that we already found with readelf
+is at 0x1360 aka .text
+
+Also noticing ill need to do a lot of hex math
+i found a project on github that has an implementation
+of a hex calculator in python: [https://github.com/zachMelby/Hex_Calculator](https://github.com/zachMelby/Hex_Calculator)
+But it ended up not working as I wanted it to, 
+so I just decided to write my own, but I ended
+up scraping it too in favor of improving at
+hex math myself.
+
+Looking down through .text
+we can see that the first thing that is called is 
+socket, but thats due to the disassembler 
+giving misinformation due to no symbols
+
+To start debugging a stripped binary we want to
+run info file to see the entry point, then break
+at the entry point and run the file, to see the 
+next instructions we can only use the
+x/<n>i $rip
+
+To get to our main function we'll just
+break on __libc_start_call_main, then 
+we obtain 
+
+```
+Breakpoint 3, __libc_start_call_main (main=main@entry=0x555555555449, argc=argc@entry=1, argv=argv@entry=0x7fffffffbd98)
+```
+
+Break at the main addr main=main@entry=0x555555555449
+from there we can disable the __libc_start_call_main breakpoint
+
+From here on, I'll be using ghidra and making
+a project instead of going at it with gdb and
+raw assembly understanding.
+
+## Getting to main 
+
+After making a ghidra project and analysing the stripped binary  
+ive noticed that it still hasn't fully resolved all symbols.
+
+Going straight to the entry point which we already know, we can  
+check the first few functions and notice that they are decoys that  
+call nothing at all.  
+
+Along the way I also learned that about the elf structure.
+FINI is whats called after main for cleanup purposes, also known as destructor code.  
+INIT is the equivalent for constructing, before main.
+Also symbols for DT_INIT and DT_FINI are simply dynamic tags to these functions.
+The entry point is the first instruction to be executed in a program and is  
+used by the OS loader.
+
+However in modern glibc, init is always null (but executed if not null) and  
+fini is completely unused.
+
+There is also things to learn from glibc,  
+starting with __libc_start_main.
+
+```c
+int __libc_start_main(
+  int (*main)(int, char**, char**),
+  int argc,
+  char **ubp_av,
+  void (*init)(void),
+  void (*fini)(void),
+  void (*rtld_fini)(void),
+  void *stack_end
+);
+```
+Obviously we provide the address of main, argc and argv (by an unbounded pointer)  
+there is also an optional auxiliary vector for kernel related stuff.  
+There is rtld_fini which is used which is a cleanup provided by the dynamic  
+linker, stack_end which is the lowest address on the stack.
+
+
+```asm
+        00101373 4c 8d 05        LEA        R8,[FUN_00102a80]
+                 06 17 00 00
+        0010137a 48 8d 0d        LEA        RCX,[FUN_00102a10]
+                 8f 16 00 00
+        00101381 48 8d 3d        LEA        RDI,[FUN_00101449]
+                 c1 00 00 00
+        00101388 ff 15 52        CALL       qword ptr [-><EXTERNAL>::__libc_start_main]      undefined __libc_start_main()
+                 3c 00 00                                                                    = 00106050
+
+```
+
+For this I'll remind you the argument registers for System V ABI.  
+In order: RDI, RSI, RDX, RCX, R8, R9
+From this and the function signature/declaration we can conclude that  
+our main function is indeed FUN_00101449
+
+From here I renamed the function to name and changed its definition accordingly
+
+```c
+int main(int argc,char **argv)
+
+{
+  char *pcVar1;
+  
+  if (argc == 1) {
+    DAT_00105698 = stdin;
+  }
+  else {
+    if (argc != 2) {
+      __printf_chk(1,"Usage: %s [<input_file>]\n",*argv);
+                    /* WARNING: Subroutine does not return */
+      exit(8);
+    }
+    DAT_00105698 = fopen(argv[1],"r");
+    if (DAT_00105698 == (FILE *)0x0) {
+      __printf_chk(1,"%s: Error: Couldn\'t open %s\n",*argv,argv[1]);
+                    /* WARNING: Subroutine does not return */
+      exit(8);
+    }
+  }
+  FUN_00101b31();
+  puts("Welcome to my fiendish little bomb. You have 6 phases with");
+  puts("which to blow yourself up. Have a nice day!");
+  pcVar1 = FUN_00101c56();
+  FUN_001015a7(pcVar1);
+  FUN_00101d9e();
+  puts("Phase 1 defused. How about the next one?");
+  pcVar1 = FUN_00101c56();
+  FUN_001015cb(pcVar1);
+  FUN_00101d9e();
+  puts("That\'s number 2.  Keep going!");
+  pcVar1 = FUN_00101c56();
+  FUN_00101639(pcVar1);
+  FUN_00101d9e();
+  puts("Halfway there!");
+  pcVar1 = FUN_00101c56();
+  FUN_0010174b(pcVar1);
+  FUN_00101d9e();
+  puts("So you got that one.  Try this one.");
+  pcVar1 = FUN_00101c56();
+  FUN_001017c4(pcVar1);
+  FUN_00101d9e();
+  puts("Good work!  On to the next...");
+  pcVar1 = FUN_00101c56();
+  FUN_0010185b(pcVar1);
+  FUN_00101d9e();
+  return 0;
+}
+```
+
+This seems to be the main hub where everything will happen,  
+however maybe there could be a function that never returns  
+and leads us elsewhere.  
+
+```c
+  if (argc == 1) {
+    input = stdin;
+  }
+  else {
+    if (argc != 2) {
+      __printf_chk(1,"Usage: %s [<input_file>]\n",*argv);
+                    /* WARNING: Subroutine does not return */
+      exit(8);
+    }
+    input = fopen(argv[1],"r");
+    if (input == (FILE *)0x0) {
+      __printf_chk(1,"%s: Error: Couldn\'t open %s\n",*argv,argv[1]);
+                    /* WARNING: Subroutine does not return */
+      exit(8);
+    }
+  }
+```
+
+This part is clearly used to setup where input will be read from,  
+if the only argument is the filename itself, then input is stdin  
+if there is another argument, that argument is the file to read from.  
+
+
+## Phase 1
+
+The first function call in main, it just calls the signal  
+function which sets up a signal trap of X signal to call Y function.  
+
+And the Y function is just telling us that we cannot disarm the bomb  
+using Ctrl+C, so i named it sigtrap_ctrl-c.
+
+The next function returns a string (char*), and at the beginning  
+it sets up 5 variables.
+```c
+  char cVar1;
+  char *pcVar2;
+  long lVar3;
+  long lVar4;
+  byte bVar5;
+  
+  bVar5 = 0;
+  pcVar2 = FUN_00101b93();
+```
+
+Lets go down the stack and analyze the function it calls,  
+```c
+char * FUN_00101b93(void)
+
+{
+  char *pcVar1;
+  undefined8 uVar2;
+  
+  do {
+    pcVar1 = fgets(&DAT_001056a0 + (long)DAT_00105690 * 0x50,0x50,input);
+    if (pcVar1 == (char *)0x0) {
+      return (char *)0x0;
+    }
+    uVar2 = FUN_00101b54(pcVar1);
+  } while ((int)uVar2 != 0);
+  return pcVar1;
+}
+```
+
+```c
+input_string = fgets(&input_string_array + (long)DAT_00105690 * 0x50,0x50,input);
+```
+
+Here, input_string_array seems to obviously be an array of strings with each string  
+occupying 16*5 bytes, for a total of 80 bytes and DAT_00105690 seems to be the index?
+Upon further review we can see that it is a global integer which means its initialized
+to zero, so its safe to assume that this stores 80 bytes into the first index of the
+
+sarray (string array)
+```asm
+DAT_00105690                                    XREF[6]:     FUN_00101b93:00101ba4(R), 
+                                                FUN_00101c56:00101c6d(R), 
+                                                FUN_00101c56:00101cce(W), 
+                                                FUN_00101c56:00101d60(R), 
+                                                FUN_00101c56:00101d69(W), 
+                                                FUN_00101d9e:00101db6(R)  
+```
+If we find an error or EOF in fgets we'll return null, in other case we return  
+input string.
+
+```c
+  do {
+    input_string = fgets(&input_string_array + (long)sarray_index * 0x50,0x50,input);
+    if (input_string == (char *)0x0) {
+      return (char *)0x0;
+    }
+    uVar1 = FUN_00101b54(input_string);
+  } while ((int)uVar1 != 0);
+  return input_string;
+```
+
+Now this calls into a function 00101b54, which seems to be an implementation of  
+some sort of isdigit/isalpha... function, since the use of __ctype_b_loc which
+provide the character classification data which is a bitmask array even though
+the underlying variable is a double pointer, it ultimately resolves to a pointer
+to the threads threadsafe byte bitmask array for character classification data.
+We can also see that it goes into a while loop which goes through the entire
+string until a null byte is found at which it returns 1.
+
+```c
+long FUN_00101b54(char *str_arg)
+
+{
+  ushort **character_classification_data;
+  char current_character;
+  
+  do {
+    current_character = *str_arg;
+    if (current_character == '\0') {
+      return 1;
+    }
+    character_classification_data = __ctype_b_loc();
+    str_arg = str_arg + 1;
+  } while ((*(byte *)((long)*character_classification_data + (long)current_character * 2 + 1) & 0x20
+           ) != 0);
+  return 0;
+}
+```
+
+Now the while loop is interesting, we can obviously see that it first dereferences  
+the double pointer to get array address, and from there it does pointer arithmetic to  
+get the correct index for the character, since we are doing byte arithmetic we need to  
+multiply the integer by two and add 1 to access the 2nd byte of the 2-byte long short.
+
+Now we'll go into the glibc ctype.h to see what the 0x20 represents.
+But first we need to find which version of glibc is used.
+(this is also doable in ghidra by searching to defined strings)
+```bash
+$ strings bomb | grep -i glibc
+GLIBC_2.3
+GLIBC_2.7
+GLIBC_2.3.4
+GLIBC_2.4
+GLIBC_2.2.5
+```
+
+Then we'll go into the [GLIBC source code explorer](https://elixir.bootlin.com/glibc/glibc-2.2.5/source/ctype/ctype.h).
+Also check for 2.7 to see if there was any changes.
+```c
+# include <endian.h>
+# if __BYTE_ORDER == __BIG_ENDIAN
+#  define _ISbit(bit)	(1 << (bit))
+# else /* __BYTE_ORDER == __LITTLE_ENDIAN */
+#  define _ISbit(bit)	((bit) < 8 ? ((1 << (bit)) << 8) : ((1 << (bit)) >> 8))
+# endif
+
+enum
+{
+  _ISupper = _ISbit (0),	/* UPPERCASE.  */
+  _ISlower = _ISbit (1),	/* lowercase.  */
+  _ISalpha = _ISbit (2),	/* Alphabetic.  */
+  _ISdigit = _ISbit (3),	/* Numeric.  */
+  _ISxdigit = _ISbit (4),	/* Hexadecimal numeric.  */
+  _ISspace = _ISbit (5),	/* Whitespace.  */
+  _ISprint = _ISbit (6),	/* Printing.  */
+  _ISgraph = _ISbit (7),	/* Graphical.  */
+  _ISblank = _ISbit (8),	/* Blank (usually SPC and TAB).  */
+  _IScntrl = _ISbit (9),	/* Control character.  */
+  _ISpunct = _ISbit (10),	/* Punctuation.  */
+  _ISalnum = _ISbit (11)	/* Alphanumeric.  */
+};
+```
+And see that that classification calls a macro to set the bitmask of
+the space.
+So we can see that ISspace is the 0x20 flag.
+That loop reads all the whitespace.
+And the function returns 1 if the argument string is only whitespace,  
+but if there is a character that isnt whitespace, it returns 0.
+Hence we'll call the function has_only_spaces.
+The entire function keeps reading into the same address  
+80 bytes at a time until there is a non space string.
+We'll call it first_nonspace_string_from_input, but its  
+important to remember that it also saves the string into  
+the string_array.
+
+```c
+char * first_nonspace_string_from_input(void)
+
+{
+  char *input_string;
+  long only_spaces;
+  
+  do {
+    input_string = fgets(&input_string_array + (long)sarray_index * 0x50,0x50,input);
+    if (input_string == (char *)0x0) {
+      return (char *)0x0;
+    }
+    only_spaces = has_only_spaces(input_string);
+  } while ((int)only_spaces != 0);
+  return input_string;
+}
+```
+
+Now we can return down the stack to our pervious function.
+
+```c
+  input_string = first_nonspace_string_from_input();
+  if (input_string == (char *)0x0) {
+    if (input == stdin) {
+      puts("Error: Premature EOF on stdin");
+                    /* WARNING: Subroutine does not return */
+      exit(8);
+    }
+    input_string = getenv("GRADE_BOMB");
+    if (input_string != (char *)0x0) {
+                    /* WARNING: Subroutine does not return */
+      exit(0);
+    }
+    input = stdin;
+    input_string = first_nonspace_string_from_input();
+    if (input_string == (char *)0x0) {
+      puts("Error: Premature EOF on stdin");
+                    /* WARNING: Subroutine does not return */
+      exit(0);
+    }
+  }
+```
+
+This checks if input string is null which only happens
+when we have a premature EOF or error in fgets  
+(or only whitespace strings), but it also reads from  
+the environment variable GRADE_BOMB.
+So if there was an null on input_string but not from
+stdin it reads GRADE_BOMB and exists if its also NULL,
+if its not NULL then it switches to stdin and checks for
+NULL again.
+
+```c
+  lVar2 = (long)sarray_index;
+  lVar3 = -1;
+  input_string = &input_string_array + lVar2 * 0x50;
+  do {
+    if (lVar3 == 0) break;
+    lVar3 = lVar3 + -1;
+    cVar1 = *input_string;
+    input_string = input_string + (ulong)bVar4 * -2 + 1;
+  } while (cVar1 != '\0');
+  if ((int)(~(uint)lVar3 - 1) < 0x4f) {
+    (&input_string_array)[(long)(int)(~(uint)lVar3 - 2) + (long)sarray_index * 0x50] = 0;
+    sarray_index = sarray_index + 1;
+    return &input_string_array + lVar2 * 0x50;
+  }
+  puts("Error: Input line too long");
+  lVar2 = (long)sarray_index;
+  sarray_index = sarray_index + 1;
+  *(undefined8 *)(&input_string_array + lVar2 * 0x50) = 0x636e7572742a2a2a;
+  *(undefined8 *)(&DAT_001056a8 + lVar2 * 0x50) = 0x2a2a2a64657461;
+                    /* WARNING: Subroutine does not return */
+  FUN_00101be5();
+}
+```
+
+Suspecting some weird activity with sarray_index I went to try
+some dynamic analysis with the debugger, however it was not working
+on my system, because of an issue with the pentoo-overlay.
+You can see my fix here (pentoo-overlay issue #2469)[https://github.com/pentoo/pentoo-overlay/pull/2469].
+
+
