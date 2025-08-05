@@ -14,13 +14,18 @@ For memory, in the memory view window we also press on:
 
 ## Seeing raw memory
 
-`Window -> Debbuger -> New Memory View`
+`Window -> Debugger -> New Memory View`
 Set the tracker to track the stack pointer (architecture specific).
 To have a better showcase of the stack also configure it to show
 8 bytes for each line.
 
 The memory view window also has a go to button, right next to 
 the exit button that allows you to go to any memory address.
+
+## Important shortcuts
+
+L for renaming variables/functions quickly,
+F for retyping or changing signatures.
 
 ## The Unintuitive
 
