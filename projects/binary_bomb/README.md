@@ -912,3 +912,157 @@ in the later if we simply have to have value = -0x7e which is
 -126, simple as that.
 
 Solution: 5 -126
+
+## Phase 4
+
+This seems to be pretty simple. At this point it doesnt even
+feel like a stripped binary anymore, I believe we know most
+symbols.
+
+```c
+void phase4(char *input_string)
+
+{
+  int scan_success;
+  long in_FS_OFFSET;
+  uint local_18;
+  int local_14;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  scan_success = __isoc99_sscanf(input_string,"%d %d",&local_18,&local_14);
+  if ((scan_success != 2) || (0xe < local_18)) {
+                    /* WARNING: Subroutine does not return */
+    blow_up();
+  }
+  scan_success = FUN_00101715(local_18,0,0xe);
+  if ((scan_success == 10) && (local_14 == 10)) {
+    if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+      return;
+    }
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+                    /* WARNING: Subroutine does not return */
+  blow_up();
+}
+```
+
+First of all lets ignore in_FS_OFFSET since that is for the stack canary.
+local_18 has to be <= 0xe which is 14, and then we go down the stack, lets see.
+Now this is a recursive function.
+
+```c
+int FUN_00101715(int param_1,undefined8 param_2,int param_3)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  iVar2 = (param_3 - (int)param_2) / 2 + (int)param_2;
+  if (param_1 < iVar2) {
+    iVar1 = FUN_00101715(param_1,param_2,iVar2 + -1);
+    iVar2 = iVar2 + iVar1;
+  }
+  else if (iVar2 < param_1) {
+    iVar1 = FUN_00101715(param_1,(ulong)(iVar2 + 1),param_3);
+    iVar2 = iVar2 + iVar1;
+  }
+  return iVar2;
+}
+```
+
+We can recognize some sort of a recursive sum for a binary search
+from 0 to 14 here, I'll make a simple C program to help with this.
+The program can be found in `./helper/binary_search_sum.c`.
+
+```bash
+projects/binary_bomb/helper main
+$ gcc binary_search_sum.c
+
+projects/binary_bomb/helper main
+$ ./a.out
+0 -> 11
+1 -> 11
+2 -> 13
+3 -> 10
+4 -> 19
+5 -> 15
+6 -> 21
+7 -> 7
+8 -> 35
+9 -> 27
+10 -> 37
+11 -> 18
+12 -> 43
+13 -> 31
+```
+
+Here we see that the only right answer is 3,
+simple enough the solution is: 3 10
+
+## Phase 5
+
+Here is the function, I'll resolve what I can before putting
+it into here.
+
+```c
+void phase5(char *input_string)
+
+{
+  int sum;
+  int counter;
+  long in_FS_OFFSET;
+  uint index;
+  int match_sum;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  sum = __isoc99_sscanf(input_string,"%d %d",&index,&match_sum);
+  if (sum < 2) {
+                    /* WARNING: Subroutine does not return */
+    blow_up();
+  }
+  index = index & 0xf;
+  if (index != 0xf) {
+    sum = 0;
+    counter = 0;
+    do {
+      counter = counter + 1;
+      index = *(uint *)(&DAT_001031c0 + (long)(int)index * 4);
+      sum = sum + index;
+    } while (index != 0xf);
+    index = 0xf;
+    if ((counter == 0xf) && (match_sum == sum)) {
+      if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+        return;
+      }
+                    /* WARNING: Subroutine does not return */
+      __stack_chk_fail();
+    }
+  }
+                    /* WARNING: Subroutine does not return */
+  blow_up();
+}
+```
+
+A really interesting thing is the DAT_001031c0 which is some sort of array we know 
+nothing about, so we'll use the `G` shortcut to go to it, and then open bytes view
+to see what it hold.
+
+0a 00 00 00 02 00 00 00
+0e 00 00 00 07 00 00 00
+08 00 00 00 0c 00 00 00
+0f 00 00 00 0b 00 00 00
+00 00 00 00 04 00 00 00
+01 00 00 00 0d 00 00 00
+03 00 00 00 09 00 00 00
+06 00 00 00 05 00 00 00
+
+This is also 10, 2, 14, 7, 8, 12, 15, 11, 0, 4, 1, 13, 3, 9, 6, 5
+Which is also why there is a check for having to not be 0xf and
+for it being anded with 0xf (which means it has to be less than 0xf).
+
+So now the easiest way we can match the sum is to make another helper
+C program to calculate it
+
