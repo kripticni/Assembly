@@ -832,3 +832,83 @@ Here we can see that array[0] must be 1.
 Then we loop from the beginning of the array to the end, 
 and each time the next element must be the last times 2 so,
 solution is: 1 2 4 8 16 32
+
+## Phase 3
+
+This tries to look obfuscated and complicated but it truly isnt.
+
+```c
+void phase3(char *input_string)
+
+{
+  int scan_success;
+  long in_FS_OFFSET;
+  int decision;
+  int value;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  scan_success = __isoc99_sscanf(input_string,"%d %d",&decision,&value);
+  if (scan_success < 2) {
+                    /* WARNING: Subroutine does not return */
+    blow_up();
+  }
+  switch(decision) {
+  case 0:
+    scan_success = 0x274;
+    break;
+  case 1:
+    scan_success = 0;
+    break;
+  case 2:
+    scan_success = 0;
+    goto LAB_00101699;
+  case 3:
+    scan_success = 0;
+    goto LAB_0010169e;
+  case 4:
+    scan_success = 0;
+    goto LAB_001016a1;
+  case 5:
+    scan_success = 0;
+    goto LAB_001016a4;
+  case 6:
+    scan_success = 0;
+    goto LAB_001016a7;
+  case 7:
+    scan_success = 0;
+    goto LAB_001016aa;
+  default:
+                    /* WARNING: Subroutine does not return */
+    blow_up();
+  }
+  scan_success = scan_success + -0x24c;
+LAB_00101699:
+  scan_success = scan_success + 0x2b0;
+LAB_0010169e:
+  scan_success = scan_success + -0x7e;
+LAB_001016a1:
+  scan_success = scan_success + 0x7e;
+LAB_001016a4:
+  scan_success = scan_success + -0x7e;
+LAB_001016a7:
+  scan_success = scan_success + 0x7e;
+LAB_001016aa:
+  if ((decision < 6) && (value == scan_success + -0x7e)) {
+    if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+      __stack_chk_fail();
+    }
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  blow_up();
+}
+```
+
+The end conditions contrained by the switch require for decision
+to less than 6, going to condition 5 simply has it be zero and 
+in the later if we simply have to have value = -0x7e which is
+-126, simple as that.
+
+Solution: 5 -126
