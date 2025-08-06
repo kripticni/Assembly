@@ -1063,6 +1063,215 @@ This is also 10, 2, 14, 7, 8, 12, 15, 11, 0, 4, 1, 13, 3, 9, 6, 5
 Which is also why there is a check for having to not be 0xf and
 for it being anded with 0xf (which means it has to be less than 0xf).
 
-So now the easiest way we can match the sum is to make another helper
-C program to calculate it
+The loop requires us to exit with counter being 15, so 15 repetitions
+and the loop ends when index becomes 15. So we need to find how to
+get to index equal to 15 in 15 turns.
 
+For this we simply write a helper C program, find it in `./helper/randomizer_sum.c`.
+Another solution would be to write a topological sort.
+
+## Phase 6
+
+I'll split this into two parts, here is the first.
+
+```c
+void phase6(char *input_string)
+
+{
+  int iVar1;
+  int *array_ptr;
+  long j;
+  long i;
+  long in_FS_OFFSET;
+  int array [8];
+  int *local_68;
+  long local_60;
+  long local_58;
+  long local_50;
+  long local_48;
+  long local_40;
+  long stack_canary;
+  
+  array_ptr = array;
+  stack_canary = *(long *)(in_FS_OFFSET + 0x28);
+  string_to_iarray_of_6(input_string,array);
+  i = 1;
+  while( true ) {
+    if (5 < *array_ptr - 1U) {
+                    /* WARNING: Subroutine does not return */
+      blow_up();
+    }
+    j = i;
+    if (5 < (int)i) break;
+    do {
+      if (*array_ptr == array[j]) {
+                    /* WARNING: Subroutine does not return */
+        blow_up();
+      }
+      j = j + 1;
+    } while ((int)j < 6);
+    i = i + 1;
+    array_ptr = array_ptr + 1;
+  }
+  i = 0;
+```
+
+Even tho the array can store 8 ints, so far we only
+store 6 from our string.
+
+Each of the first 6 values in the array cannot be more than 6,
+and no two values can be equal.
+
+Here is the second part.
+
+```c
+  do {
+    iVar1 = 1;
+    array_ptr = (int *)&DAT_00105200;
+    if (1 < array[i]) {
+      do {
+        array_ptr = *(int **)(array_ptr + 2);
+        iVar1 = iVar1 + 1;
+      } while (iVar1 != array[i]);
+    }
+    (&local_68)[i] = array_ptr;
+    i = i + 1;
+  } while (i != 6);
+  *(long *)(local_68 + 2) = local_60;
+  *(long *)(local_60 + 8) = local_58;
+  *(long *)(local_58 + 8) = local_50;
+  *(long *)(local_50 + 8) = local_48;
+  *(long *)(local_48 + 8) = local_40;
+  *(undefined8 *)(local_40 + 8) = 0;
+  iVar1 = 5;
+  do {
+    if (*local_68 < **(int **)(local_68 + 2)) {
+                    /* WARNING: Subroutine does not return */
+      blow_up();
+    }
+    local_68 = *(int **)(local_68 + 2);
+    iVar1 = iVar1 + -1;
+  } while (iVar1 != 0);
+  if (stack_canary != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+  return;
+}
+```
+
+This reads from DAT_00105200, which stores an array of {530, 1}.
+So array_ptr is practically moves to a different array.
+
+If array[i] is more than 1, array_ptr moves 2 ints forward
+and iVar1 gets increased by 1 while they are unequal.
+local_68 gets reassigned constantly but finally settles down
+on array[5].
+
+After looking deeper into the code structure we can figure out
+that this is infact using a long with weird pointer arithmetic
+instead of an actual structure, we can fix this by setting up
+a ghidra structure and retyping the variables.
+
+```c
+typedef struct node{
+  int value;
+  int index;
+  struct node* next;
+}Node;
+```
+
+After that the code is infinitely more readable.
+
+```c
+void phase6(char *input_string)
+
+{
+  int node_index;
+  node *node_ptr;
+  long j;
+  int *array_ptr;
+  long i;
+  long in_FS_OFFSET;
+  int array [8];
+  node *node1;
+  node *node2;
+  node *node3;
+  node *node4;
+  node *node5;
+  node *node6;
+  long stack_canary;
+  
+  array_ptr = array;
+  stack_canary = *(long *)(in_FS_OFFSET + 0x28);
+  string_to_iarray_of_6(input_string,array);
+  i = 1;
+  while( true ) {
+    if (5 < *array_ptr - 1U) {
+                    /* WARNING: Subroutine does not return */
+      blow_up();
+    }
+    j = i;
+    if (5 < (int)i) break;
+    do {
+      if (*array_ptr == array[j]) {
+                    /* WARNING: Subroutine does not return */
+        blow_up();
+      }
+      j = j + 1;
+    } while ((int)j < 6);
+    i = i + 1;
+    array_ptr = array_ptr + 1;
+  }
+  i = 0;
+  do {
+    node_index = 1;
+    node_ptr = (node *)&DAT_00105200;
+    if (1 < array[i]) {
+      do {
+        node_ptr = node_ptr->next;
+        node_index = node_index + 1;
+      } while (node_index != array[i]);
+    }
+    (&node1)[i] = node_ptr;
+    i = i + 1;
+  } while (i != 6);
+  node1->next = node2;
+  node2->next = node3;
+  node3->next = node4;
+  node4->next = node5;
+  node5->next = node6;
+  node6->next = (node *)0x0;
+  node_index = 5;
+  do {
+    if (node1->value < node1->next->value) {
+                    /* WARNING: Subroutine does not return */
+      blow_up();
+    }
+    node1 = node1->next;
+    node_index = node_index + -1;
+  } while (node_index != 0);
+  if (stack_canary != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+  return;
+}
+```
+
+The last checks simply require us to order the linked list in
+such a way for it to be sorted in descending order so that
+the bomb doesnt explode.
+I wont be writing a helper program for this since its trivially
+easy to sort the values from smallest to biggest by hand.
+
+After defining the correct data types to the program memory we can
+read that the values of the nodes are:
+1: 212h
+2: 1C2h
+3: 215h
+4: 393h
+5: 3A7h
+6: 200h
+
+Solution: 5 4 3 1 6 2
