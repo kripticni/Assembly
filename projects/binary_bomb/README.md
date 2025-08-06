@@ -504,4 +504,331 @@ some dynamic analysis with the debugger, however it was not working
 on my system, because of an issue with the pentoo-overlay.
 You can see my fix here (pentoo-overlay issue #2469)[https://github.com/pentoo/pentoo-overlay/pull/2469].
 
+Running into the next code blocks, I've noticed this strange code that is basically a noop
+```c
+  l_sarray_index = (long)sarray_index;
+  lVar2 = -1;
+  // input_string was already input_string = fgets(&input_string_array + (long)sarray_index * 0x50,0x50,input);
+  input_string = &input_string_array + l_sarray_index * 0x50;
+```
 
+Then we have this loop.
+
+```c
+  do {
+    if (lVar2 == 0) break;
+    lVar2 = lVar2 + -1;
+    cVar1 = *input_string;
+    input_string = input_string + (ulong)bVar3 * -2 + 1;
+  } while (cVar1 != '\0');
+```
+
+This makes it pretty clear that lVar2 was  
+some sort of a counter/index that was initialized to -1 so that
+the loop could start, why the first if isnt put in as a condition
+into the while loop is a mystery to me, but i can imagine that its
+something to do with how the code gets compiled and then later
+decompiled. Looking into it, lVar2 is only setup here
+to get used further down the code and the if statement is useless.
+
+lVar2 stores the negative strlen - 1.
+cVar2 is the current character processed by the loop.
+bVar3 is a literal zero.
+
+So the product of the loop is a literal negative strlen negative 1.
+
+Next we have this if statement.
+```c
+  if ((int)(~(uint)neglen_neg1 - 1) < 0x4f) {
+    (&input_string_array)[(long)(int)(~(uint)neglen_neg1 - 2) + (long)sarray_index * 0x50] = 0;
+    sarray_index = sarray_index + 1;
+    return &input_string_array + l_sarray_index * 0x50;
+  }
+```
+The first part basically converts the negative number (2s complement)
+to a positive number and then checks if its less than 79 but considering
+the that the strlen starts with -1 for the null terminator, its len - 1 < 79 or len < 80.
+
+The first line indexes the first character before the null terminator and
+replaces it with the null terminator, effectively cutting off the string a character early.
+Then it also updates the sarray_index to 1 instead of 0.
+After that it returns the same address of input_string_array since l_sarray_index is still zero.
+
+```c
+  puts("Error: Input line too long");
+  l_sarray_index = (long)sarray_index;
+  sarray_index = sarray_index + 1;
+  *(undefined8 *)(&input_string_array + l_sarray_index * 0x50) = 0x636e7572742a2a2a;
+  *(undefined8 *)(&DAT_001056a8 + l_sarray_index * 0x50) = 0x2a2a2a64657461;
+                    /* WARNING: Subroutine does not return */
+  FUN_00101be5();
+```
+In case its bigger than 79, it changes the string to truncated, we can see that
+DAT_001056a8 is just input_string_array + 0x8 in the disassembly which lines it up.
+The function it calls simply blows up the bomb, I named it blow_up.
+
+The entire function FUN_00101c56, simply validates input by making sure there
+is at least one character thats not a whitespace in an input string and the 
+input we already know can be stdin or a file, then it checks for the string
+to be less than 79 characters long. Because the input string array only 
+reserves 80 bytes for each string.
+
+Going back to main we have a really short function.
+```c
+void FUN_001015a7(char *param_1)
+
+{
+  undefined8 uVar1;
+  
+  uVar1 = FUN_00101ad1(param_1,"I am just a renegade hockey mom.");
+  if ((int)uVar1 == 0) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  blow_up();
+}
+```
+
+This calls another bool function and if it doesnt return
+with 0, it blows up.
+
+```c
+undefined8 FUN_00101ad1(char *input_string,char *arg_string)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined8 uVar3;
+  long lVar4;
+  char cVar5;
+  
+  iVar1 = FUN_00101ab0(input_string);
+  iVar2 = FUN_00101ab0(arg_string);
+  uVar3 = 1;
+  if (iVar1 == iVar2) {
+    cVar5 = *input_string;
+    if (cVar5 == '\0') {
+      uVar3 = 0;
+    }
+    else {
+      lVar4 = 0;
+      do {
+        if (arg_string[lVar4] != cVar5) {
+          return 1;
+        }
+        lVar4 = lVar4 + 1;
+        cVar5 = input_string[lVar4];
+      } while (cVar5 != '\0');
+      uVar3 = 0;
+    }
+  }
+  return uVar3;
+}
+```
+
+This calls a function for both input_string and arg_string, im assuming
+it is strlen but lets check.
+
+```c
+int strlen(char *string)
+
+{
+  int counter;
+  
+  if (*string != '\0') {
+    counter = 0;
+    do {
+      string = string + 1;
+      counter = counter + 1;
+    } while (*string != '\0');
+    return counter;
+  }
+  return 0;
+}
+```
+Its exactly strlen.
+This lets us know that iVar1 and iVar2 are actually input_len and arg_len.
+If they are not the same length the program exits early with an error so we can assume
+this simply checks for equality (strcmp), cVar3 is also an current_char again.
+uVar1 is our exit code or status since thats what is returned, ill call it is_not_equal.
+The first if checks if the first char is null and if so returns 0 (wanted result) but this
+is basically a noop for us because it could never occur that they are of the same non-zero length
+and that the input_string starts with null, its useful in a case where both are 0 or 1 sized.
+Then the else case with the while loop simply checks for equality of each character until null,
+we can conclude that this is a strcmp.
+
+That solves the second function to 
+```c
+void is_input_string_correct_string(char *input_string)
+
+{
+  undefined8 flag;
+  
+  flag = strcmp(input_string,"I am just a renegade hockey mom.");
+  if ((int)flag == 0) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  blow_up();
+}
+```
+
+For now we know that our first string must be "I am just a renegade hockey mom."
+and that we can input it through a file or stdin based on argv.
+Putting this into the program tells us that we've solved phase 1!
+
+```bash
+$ ./bomb
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+I am just a renegade hockey mom.
+Phase 1 defused. How about the next one?
+```
+
+## Phase 2
+
+First off we find a function call after phase one, its the secret phase
+that I'll be looking into later on.
+
+```c
+void secret_phase(void)
+
+{
+  int iVar1;
+  undefined8 uVar2;
+  long in_FS_OFFSET;
+  undefined1 local_70 [4];
+  undefined1 local_6c [4];
+  char local_68 [88];
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  if (sarray_index == 6) {
+    iVar1 = __isoc99_sscanf(&DAT_00105790,"%d %d %s",local_70,local_6c,local_68);
+    if (iVar1 == 3) {
+      uVar2 = strcmp(local_68,"DrEvil");
+      if ((int)uVar2 == 0) {
+        puts("Curses, you\'ve found the secret phase!");
+        puts("But finding it and solving it are quite different...");
+        FUN_001019c4();
+      }
+    }
+    puts("Congratulations! You\'ve defused the bomb!");
+  }
+  if (local_10 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  __stack_chk_fail();
+}
+```
+
+This is unimportant for now, but it does reuse a lot of functions
+we've already been over.
+
+Now we validate input again, but considering sarray_index was incremented
+last time, now this will store the second string 80 bytes from the first, correctly.
+
+```c
+void phase2(undefined8 param_1)
+
+{
+  int *piVar1;
+  long in_FS_OFFSET;
+  int local_38 [6];
+  long local_20;
+  
+  piVar1 = local_38;
+  local_20 = *(long *)(in_FS_OFFSET + 0x28);
+  FUN_00101c11(param_1,(long)local_38);
+  if (local_38[0] != 1) {
+                    /* WARNING: Subroutine does not return */
+    blow_up();
+  }
+  do {
+    if (piVar1[1] != *piVar1 * 2) {
+                    /* WARNING: Subroutine does not return */
+      blow_up();
+    }
+    piVar1 = piVar1 + 1;
+  } while (piVar1 != local_38 + 5);
+  if (local_20 == *(long *)(in_FS_OFFSET + 0x28)) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  __stack_chk_fail();
+}
+```
+
+Here we see that local_38[6] is an integer array, and piVar1 is
+a pointer to the beginning of the array.
+in_FS_OFFSET is referring to the FS segment register, basically
+the only segment registers used these days are FS and GS, they
+are used for thread_local storage, stack canaries and security data,
+and thread control blocks, as in pointers to main memory.
+The FS and GS are set by the os kernel and you access their contents
+via offsets.
+
+In this case since we are having offset 0x28 for FS, after readin:
+from the internet, can be sure that it stores the stack canary.
+
+Going further down the stack into the checking function.
+
+```c
+
+void FUN_00101c11(char *input_string,int *array)
+
+{
+  int len;
+  
+  len = __isoc99_sscanf(input_string,"%d %d %d %d %d %d",array,array + 1,array + 2,array + 3,
+                        array + 4,array + 5);
+  if (5 < len) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  blow_up();
+}
+```
+
+sscanf applies scanf on the input_string and reads into the array, if there is less than
+5 variables succesfully assigned it blows up, so it requires more than 6 or in this case
+exactly 6 since we cant get any more.
+
+Going back down the stack to our phase2 function we can resolve the following.
+
+```c
+void phase2(char *input_string)
+
+{
+  int *array_ptr;
+  long in_FS_OFFSET;
+  int array [6];
+  long stack_canary;
+  
+  array_ptr = array;
+  stack_canary = *(long *)(in_FS_OFFSET + 0x28);
+  string_to_iarray_of_6(input_string,array);
+  if (array[0] != 1) {
+                    /* WARNING: Subroutine does not return */
+    blow_up();
+  }
+  do {
+    if (array_ptr[1] != *array_ptr * 2) {
+                    /* WARNING: Subroutine does not return */
+      blow_up();
+    }
+    array_ptr = array_ptr + 1;
+  } while (array_ptr != array + 5);
+  if (stack_canary == *(long *)(in_FS_OFFSET + 0x28)) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  __stack_chk_fail();
+}
+```
+
+Here we can see that array[0] must be 1.
+Then we loop from the beginning of the array to the end, 
+and each time the next element must be the last times 2 so,
+solution is: 1 2 4 8 16 32
